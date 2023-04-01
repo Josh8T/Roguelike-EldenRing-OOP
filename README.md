@@ -1,7 +1,10 @@
 # FIT2099 Assignment (Semester 1, 2023)
 # Elden Ring
 
-## XX_LabYYTeamZZ
+## MA_Lab02_Group4
 Team members:
+1. Aflah Hanif Amarlyadi
+2. Josh Hernett Tan
+3. David Lee
 
 ## Design Rationale
