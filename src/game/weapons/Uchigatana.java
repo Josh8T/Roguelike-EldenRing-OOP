@@ -1,5 +1,7 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 /**
@@ -14,7 +16,13 @@ public class Uchigatana extends WeaponItem {
     /**
      * Constructor.
      */
-    public Uchigatana(String name, char displayChar, int damage, String verb, int hitRate) {
+    public Uchigatana() {
         super("Uchigatana", ')', 115, "slashes", 80);
+    }
+
+    @Override
+    public Action getSkill(Actor target, String direction) {
+        // TODO: create Unsheathe skill
+        return super.getSkill(target, direction);
     }
 }
