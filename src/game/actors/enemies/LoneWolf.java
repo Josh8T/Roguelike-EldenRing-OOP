@@ -1,4 +1,4 @@
-package game;
+package game.actors.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
@@ -7,6 +7,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.AttackAction;
+import game.Behaviour;
+import game.Status;
+import game.WanderBehaviour;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +56,7 @@ public class LoneWolf extends Actor {
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
-     * @return
+     * @return the list of actions the Actor can do to the lone wolf
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
