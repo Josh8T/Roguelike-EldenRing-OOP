@@ -12,6 +12,7 @@ import game.Status;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
 import game.behaviours.WanderBehaviour;
+import game.weapons.Scimitar;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,7 @@ public class SkeletalBandit extends Actor implements Resettable {
     public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 102);
         this.behaviours.put(999, new WanderBehaviour());
+        this.addWeaponToInventory(new Scimitar());
     }
 
     /**

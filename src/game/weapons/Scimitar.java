@@ -5,7 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 
 /**
- * A class that represents the Great Knife weapon.
+ * A class that represents the Scimitar weapon.
  * Created by:
  * @author Aflah Hanif Amarlyadi
  * Modified by:
