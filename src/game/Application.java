@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Player;
 import game.actors.Trader;
+import game.actors.enemies.LoneWolf;
 import game.grounds.Dirt;
 import game.grounds.Floor;
 import game.grounds.Wall;
@@ -74,7 +75,8 @@ public class Application {
 		Player player = new Player("Tarnished", '@', 300);
 		world.addPlayer(player, gameMap.at(36, 10));
 		Trader trader = new Trader("Merchant Kale", 'K');
-		world.addPlayer(trader, gameMap.at(40, 12));
+		gameMap.at(40, 12).addActor(trader);
+		gameMap.at(23, 17).addActor(new LoneWolf());
 
 		world.run();
 	}

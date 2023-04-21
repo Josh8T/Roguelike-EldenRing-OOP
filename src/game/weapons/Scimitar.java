@@ -3,13 +3,14 @@ package game.weapons;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.AreaAttackAction;
 
 /**
  * A class that represents the Scimitar weapon.
  * Created by:
  * @author Aflah Hanif Amarlyadi
  * Modified by:
- *
+ * @author David Lee
  */
 public class Scimitar extends WeaponItem {
 
@@ -22,7 +23,6 @@ public class Scimitar extends WeaponItem {
 
     @Override
     public Action getSkill(Actor target, String direction) {
-        // TODO: create Spinning Attack skill
-        return super.getSkill(target, direction);
+        return new AreaAttackAction(this);
     }
 }
