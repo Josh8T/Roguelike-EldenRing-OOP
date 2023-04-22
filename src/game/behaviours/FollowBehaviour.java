@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
+import game.utils.DistanceCalculator;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
@@ -38,11 +39,11 @@ public class FollowBehaviour implements Behaviour {
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 
-		int currentDistance = distance(here, there);
+		int currentDistance = DistanceCalculator.distance(here, there);
 		for (Exit exit : here.getExits()) {
 			Location destination = exit.getDestination();
 			if (destination.canActorEnter(actor)) {
-				int newDistance = distance(destination, there);
+				int newDistance = DistanceCalculator.distance(destination, there);
 				if (newDistance < currentDistance) {
 					return new MoveActorAction(destination, exit.getName());
 				}
@@ -50,16 +51,5 @@ public class FollowBehaviour implements Behaviour {
 		}
 
 		return null;
-	}
-
-	/**
-	 * Compute the Manhattan distance between two locations.
-	 * 
-	 * @param a the first location
-	 * @param b the first location
-	 * @return the number of steps between a and b if you only move in the four cardinal directions.
-	 */
-	private int distance(Location a, Location b) {
-		return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
 	}
 }

@@ -2,7 +2,7 @@ package game.grounds.environments;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.RandomNumberGenerator;
+import game.utils.RandomNumberGenerator;
 
 /**
  * A class that represents Gust of Wind, where Lone Wolf and Giant Dog spawns.

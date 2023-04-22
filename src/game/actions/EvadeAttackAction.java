@@ -1,0 +1,85 @@
+package game.actions;
+
+import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.MoveActorAction;
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.Weapon;
+import game.utils.DistanceCalculator;
+
+public class EvadeAttackAction extends Action {
+
+    /**
+     * The Actor that is to be attacked
+     */
+    private Actor target;
+
+    /**
+     * The direction of incoming attack.
+     */
+    private String direction;
+
+    /**
+     * Weapon used for the attack
+     */
+    private Weapon weapon;
+
+    /**
+     * Constructor
+     *
+     * @param target the Actor to attack
+     * @param direction the direction where the attack should be performed (only used for display purposes)
+     * @param weapon the weapon used to attack
+     */
+    public EvadeAttackAction(Actor target, String direction, Weapon weapon) {
+        this.target = target;
+        this.direction = direction;
+        this.weapon = weapon;
+    }
+
+    /**
+     *
+     * @param actor The actor performing the action.
+     * @param map The map the actor is on.
+     * @return the result of the attack, e.g. whether the target is killed, etc., and the direction the actor moves
+     * @see DeathAction
+     */
+    @Override
+    public String execute(Actor actor, GameMap map) {
+        Location targetLocation = map.locationOf(target);
+        Location maxLocation = map.locationOf(actor);
+        String maxDirection = "to the same location";
+        int maxDistance = 1;
+
+        for (Exit exit: map.locationOf(actor).getExits()) {
+            Location destination = exit.getDestination();
+            if (destination.canActorEnter(actor)) {
+                int newDistance = DistanceCalculator.distance(targetLocation, destination);
+                if (newDistance > maxDistance) {
+                    maxLocation = destination;
+                    maxDirection = exit.getName();
+                    maxDistance = newDistance;
+                }
+            }
+        }
+
+        String result = new AttackAction(target, direction, weapon).execute(actor, map);
+
+        result += System.lineSeparator() + new MoveActorAction(maxLocation, maxDirection).execute(actor, map);
+
+        return result;
+    }
+
+    /**
+     * Describes which target the actor is attacking with which weapon
+     *
+     * @param actor The actor performing the action.
+     * @return a description used for the menu UI
+     */
+    @Override
+    public String menuDescription(Actor actor) {
+        return actor + " attacks " + target + " at " + direction + " and moves away from the enemy with " + (weapon != null ? weapon : "Intrinsic Weapon");
+    }
+}
