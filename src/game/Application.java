@@ -73,7 +73,7 @@ public class Application {
 		}
 
 		// HINT: what does it mean to prefer composition to inheritance?
-		Player player = new Bandit("Tarnished", '@');
+		Player player = new Bandit();
 		world.addPlayer(player, gameMap.at(36, 10));
 		Trader trader = new Trader("Merchant Kale", 'K');
 		gameMap.at(40, 12).addActor(trader);
