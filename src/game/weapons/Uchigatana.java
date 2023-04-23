@@ -23,7 +23,6 @@ public class Uchigatana extends WeaponItem {
 
     @Override
     public Action getSkill(Actor target, String direction) {
-        // TODO: create Unsheathe skill
         return new MultipliedDamageAction(target, direction, this, 2, 60);
     }
 }

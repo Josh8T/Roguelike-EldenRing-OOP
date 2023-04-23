@@ -25,12 +25,10 @@ public abstract class Player extends Actor implements Resettable {
 	/**
 	 * Constructor.
 	 *
-	 * @param name        Name to call the player in the UI
-	 * @param displayChar Character to represent the player in the UI
 	 * @param hitPoints   Player's starting number of hitpoints
 	 */
-	public Player(String name, char displayChar, int hitPoints) {
-		super(name, displayChar, hitPoints);
+	public Player(int hitPoints) {
+		super("Tarnished", '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addItemToInventory(new Runes(0));
 	}
