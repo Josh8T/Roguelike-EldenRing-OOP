@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actions.AttackAction;
 import game.behaviours.Behaviour;
+import game.behaviours.WanderBehaviour;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,6 +20,7 @@ public abstract class Enemy extends Actor {
 
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        this.getBehaviours().put(999, new WanderBehaviour());
     }
 
     /**
