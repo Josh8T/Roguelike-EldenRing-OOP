@@ -1,7 +1,6 @@
 package game.actors.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.behaviours.WanderBehaviour;
 
 /**
  * BEHOLD, DOG!
@@ -14,7 +13,6 @@ public class LoneWolf extends Enemy {
 
     public LoneWolf() {
         super("Lone Wolf", 'h', 102);
-        this.getBehaviours().put(999, new WanderBehaviour());
     }
 
     @Override

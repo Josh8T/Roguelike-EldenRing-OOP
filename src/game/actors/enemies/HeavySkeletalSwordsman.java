@@ -1,6 +1,5 @@
 package game.actors.enemies;
 
-import game.behaviours.WanderBehaviour;
 import game.weapons.Grossmesser;
 
 /**
@@ -13,8 +12,7 @@ import game.weapons.Grossmesser;
 public class HeavySkeletalSwordsman extends Enemy{
 
     public HeavySkeletalSwordsman() {
-        super("HeavySkeletalSwordsman", 'q', 153);
-        this.getBehaviours().put(999, new WanderBehaviour());
+        super("Heavy Skeletal Swordsman", 'q', 153);
         this.addWeaponToInventory(new Grossmesser());
     }
 

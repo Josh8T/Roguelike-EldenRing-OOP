@@ -1,7 +1,6 @@
 package game.actors.enemies;
 
 import game.Resettable;
-import game.behaviours.WanderBehaviour;
 import game.weapons.Scimitar;
 
 /**
@@ -15,7 +14,6 @@ public class SkeletalBandit extends Enemy implements Resettable {
 
     public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 102);
-        this.getBehaviours().put(999, new WanderBehaviour());
         this.addWeaponToInventory(new Scimitar());
     }
 

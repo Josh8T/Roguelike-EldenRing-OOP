@@ -5,20 +5,20 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.actions.AreaAttackAction;
 
 /**
- * A class that represents the Giant Crab enemy.
+ * A class that represents the Giant Crayfish.
  * Created by:
- * @author Josh Hernett Tan
+ * @author David Lee
  * Modified by:
- * 
+ *
  */
-public class GiantCrab extends Enemy{
-    public GiantCrab() {
-        super("Giant Crab", 'C', 407);
+public class GiantCrayfish extends Enemy{
+    public GiantCrayfish() {
+        super("Giant Crayfish", 'R', 4803);
     }
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(208, "slams", 90);
+        return new IntrinsicWeapon(527, "slams", 100);
     }
 
     public Action getSkill() {
