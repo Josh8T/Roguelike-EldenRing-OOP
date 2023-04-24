@@ -6,9 +6,16 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.actors.enemies.Enemy;
 
 import java.util.Random;
-
+/**
+ * A class that figures out an attack action of an actor upon another actor
+ * Created by:
+ * @author Josh Hernett Tan
+ * Modified by:
+ *
+ */
 public class AttackBehaviour implements Behaviour{
     private final Actor target;
     private final Random rand = new Random();
@@ -25,7 +32,7 @@ public class AttackBehaviour implements Behaviour{
         for (Exit hereExit : here.getExits()){
             for (Exit thereExit : there.getExits()){
                 if (hereExit == thereExit){
-                    //TODO add type checker
+                    //TODO add enemy type checker
                     if (actor.getWeaponInventory() != null){
                         Weapon weapon = actor.getWeaponInventory().get(0);
                         //TODO check if weapon has skill
