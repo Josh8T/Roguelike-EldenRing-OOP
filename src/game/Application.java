@@ -10,7 +10,6 @@ import edu.monash.fit2099.engine.positions.World;
 import game.actors.players.Bandit;
 import game.actors.players.Player;
 import game.actors.Trader;
-import game.actors.enemies.LoneWolf;
 import game.grounds.Dirt;
 import game.grounds.Floor;
 import game.grounds.Wall;
@@ -23,7 +22,7 @@ import game.grounds.environments.PuddleOfWater;
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
- *
+ * @author Aflah Hanif Amarlyadi
  */
 public class Application {
 
@@ -77,7 +76,6 @@ public class Application {
 		world.addPlayer(player, gameMap.at(36, 10));
 		Trader trader = new Trader("Merchant Kale", 'K');
 		gameMap.at(40, 12).addActor(trader);
-		gameMap.at(23, 17).addActor(new LoneWolf());
 
 		world.run();
 	}
