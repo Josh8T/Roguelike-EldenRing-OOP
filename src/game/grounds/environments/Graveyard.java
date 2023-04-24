@@ -2,6 +2,8 @@ package game.grounds.environments;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.enemies.HeavySkeletalSwordsman;
+import game.actors.enemies.SkeletalBandit;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -20,14 +22,14 @@ public class Graveyard extends Ground {
     @Override
     public void tick(Location location) {
         if (!location.containsAnActor()) {
-            if (location.x() < 38) {    // TODO: replace hard coded value to find the center x value of the map
-                if (RandomNumberGenerator.getRandomInt(1) < 0.27) {
-                    // TODO: create new HeavySkeletalSwordsman
+            if (location.x() < location.map().getXRange().max() / 2) {
+                if (RandomNumberGenerator.getRandomInt(100) <= 27) {
+                    location.addActor(new HeavySkeletalSwordsman());
                 }
             }
             else {
-                if (RandomNumberGenerator.getRandomInt(1) < 0.27) {
-                    // TODO: create new SkeletalBandit
+                if (RandomNumberGenerator.getRandomInt(100) <= 27) {
+                    location.addActor(new SkeletalBandit());
                 }
             }
         }

@@ -2,6 +2,8 @@ package game.grounds.environments;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.actors.enemies.GiantCrab;
+import game.actors.enemies.GiantCrayfish;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -20,14 +22,14 @@ public class PuddleOfWater extends Ground {
     @Override
     public void tick(Location location) {
         if (!location.containsAnActor()) {
-            if (location.x() < 38) {    // TODO: replace hard coded value to find the center x value of the map
-                if (RandomNumberGenerator.getRandomInt(1) < 0.02) {
-                    // TODO: create new GiantCrab
+            if (location.x() < location.map().getXRange().max() / 2) {
+                if (RandomNumberGenerator.getRandomInt(100) <= 2) {
+                    location.addActor(new GiantCrab());
                 }
             }
             else {
-                if (RandomNumberGenerator.getRandomInt(1) < 0.01) {
-                    // TODO: create new GiantCrayfish
+                if (RandomNumberGenerator.getRandomInt(100) <= 1) {
+                    location.addActor(new GiantCrayfish());
                 }
             }
         }
