@@ -9,7 +9,9 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actions.AttackAction;
+import game.behaviours.AttackBehaviour;
 import game.behaviours.Behaviour;
+import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
 
 import java.util.HashMap;
@@ -20,7 +22,8 @@ public abstract class Enemy extends Actor {
 
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.getBehaviours().put(999, new WanderBehaviour());
+        this.getBehaviours().put(10, new WanderBehaviour());
+        this.getBehaviours().put(20, new AttackBehaviour());
     }
 
     /**

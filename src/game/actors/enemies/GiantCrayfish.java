@@ -2,6 +2,7 @@ package game.actors.enemies;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Status;
 import game.actions.AreaAttackAction;
 
 /**
@@ -14,6 +15,7 @@ import game.actions.AreaAttackAction;
 public class GiantCrayfish extends Enemy{
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803);
+        this.addCapability(Status.CRUSTACEAN);
     }
 
     @Override

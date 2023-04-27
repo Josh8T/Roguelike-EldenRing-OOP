@@ -33,6 +33,8 @@ public class Application {
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
 				new Graveyard(), new GustOfWind(), new PuddleOfWater());
 
+
+
 		List<String> map = Arrays.asList(
 				"..nnnn................................................~~~~~~~~~~~~~~~~~~~~~",
 				"......................#####....######..................~~~~~~~~~~~~~~~~~~~~",
@@ -58,6 +60,16 @@ public class Application {
 				"..####__###.........&&&......................................._.....__.#...",
 				"....................&&&.......................................###..__###...",
 				"...........................................................................");
+
+		List<String> testMap = Arrays.asList(
+				"......................",
+				"......................",
+				"......................",
+				"......................",
+				"......................",
+				"......................"
+		);
+
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
 

@@ -1,6 +1,7 @@
 package game.actors.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
+import game.Status;
 
 /**
  * A class that represents the Giant Dog enemy.
@@ -12,6 +13,7 @@ import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 public class GiantDog extends Enemy {
     public GiantDog() {
         super("Giant Dog", 'G', 693);
+        this.addCapability(Status.BEAST);
     }
 
     @Override
