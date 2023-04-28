@@ -1,6 +1,7 @@
 package game.behaviours;
 
 import edu.monash.fit2099.engine.actions.Action;
+import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
@@ -11,18 +12,21 @@ import game.EnemyType;
 import game.Status;
 import game.actions.AreaAttackAction;
 import game.actions.AttackAction;
+import game.actors.enemies.Enemy;
 
 import java.util.Random;
+
 /**
  * A class that figures out an attack action of an actor upon another actor
  * Created by:
  * @author Josh Hernett Tan
  * Modified by:
- * @author Josh Hernett Tan
+ * @author Aflah Hanif Amarlyadi
  */
-public class AttackBehaviour implements Behaviour{
+public class AttackBehaviour implements Behaviour {
 
     Random rand = new Random();
+
     /**
      *
      * This method checks for the surrounding enemies, if the actor and the target has the same typing then it wouldn't attack.
@@ -37,36 +41,27 @@ public class AttackBehaviour implements Behaviour{
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location actorLocation = map.locationOf(actor);
-        for (Exit targetExit : actorLocation.getExits()){
-            Actor aSingularTarget = targetExit.getDestination().getActor();
-            if (actor.hasCapability(EnemyType.SKELETON) && aSingularTarget.hasCapability(EnemyType.SKELETON)){
-                return null;
-            }
-            else if (actor.hasCapability(EnemyType.BEAST) && aSingularTarget.hasCapability(EnemyType.BEAST)){
-                return null;
-            }
-            else if (actor.hasCapability(EnemyType.CRUSTACEAN) && aSingularTarget.hasCapability(EnemyType.CRUSTACEAN)){
-                return null;
-            }
-            else if (aSingularTarget != null && aSingularTarget.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        for (Exit exits : actorLocation.getExits()){
+            Actor target = exits.getDestination().getActor();
+            if (target != null) {
+                if (actor.hasCapability(EnemyType.SKELETON) && target.hasCapability(EnemyType.SKELETON)){
+                    return null;
+                }
+                else if (actor.hasCapability(EnemyType.BEAST) && target.hasCapability(EnemyType.BEAST)){
+                    return null;
+                }
+                else if (actor.hasCapability(EnemyType.CRUSTACEAN) && target.hasCapability(EnemyType.CRUSTACEAN)){
+                    return null;
+                }
                 if (!actor.getWeaponInventory().isEmpty()) {
                     Weapon actorWeapon = actor.getWeaponInventory().get(0);
-                    return actorWeapon.getSkill(aSingularTarget,targetExit.getName());
-                }
-                else {
-                    if (actor.hasCapability(Status.SLAMS)) {
-                        if ( actor.hasCapability(EnemyType.CRUSTACEAN)){
-                            if (rand.nextInt(100) <= 50){
-                                return new AreaAttackAction(new IntrinsicWeapon(527, "slam", 100));
-                            }
-                        } else if (actor.hasCapability(EnemyType.BEAST)){
-                            if (rand.nextInt(100) <= 50){
-                                return new AreaAttackAction(new IntrinsicWeapon(314, "head slam", 90));
-                            }
-                        }
+                    if (rand.nextInt(100) <= 50){
+                        return new AttackAction(target, exits.getName(), actorWeapon);
                     } else {
-                        return new AttackAction(aSingularTarget,targetExit.getName());
+                        return actorWeapon.getSkill(target, exits.getName());
                     }
+                } else {
+                    return new AttackAction(target, exits.getName());
                 }
             }
         }
