@@ -6,8 +6,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
+import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
+import game.actions.AreaAttackAction;
 import game.actions.AttackAction;
 import game.actors.enemies.Enemy;
 
@@ -21,6 +23,7 @@ import java.util.Random;
  */
 public class AttackBehaviour implements Behaviour{
 
+    Random rand = new Random();
     /**
      *
      * This method checks for the surrounding enemies, if the actor and the target has the same typing then it wouldn't attack.
@@ -52,12 +55,22 @@ public class AttackBehaviour implements Behaviour{
                     return actorWeapon.getSkill(aSingularTarget,targetExit.getName());
                 }
                 else {
-                    return new AttackAction(aSingularTarget,targetExit.getName());
-                    //TODO haven't implement enemy with slams
+                    if (actor.hasCapability(Status.SLAMS)) {
+                        if ( actor.hasCapability(Status.CRUSTACEAN)){
+                            if (rand.nextInt(100) <= 50){
+                                return new AreaAttackAction(new IntrinsicWeapon(527, "slam", 100));
+                            }
+                        } else if (actor.hasCapability(Status.BEAST)){
+                            if (rand.nextInt(100) <= 50){
+                                return new AreaAttackAction(new IntrinsicWeapon(314, "head slam", 90));
+                            }
+                        }
+                    } else {
+                        return new AttackAction(aSingularTarget,targetExit.getName());
+                    }
                 }
             }
         }
-
         return null;
     }
 }

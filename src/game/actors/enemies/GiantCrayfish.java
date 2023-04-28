@@ -16,14 +16,14 @@ public class GiantCrayfish extends Enemy{
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803);
         this.addCapability(Status.CRUSTACEAN);
+        this.addCapability(Status.SLAMS);
     }
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(527, "slams", 100);
+        return new IntrinsicWeapon(527, "pinch", 100);
     }
 
-    public Action getSkill() {
-        return new AreaAttackAction();
-    }
+
+
 }

@@ -18,7 +18,7 @@ public class GiantDog extends Enemy {
 
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
-        return new IntrinsicWeapon(314, "head slams", 90);
+        return new IntrinsicWeapon(314, "scratch", 90);
     }
 
 }

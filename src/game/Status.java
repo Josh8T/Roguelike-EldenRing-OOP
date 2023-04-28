@@ -11,5 +11,7 @@ public enum Status {
     RESTING,
     CRUSTACEAN,
     BEAST,
-    SKELETON
+    SKELETON,
+    SLAMS
+
 }
