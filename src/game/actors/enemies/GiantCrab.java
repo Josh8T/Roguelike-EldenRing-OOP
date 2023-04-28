@@ -2,6 +2,7 @@ package game.actors.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.EnemyType;
+import game.weapons.GiantCrabPincer;
 
 /**
  * A class that represents the Giant Crab enemy.
@@ -14,6 +15,7 @@ public class GiantCrab extends Enemy{
     public GiantCrab() {
         super("Giant Crab", 'C', 407);
         this.addCapability(EnemyType.CRUSTACEAN);
+        this.addWeaponToInventory(new GiantCrabPincer());
     }
 
     @Override

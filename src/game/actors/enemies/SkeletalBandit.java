@@ -17,7 +17,6 @@ public class SkeletalBandit extends Enemy implements Resettable {
         super("Skeletal Bandit", 'b', 102);
         this.addCapability(EnemyType.SKELETON);
         this.addWeaponToInventory(new Scimitar());
-
     }
 
     @Override
