@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.players.Bandit;
 import game.actors.players.Player;
 import game.actors.Trader;
 import game.grounds.Dirt;
@@ -84,7 +83,7 @@ public class Application {
 		}
 
 		// HINT: what does it mean to prefer composition to inheritance?
-		Player player = new Bandit();
+		Player player = new StartingClassMenu().chooseStartingClass();
 		world.addPlayer(player, gameMap.at(36, 10));
 		Trader trader = new Trader("Merchant Kale", 'K');
 		gameMap.at(40, 12).addActor(trader);
