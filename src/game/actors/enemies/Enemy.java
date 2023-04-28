@@ -5,14 +5,13 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.Status;
 import game.actions.AttackAction;
-import game.behaviours.AttackBehaviour;
-import game.behaviours.Behaviour;
-import game.behaviours.FollowBehaviour;
-import game.behaviours.WanderBehaviour;
+import game.behaviours.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,8 +21,9 @@ public abstract class Enemy extends Actor {
 
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
-        this.getBehaviours().put(10, new WanderBehaviour());
-        this.getBehaviours().put(20, new AttackBehaviour());
+        this.getBehaviours().put(1, new AttackBehaviour());
+        this.getBehaviours().put(4, new WanderBehaviour());
+
     }
 
     /**
@@ -37,6 +37,13 @@ public abstract class Enemy extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        Location actorLocation = map.locationOf(this);
+        for (Exit targetExits : actorLocation.getExits()) {
+            Actor target = targetExits.getDestination().getActor();
+            if (target != null) {
+                this.getBehaviours().put(2, new FollowBehaviour(target));
+            }
+        }
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if(action != null)
