@@ -1,18 +1,13 @@
 package game.behaviours;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
-import game.EnemyType;
-import game.Status;
-import game.actions.AreaAttackAction;
+import game.enums.EnemyType;
 import game.actions.AttackAction;
-import game.actors.enemies.Enemy;
 
 import java.util.Random;
 
@@ -44,13 +39,7 @@ public class AttackBehaviour implements Behaviour {
         for (Exit exits : actorLocation.getExits()){
             Actor target = exits.getDestination().getActor();
             if (target != null) {
-                if (actor.hasCapability(EnemyType.SKELETON) && target.hasCapability(EnemyType.SKELETON)){
-                    return null;
-                }
-                else if (actor.hasCapability(EnemyType.BEAST) && target.hasCapability(EnemyType.BEAST)){
-                    return null;
-                }
-                else if (actor.hasCapability(EnemyType.CRUSTACEAN) && target.hasCapability(EnemyType.CRUSTACEAN)){
+                if (actor.findCapabilitiesByType(EnemyType.class).equals(target.findCapabilitiesByType(EnemyType.class))){
                     return null;
                 }
                 if (!actor.getWeaponInventory().isEmpty()) {

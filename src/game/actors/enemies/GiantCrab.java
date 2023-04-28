@@ -1,7 +1,7 @@
 package game.actors.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.EnemyType;
+import game.enums.EnemyType;
 import game.weapons.GiantCrabPincer;
 
 /**

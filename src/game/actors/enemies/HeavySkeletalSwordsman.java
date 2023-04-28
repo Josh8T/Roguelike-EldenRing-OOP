@@ -1,6 +1,6 @@
 package game.actors.enemies;
 
-import game.EnemyType;
+import game.enums.EnemyType;
 import game.weapons.Grossmesser;
 
 /**

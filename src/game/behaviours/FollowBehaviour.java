@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actions.MoveActorAction;
-import game.utils.DistanceCalculator;
 
 /**
  * A class that figures out a MoveAction that will move the actor one step 
@@ -39,11 +38,11 @@ public class FollowBehaviour implements Behaviour {
 		Location here = map.locationOf(actor);
 		Location there = map.locationOf(target);
 
-		int currentDistance = DistanceCalculator.distance(here, there);
+		int currentDistance = distance(here, there);
 		for (Exit exit : here.getExits()) {
 			Location destination = exit.getDestination();
 			if (destination.canActorEnter(actor)) {
-				int newDistance = DistanceCalculator.distance(destination, there);
+				int newDistance = distance(destination, there);
 				if (newDistance < currentDistance) {
 					return new MoveActorAction(destination, exit.getName());
 				}
@@ -51,5 +50,9 @@ public class FollowBehaviour implements Behaviour {
 		}
 
 		return null;
+	}
+
+	public static int distance(Location a, Location b) {
+		return Math.abs(a.x() - b.x()) + Math.abs(a.y() - b.y());
 	}
 }

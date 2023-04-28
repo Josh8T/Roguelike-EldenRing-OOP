@@ -22,7 +22,7 @@ import game.grounds.environments.PuddleOfWater;
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
- * @author Aflah Hanif Amarlyadi
+ * @author Aflah Hanif Amarlyadi, David Lee
  */
 public class Application {
 

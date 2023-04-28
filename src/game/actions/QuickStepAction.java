@@ -7,7 +7,9 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
-import game.utils.DistanceCalculator;
+import game.utils.RandomNumberGenerator;
+
+import java.util.ArrayList;
 
 /**
  * A class that represents the quickstep action.
@@ -55,26 +57,28 @@ public class QuickStepAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Location targetLocation = map.locationOf(target);
-        Location maxLocation = map.locationOf(actor);
-        String maxDirection = "to the same location";
-        int maxDistance = 1;
+        Location finalDestination = map.locationOf(target);
+        String finalDirection = "to the same location";
+        ArrayList<Location> destinations = new ArrayList<>();
+        ArrayList<String> directions = new ArrayList<>();
 
         for (Exit exit: map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
             if (destination.canActorEnter(actor)) {
-                int newDistance = DistanceCalculator.distance(targetLocation, destination);
-                if (newDistance > maxDistance) {
-                    maxLocation = destination;
-                    maxDirection = exit.getName();
-                    maxDistance = newDistance;
-                }
+                destinations.add(destination);
+                directions.add(exit.getName());
             }
+        }
+
+        if (!destinations.isEmpty()) {
+            int randomInt = RandomNumberGenerator.getRandomInt(destinations.size());
+            finalDestination = destinations.get(randomInt);
+            finalDirection = directions.get(randomInt);
         }
 
         String result = new AttackAction(target, direction, weapon).execute(actor, map);
 
-        result += System.lineSeparator() + new MoveActorAction(maxLocation, maxDirection).execute(actor, map);
+        result += System.lineSeparator() + new MoveActorAction(finalDestination, finalDirection).execute(actor, map);
 
         return result;
     }

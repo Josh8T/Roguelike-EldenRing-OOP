@@ -9,7 +9,7 @@ import edu.monash.fit2099.engine.displays.Menu;
 import game.items.FlaskOfCrimsonTears;
 import game.items.Runes;
 import game.Resettable;
-import game.Status;
+import game.enums.Status;
 
 /**
  * Class representing the Player. It implements the Resettable interface.

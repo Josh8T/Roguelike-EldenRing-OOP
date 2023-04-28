@@ -1,8 +1,7 @@
 package game.actors.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.EnemyType;
-import game.Status;
+import game.enums.EnemyType;
 import game.weapons.GiantCrayfishPincer;
 
 /**
@@ -16,7 +15,6 @@ public class GiantCrayfish extends Enemy{
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803);
         this.addCapability(EnemyType.CRUSTACEAN);
-        this.addCapability(Status.SLAMS);
         this.addWeaponToInventory(new GiantCrayfishPincer());
     }
 
