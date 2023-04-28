@@ -9,9 +9,6 @@ public enum Status {
     HOSTILE_TO_ENEMY,
     RESPAWNABLE,
     RESTING,
-    CRUSTACEAN,
-    BEAST,
-    SKELETON,
     SLAMS
 
 }

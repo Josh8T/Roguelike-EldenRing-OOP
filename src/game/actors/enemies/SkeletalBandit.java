@@ -1,7 +1,7 @@
 package game.actors.enemies;
 
+import game.EnemyType;
 import game.Resettable;
-import game.Status;
 import game.weapons.Scimitar;
 
 /**
@@ -15,7 +15,7 @@ public class SkeletalBandit extends Enemy implements Resettable {
 
     public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 102);
-        this.addCapability(Status.SKELETON);
+        this.addCapability(EnemyType.SKELETON);
         this.addWeaponToInventory(new Scimitar());
 
     }

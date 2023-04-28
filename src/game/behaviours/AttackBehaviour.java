@@ -1,17 +1,16 @@
 package game.behaviours;
 
 import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.EnemyType;
 import game.Status;
 import game.actions.AreaAttackAction;
 import game.actions.AttackAction;
-import game.actors.enemies.Enemy;
 
 import java.util.Random;
 /**
@@ -40,13 +39,13 @@ public class AttackBehaviour implements Behaviour{
         Location actorLocation = map.locationOf(actor);
         for (Exit targetExit : actorLocation.getExits()){
             Actor aSingularTarget = targetExit.getDestination().getActor();
-            if (actor.hasCapability(Status.SKELETON) && aSingularTarget.hasCapability(Status.SKELETON)){
+            if (actor.hasCapability(EnemyType.SKELETON) && aSingularTarget.hasCapability(EnemyType.SKELETON)){
                 return null;
             }
-            else if (actor.hasCapability(Status.BEAST) && aSingularTarget.hasCapability(Status.BEAST)){
+            else if (actor.hasCapability(EnemyType.BEAST) && aSingularTarget.hasCapability(EnemyType.BEAST)){
                 return null;
             }
-            else if (actor.hasCapability(Status.CRUSTACEAN) && aSingularTarget.hasCapability(Status.CRUSTACEAN)){
+            else if (actor.hasCapability(EnemyType.CRUSTACEAN) && aSingularTarget.hasCapability(EnemyType.CRUSTACEAN)){
                 return null;
             }
             else if (aSingularTarget != null && aSingularTarget.hasCapability(Status.HOSTILE_TO_ENEMY)){
@@ -56,11 +55,11 @@ public class AttackBehaviour implements Behaviour{
                 }
                 else {
                     if (actor.hasCapability(Status.SLAMS)) {
-                        if ( actor.hasCapability(Status.CRUSTACEAN)){
+                        if ( actor.hasCapability(EnemyType.CRUSTACEAN)){
                             if (rand.nextInt(100) <= 50){
                                 return new AreaAttackAction(new IntrinsicWeapon(527, "slam", 100));
                             }
-                        } else if (actor.hasCapability(Status.BEAST)){
+                        } else if (actor.hasCapability(EnemyType.BEAST)){
                             if (rand.nextInt(100) <= 50){
                                 return new AreaAttackAction(new IntrinsicWeapon(314, "head slam", 90));
                             }

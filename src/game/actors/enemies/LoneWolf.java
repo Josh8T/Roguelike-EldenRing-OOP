@@ -1,7 +1,7 @@
 package game.actors.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
-import game.Status;
+import game.EnemyType;
 
 /**
  * BEHOLD, DOG!
@@ -14,7 +14,7 @@ public class LoneWolf extends Enemy {
 
     public LoneWolf() {
         super("Lone Wolf", 'h', 102);
-        this.addCapability(Status.BEAST);
+        this.addCapability(EnemyType.BEAST);
     }
 
     @Override
