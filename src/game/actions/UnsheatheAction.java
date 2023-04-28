@@ -7,7 +7,14 @@ import edu.monash.fit2099.engine.weapons.Weapon;
 
 import java.util.Random;
 
-public class MultipliedDamageAction extends Action {
+/**
+ * A class that represents the unsheathe action.
+ * Created by:
+ * @author David Lee
+ * Modified by:
+ *
+ */
+public class UnsheatheAction extends Action {
 
     /**
      * The Actor that is to be attacked
@@ -30,11 +37,6 @@ public class MultipliedDamageAction extends Action {
     private Weapon weapon;
 
     /**
-     * The number the damage of the weapon is multiplied by
-     */
-    private int multiplier;
-
-    /**
      * The hit chance of the attack
      */
     private int hitChance;
@@ -45,20 +47,18 @@ public class MultipliedDamageAction extends Action {
      * @param target the Actor to attack
      * @param direction the direction where the attack should be performed (only used for display purposes)
      * @param weapon the weapon used to attack
-     * @param multiplier the number the damage of the weapon is multiplied by
      * @param hitChance the hit chance of the attack
      */
-    public MultipliedDamageAction(Actor target, String direction, Weapon weapon, int multiplier, int hitChance) {
+    public UnsheatheAction(Actor target, String direction, Weapon weapon, int hitChance) {
         this.target = target;
         this.direction = direction;
         this.weapon = weapon;
-        this.multiplier = multiplier;
         this.hitChance = hitChance;
     }
 
     /**
      * When executed, the chance to hit of the weapon that the Actor used is computed to determine whether
-     * the actor will hit the target. If so, deal multiplied damage to the target and determine whether the target is killed.
+     * the actor will hit the target. If so, deal double damage to the target and determine whether the target is killed.
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
@@ -71,7 +71,7 @@ public class MultipliedDamageAction extends Action {
             return actor + " misses " + target + ".";
         }
 
-        int damage = weapon.damage() * multiplier;
+        int damage = weapon.damage() * 2;
         String result = actor + " " + weapon.verb() + " " + target + " for " + damage + " damage.";
         target.hurt(damage);
         if (!target.isConscious()) {
@@ -89,6 +89,6 @@ public class MultipliedDamageAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " deals x" + multiplier + " damage to " + target + " at " + direction + " with " + (weapon != null ? weapon : "Intrinsic Weapon");
+        return actor + " unsheathes " + weapon + " on " + target + " at " + direction;
     }
 }

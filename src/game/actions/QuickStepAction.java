@@ -9,7 +9,14 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.utils.DistanceCalculator;
 
-public class EvadeAttackAction extends Action {
+/**
+ * A class that represents the quickstep action.
+ * Created by:
+ * @author David Lee
+ * Modified by:
+ *
+ */
+public class QuickStepAction extends Action {
 
     /**
      * The Actor that is to be attacked
@@ -33,7 +40,7 @@ public class EvadeAttackAction extends Action {
      * @param direction the direction where the attack should be performed (only used for display purposes)
      * @param weapon the weapon used to attack
      */
-    public EvadeAttackAction(Actor target, String direction, Weapon weapon) {
+    public QuickStepAction(Actor target, String direction, Weapon weapon) {
         this.target = target;
         this.direction = direction;
         this.weapon = weapon;
@@ -80,6 +87,6 @@ public class EvadeAttackAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " attacks " + target + " at " + direction + " and moves away from the enemy with " + (weapon != null ? weapon : "Intrinsic Weapon");
+        return actor + " performs quickstep on " + target + " at " + direction + " with " + weapon;
     }
 }

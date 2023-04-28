@@ -7,6 +7,13 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 
+/**
+ * A class that represents the area attack action.
+ * Created by:
+ * @author David Lee
+ * Modified by:
+ *
+ */
 public class AreaAttackAction extends Action {
 
     /**
@@ -24,22 +31,16 @@ public class AreaAttackAction extends Action {
     }
 
     /**
-     * Constructor with intrinsic weapon as default
-     */
-    public AreaAttackAction() {
-    }
-
-    /**
      * When executed, the Actor attacks every other actor that is in its exits by executing AttackAction on them.
      *
      * @param actor The actor performing the area attack.
      * @param map The map the actor is on.
-     * @return that an area attack is performed and results of attacks on each target, e.g. whether the target is killed, etc.
+     * @return results of attacks on each target, e.g. whether the target is killed, etc.
      * @see AttackAction
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        String result = actor + " does an area attack.";
+        String result = actor + " attacks its surrounding";
 
         for (Exit exit: map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
@@ -59,6 +60,6 @@ public class AreaAttackAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " does an area attack with " + (weapon != null ? weapon : "Intrinsic Weapon");
+        return actor + " does an area attack with " + weapon;
     }
 }
