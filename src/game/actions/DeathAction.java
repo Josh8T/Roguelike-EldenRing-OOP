@@ -6,13 +6,15 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.enums.EnemyType;
+import game.enums.Status;
 
 /**
  * An action executed if an actor is killed.
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
- *
+ * @author Josh Hernett Tan
  */
 public class DeathAction extends Action {
     private Actor attacker;
@@ -23,7 +25,8 @@ public class DeathAction extends Action {
 
     /**
      * When the target is killed, the items & weapons carried by target
-     * will be dropped to the location in the game map where the target was
+     * will be dropped to the location in the game map where the target was.
+     * Skeleton type enemies are not dead the moment it is no longer conscious but instead becomes pile of bones
      *
      * @param target The actor performing the action.
      * @param map The map the actor is on.
@@ -32,19 +35,28 @@ public class DeathAction extends Action {
     @Override
     public String execute(Actor target, GameMap map) {
         String result = "";
-
         ActionList dropActions = new ActionList();
-        // drop all items
-        for (Item item : target.getItemInventory())
-            dropActions.add(item.getDropAction(target));
-        for (WeaponItem weapon : target.getWeaponInventory())
-            dropActions.add(weapon.getDropAction(target));
-        for (Action drop : dropActions)
-            drop.execute(target, map);
-        // remove actor
-        map.removeActor(target);
+
+        if (target.hasCapability(EnemyType.SKELETON)){
+            target.resetMaxHp(1);
+            target.addCapability(Status.PILE_OF_BONES);
+            target.removeCapability(EnemyType.SKELETON);
+        }
+        else {
+            // drop all items
+            for (Item item : target.getItemInventory())
+                dropActions.add(item.getDropAction(target));
+            for (WeaponItem weapon : target.getWeaponInventory())
+                dropActions.add(weapon.getDropAction(target));
+            for (Action drop : dropActions)
+                drop.execute(target, map);
+            // remove actor
+            map.removeActor(target);
+
+        }
         result += System.lineSeparator() + menuDescription(target);
         return result;
+
     }
 
     @Override

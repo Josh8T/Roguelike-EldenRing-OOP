@@ -8,5 +8,6 @@ package game.enums;
 public enum Status {
     HOSTILE_TO_ENEMY,
     RESPAWNABLE,
-    RESTING
+    RESTING,
+    PILE_OF_BONES
 }

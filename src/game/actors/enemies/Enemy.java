@@ -17,13 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Enemy extends Actor {
-    private Map<Integer, Behaviour> behaviours = new HashMap<>();
+    protected Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.getBehaviours().put(1, new AttackBehaviour());
         this.getBehaviours().put(4, new WanderBehaviour());
-
     }
 
     /**
