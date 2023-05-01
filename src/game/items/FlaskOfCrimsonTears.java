@@ -2,6 +2,8 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import game.Consumable;
+
 /**
  * A class that represents a Flask of Crimson Tears item.
  * Created by:
@@ -9,7 +11,7 @@ import edu.monash.fit2099.engine.items.Item;
  * Modified by:
  *
  */
-public class FlaskOfCrimsonTears extends Item {
+public class FlaskOfCrimsonTears extends Item implements Consumable {
 
     private int amount;
     /**
@@ -18,18 +20,8 @@ public class FlaskOfCrimsonTears extends Item {
      * @param amount the amount of Flask of Crimson Tears left
      */
     public FlaskOfCrimsonTears(int amount) {
-        //TODO Shouldn't have a display char, might need to change later
         super("Flask of Crimson Tears", 'F',false);
         this.amount = amount;
-    }
-
-    /**
-     * Getter.
-     *
-     * @return amount
-     */
-    public int getAmount() {
-        return amount;
     }
 
     /**
@@ -41,4 +33,17 @@ public class FlaskOfCrimsonTears extends Item {
         actor.heal(250);
         this.amount -= 1;
     }
+
+    /**
+     * Getter method for amount attribute
+     *
+     * @return amount
+     */
+    @Override
+    public int amountLeft() {
+        return this.amount;
+    }
+
+
+
 }

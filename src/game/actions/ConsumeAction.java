@@ -24,8 +24,8 @@ public class ConsumeAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         for (Item item : actor.getItemInventory()){
-            if (item instanceof FlaskOfCrimsonTears){
-                if (((FlaskOfCrimsonTears) item).getAmount() > 0){
+            if (item.toString().equals("Flask of Crimson Tears") ){
+                if (((FlaskOfCrimsonTears) item).amountLeft() > 0){
                     ((FlaskOfCrimsonTears) item).consume(actor);
                     return actor + " has heals successfully";
                 }
@@ -42,6 +42,6 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " heals by consuming Flask of Crimson Tears";
+        return actor + " consume Flask of Crimson Tears (" ;
     }
 }
