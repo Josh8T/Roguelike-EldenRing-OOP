@@ -22,6 +22,7 @@ public abstract class Enemy extends Actor {
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.getBehaviours().put(1, new AttackBehaviour());
+        this.getBehaviours().put(3, new DeSpawnBehaviour());
         this.getBehaviours().put(4, new WanderBehaviour());
     }
 
@@ -41,6 +42,7 @@ public abstract class Enemy extends Actor {
             Actor target = targetExits.getDestination().getActor();
             if (target != null) {
                 this.getBehaviours().put(2, new FollowBehaviour(target));
+                behaviours.remove(3);
             }
         }
         for (Behaviour behaviour : behaviours.values()) {
