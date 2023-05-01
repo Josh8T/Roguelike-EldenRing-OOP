@@ -26,7 +26,8 @@ public class DeathAction extends Action {
     /**
      * When the target is killed, the items & weapons carried by target
      * will be dropped to the location in the game map where the target was.
-     * Skeleton type enemies are not dead the moment it is no longer conscious but instead becomes pile of bones
+     * Skeleton type enemies are not dead the moment it is no longer conscious but instead becomes pile of bones.
+     * If an enemy kills another enemy, it would drop any items.
      *
      * @param target The actor performing the action.
      * @param map The map the actor is on.
@@ -42,7 +43,7 @@ public class DeathAction extends Action {
             target.addCapability(Status.PILE_OF_BONES);
             target.removeCapability(EnemyType.SKELETON);
         }
-        else {
+        else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
             // drop all items
             for (Item item : target.getItemInventory())
                 dropActions.add(item.getDropAction(target));
@@ -52,7 +53,10 @@ public class DeathAction extends Action {
                 drop.execute(target, map);
             // remove actor
             map.removeActor(target);
-
+        }
+        else if (!attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            // remove actor and no drops
+            map.removeActor(target);
         }
         result += System.lineSeparator() + menuDescription(target);
         return result;
