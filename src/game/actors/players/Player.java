@@ -40,7 +40,7 @@ public abstract class Player extends Actor implements Resettable {
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
-
+		display.println(this.name + " HP = (" + this.hitPoints + "/" + this.maxHitPoints + ") ");
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}
