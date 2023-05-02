@@ -1,13 +1,27 @@
-package game.actions;
+package game.actions.sell;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.items.Runes;
 import game.weapons.Club;
 
+/**
+ * A class that represents the sell action for Club between actors.
+ * Created by:
+ * @author Aflah Hanif Amarlyadi
+ * Modified by:
+ *
+ */
 public class SellClub extends SellAction {
+
+    private Club club;
+
+    /**
+     * Constructor.
+     * @param club being sold
+     */
+    public SellClub (Club club) {
+        this.club = club;
+    }
 
     /**
      * When executed, the weapon is removed from the inventory and the actor receives runes.
@@ -18,18 +32,9 @@ public class SellClub extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        for (WeaponItem weapon: actor.getWeaponInventory()) {
-            if (weapon instanceof Club) {
-                actor.removeWeaponFromInventory(weapon);
-                for (Item item: actor.getItemInventory()) {
-                    if (item instanceof Runes) {
-                        ((Runes) item).increaseValue(100);
-                    }
-                }
-                return actor + " sells Club for 100 runes successfully.";
-            }
-        }
-        return actor + " does not have Club in their inventory.";
+        club.receiveRunes();
+        actor.removeWeaponFromInventory(club);
+        return actor + " sells Club for 100 runes successfully";
     }
 
     /**

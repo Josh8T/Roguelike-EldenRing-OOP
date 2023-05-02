@@ -8,9 +8,10 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import game.actions.ConsumeAction;
 import game.items.FlaskOfCrimsonTears;
-import game.items.Runes;
+import game.items.Rune;
 import game.Resettable;
 import game.enums.Status;
+import game.items.RuneManager;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -33,7 +34,9 @@ public abstract class Player extends Actor implements Resettable {
 		super("Tarnished", '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FOLLOWABLE);
-		this.addItemToInventory(new Runes(0));
+		Rune rune = new Rune(0);
+		this.addItemToInventory(rune);
+		RuneManager.getInstance().registerRune(rune);
 		this.addItemToInventory(new FlaskOfCrimsonTears(2));
 	}
 
@@ -43,7 +46,7 @@ public abstract class Player extends Actor implements Resettable {
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
 		actions.add(new ConsumeAction());
-		display.println(this.name + " HP = (" + this.hitPoints + "/" + this.maxHitPoints + ") ");
+		display.println(this.name + " (" + this.hitPoints + "/" + this.maxHitPoints + "), Runes: " + RuneManager.getInstance().getRune().getValue());
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}

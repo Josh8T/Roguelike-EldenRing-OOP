@@ -1,19 +1,17 @@
-package game.actions;
+package game.actions.purchase;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.items.Runes;
-import game.weapons.Uchigatana;
+import game.weapons.Scimitar;
 
 /**
- * A class that represents the purchase action for Uchigatana between actors.
+ * A class that represents the purchase action for Scimitar between actors.
  * Created by:
  * @author Aflah Hanif Amarlyadi
  * Modified by:
  *
  */
-public class PurchaseUchigatana extends PurchaseAction {
+public class PurchaseScimitar extends PurchaseAction {
 
     /**
      * When executed, the weapon is added to the actor's inventory and the actor loses runes.
@@ -24,14 +22,11 @@ public class PurchaseUchigatana extends PurchaseAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        for (Item item : actor.getItemInventory()) {
-            if (item instanceof Runes) {
-                if (((Runes) item).getValue() >= 5000) {
-                    ((Runes) item).decreaseValue(5000);
-                    actor.addWeaponToInventory(new Uchigatana());
-                    return actor + " purchases Uchigatana for 5000 runes successfully.";
-                }
-            }
+        Scimitar scimitar = new Scimitar();
+        if (scimitar.isAffordable()) {
+            scimitar.giveRunes();
+            actor.addWeaponToInventory(scimitar);
+            return actor + " purchases Scimitar for 600 runes successfully";
         }
         return actor + " does not have enough runes.";
     }
@@ -44,6 +39,6 @@ public class PurchaseUchigatana extends PurchaseAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " purchases Uchigatana for 5000 runes.";
+        return actor + " purchases Scimitar for 600 runes";
     }
 }

@@ -15,6 +15,7 @@ import game.grounds.Wall;
 import game.grounds.environments.Graveyard;
 import game.grounds.environments.GustOfWind;
 import game.grounds.environments.PuddleOfWater;
+import game.grounds.environments.SiteOfLostGrace;
 
 /**
  * The main class to start the game.
@@ -30,7 +31,7 @@ public class Application {
 		World world = new World(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				new Graveyard(), new GustOfWind(), new PuddleOfWater());
+				new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace());
 
 
 
@@ -46,7 +47,7 @@ public class Application {
 				"...........................................................................",
 				"~~~~~~~~~~~.......................###___###................................",
 				"~~~~~~~~~~~~......................________#....nnnn........................",
-				"~~~~~~~~~~~~~.....................#________................................",
+				"~~~~~~~~~~~~~.....................#___U____................................",
 				"~~~~~~~~~~~~......................#_______#....nnnn........................",
 				"~~~~~~~~~~~.......................###___###................................",
 				"~~~~~~~~~~..........................#___#..................................",

@@ -2,7 +2,14 @@ package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
 
-public class Runes extends Item {
+/**
+ * A class that represents a Rune item, used to trade with the Trader.
+ * Created by:
+ * @author Aflah Hanif Amarlyadi
+ * Modified by:
+ *
+ */
+public class Rune extends Item {
 
     private int value;
 
@@ -11,8 +18,8 @@ public class Runes extends Item {
      *
      * @param value the value of the Runes
      */
-    public Runes(int value) {
-        super("Runes", '$', true);
+    public Rune(int value) {
+        super("Rune", '$', true);
         this.value = value;
     }
 

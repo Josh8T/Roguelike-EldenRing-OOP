@@ -1,10 +1,8 @@
-package game.actions;
+package game.actions.sell;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.items.Runes;
+import game.actions.sell.SellAction;
 import game.weapons.Grossmesser;
 
 /**
@@ -16,6 +14,16 @@ import game.weapons.Grossmesser;
  */
 public class SellGrossmesser extends SellAction {
 
+    private Grossmesser grossmesser;
+
+    /**
+     * Constructor.
+     * @param grossmesser being sold
+     */
+    public SellGrossmesser(Grossmesser grossmesser) {
+        this.grossmesser = grossmesser;
+    }
+
     /**
      * When executed, the weapon is removed from the inventory and the actor receives runes.
      *
@@ -25,18 +33,9 @@ public class SellGrossmesser extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        for (WeaponItem weapon: actor.getWeaponInventory()) {
-            if (weapon instanceof Grossmesser) {
-                actor.removeWeaponFromInventory(weapon);
-                for (Item item: actor.getItemInventory()) {
-                    if (item instanceof Runes) {
-                        ((Runes) item).increaseValue(100);
-                    }
-                }
-                return actor + " sells Grossmesser for 100 runes successfully.";
-            }
-        }
-        return actor + " does not have Club in their inventory.";
+        grossmesser.receiveRunes();
+        actor.removeWeaponFromInventory(grossmesser);
+        return actor + " sells Grossmesser for 100 runes successfully.";
     }
 
     /**

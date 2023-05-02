@@ -6,8 +6,11 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.purchase.PurchaseClub;
+import game.actions.purchase.PurchaseGreatKnife;
+import game.actions.purchase.PurchaseScimitar;
+import game.actions.purchase.PurchaseUchigatana;
 import game.enums.Status;
-import game.actions.*;
 
 /**
  * A class that represents the Trader.
@@ -26,6 +29,7 @@ public class Trader extends Actor {
      */
     public Trader(String name, char displayChar) {
         super(name, displayChar, 100);
+        this.addCapability(Status.WILLING_TO_TRADE);
     }
 
     /**
@@ -57,10 +61,7 @@ public class Trader extends Actor {
             actions.add(new PurchaseUchigatana());
             actions.add(new PurchaseGreatKnife());
             actions.add(new PurchaseClub());
-            actions.add(new SellUchigatana());
-            actions.add(new SellGreatKnife());
-            actions.add(new SellClub());
-            actions.add(new SellGrossmesser());
+            actions.add(new PurchaseScimitar());
         }
         return actions;
     }

@@ -36,8 +36,8 @@ public class AttackBehaviour implements Behaviour {
     @Override
     public Action getAction(Actor actor, GameMap map) {
         Location actorLocation = map.locationOf(actor);
-        for (Exit exits : actorLocation.getExits()){
-            Actor target = exits.getDestination().getActor();
+        for (Exit exit : actorLocation.getExits()){
+            Actor target = exit.getDestination().getActor();
             if (target != null) {
                 if (actor.findCapabilitiesByType(EnemyType.class).equals(target.findCapabilitiesByType(EnemyType.class))){
                     return null;
@@ -45,12 +45,12 @@ public class AttackBehaviour implements Behaviour {
                 if (!actor.getWeaponInventory().isEmpty()) {
                     Weapon actorWeapon = actor.getWeaponInventory().get(0);
                     if (rand.nextInt(100) <= 50){
-                        return new AttackAction(target, exits.getName(), actorWeapon);
+                        return new AttackAction(target, exit.getName(), actorWeapon);
                     } else {
-                        return actorWeapon.getSkill(target, exits.getName());
+                        return actorWeapon.getSkill(target, exit.getName());
                     }
                 } else {
-                    return new AttackAction(target, exits.getName());
+                    return new AttackAction(target, exit.getName());
                 }
             }
         }

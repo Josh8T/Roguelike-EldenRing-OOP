@@ -1,10 +1,7 @@
-package game.actions;
+package game.actions.sell;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.items.Runes;
 import game.weapons.GreatKnife;
 
 /**
@@ -16,6 +13,16 @@ import game.weapons.GreatKnife;
  */
 public class SellGreatKnife extends SellAction {
 
+    private GreatKnife greatKnife;
+
+    /**
+     * Constructor.
+     * @param greatKnife being sold
+     */
+    public SellGreatKnife(GreatKnife greatKnife) {
+        this.greatKnife = greatKnife;
+    }
+
     /**
      * When executed, the weapon is removed from the inventory and the actor receives runes.
      *
@@ -25,18 +32,9 @@ public class SellGreatKnife extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        for (WeaponItem weapon: actor.getWeaponInventory()) {
-            if (weapon instanceof GreatKnife) {
-                actor.removeWeaponFromInventory(weapon);
-                for (Item item: actor.getItemInventory()) {
-                    if (item instanceof Runes) {
-                        ((Runes) item).increaseValue(350);
-                    }
-                }
-                return actor + " sells Great Knife for 350 runes successfully.";
-            }
-        }
-        return actor + " does not have Great Knife in their inventory.";
+        greatKnife.receiveRunes();
+        actor.removeWeaponFromInventory(greatKnife);
+        return actor + " sells Great Knife for 350 runes successfully";
     }
 
     /**

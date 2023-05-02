@@ -1,4 +1,4 @@
-package game.actions;
+package game.actions.purchase;
 
 import edu.monash.fit2099.engine.actions.Action;
 

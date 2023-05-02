@@ -2,8 +2,15 @@ package game.weapons;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.actions.sell.SellGreatKnife;
+import game.actions.purchase.Purchasable;
 import game.actions.QuickStepAction;
+import game.actions.sell.Sellable;
+import game.enums.Status;
+import game.items.RuneManager;
 
 /**
  * A class that represents the Great Knife weapon.
@@ -12,7 +19,10 @@ import game.actions.QuickStepAction;
  * Modified by:
  * @author David Lee
  */
-public class GreatKnife extends WeaponItem {
+public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
+
+    private final int PURCHASE_VALUE = 3500;
+    private final int SELL_VALUE = 350;
 
     /**
      * Constructor.
@@ -24,5 +34,30 @@ public class GreatKnife extends WeaponItem {
     @Override
     public Action getSkill(Actor target, String direction) {
         return new QuickStepAction(target, direction, this);
+    }
+
+    @Override
+    public void tick(Location currentLocation) {
+        for (Exit exit : currentLocation.getExits()) {
+            Actor actor = exit.getDestination().getActor();
+            if (actor != null && actor.hasCapability(Status.WILLING_TO_TRADE)) {
+                this.addAction(new SellGreatKnife(this));
+            }
+        }
+    }
+
+    @Override
+    public boolean isAffordable() {
+        return RuneManager.getInstance().getRune().getValue() >= PURCHASE_VALUE;
+    }
+
+    @Override
+    public void giveRunes() {
+        RuneManager.getInstance().getRune().decreaseValue(PURCHASE_VALUE);
+    }
+
+    @Override
+    public void receiveRunes() {
+        RuneManager.getInstance().getRune().increaseValue(SELL_VALUE);
     }
 }
