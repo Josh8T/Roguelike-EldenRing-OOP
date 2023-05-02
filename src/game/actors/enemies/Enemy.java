@@ -16,9 +16,26 @@ import game.behaviours.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Base class for an Enemy. These represent things that an Enemy can do.
+ * Created by:
+ * @author David Lee
+ * Modified by:
+ *
+ */
 public abstract class Enemy extends Actor {
+
+    /**
+     * The behaviours of the enemy stored in a hashmap
+     */
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
 
+    /**
+     * Constructor.
+     * @param name the name of the Enemy
+     * @param displayChar the character that will represent the Enemy in the display
+     * @param hitPoints the Enemy's starting hit points
+     */
     public Enemy(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         this.getBehaviours().put(1, new AttackBehaviour());
@@ -29,9 +46,9 @@ public abstract class Enemy extends Actor {
     /**
      * At each turn, select a valid action to perform.
      *
-     * @param actions    collection of possible Actions for this Actor
-     * @param lastAction The Action this Actor took last turn. Can do interesting things in conjunction with Action.getNextAction()
-     * @param map        the map containing the Actor
+     * @param actions    collection of possible Actions for this Enemy
+     * @param lastAction The Action this Enemy took last turn. Can do interesting things in conjunction with Action.getNextAction()
+     * @param map        the map containing the Enemy
      * @param display    the I/O object to which messages may be written
      * @return the valid action that can be performed in that iteration or null if no valid action is found
      */
@@ -54,12 +71,12 @@ public abstract class Enemy extends Actor {
     }
 
     /**
-     * This Actor can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
+     * This Enemy can be attacked by any actor that has the HOSTILE_TO_ENEMY capability
      *
      * @param otherActor the Actor that might be performing attack
      * @param direction  String representing the direction of the other Actor
      * @param map        current GameMap
-     * @return the list of actions the Actor can do to the Actor
+     * @return the list of actions the Actor can do to the Enemy
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
@@ -70,12 +87,14 @@ public abstract class Enemy extends Actor {
                 actions.add(weapon.getSkill(this, direction));
             }
             actions.add(new AttackAction(this, direction));
-            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
-            // HINT 1: How would you attack the enemy with a weapon?
         }
         return actions;
     }
 
+    /**
+     * Getter for the enemy's hashmap of behaviours
+     * @return enemy's hashmap of behaviours
+     */
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;
     }
