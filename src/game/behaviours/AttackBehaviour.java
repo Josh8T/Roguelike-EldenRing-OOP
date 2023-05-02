@@ -8,7 +8,9 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.enums.EnemyType;
 import game.actions.AttackAction;
+import game.utils.RandomNumberGenerator;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -35,25 +37,37 @@ public class AttackBehaviour implements Behaviour {
      */
     @Override
     public Action getAction(Actor actor, GameMap map) {
+        ArrayList<Actor> targets = new ArrayList<>();
+        ArrayList<String> directions = new ArrayList<>();
+
         Location actorLocation = map.locationOf(actor);
         for (Exit exit : actorLocation.getExits()){
             Actor target = exit.getDestination().getActor();
             if (target != null) {
-                if (actor.findCapabilitiesByType(EnemyType.class).equals(target.findCapabilitiesByType(EnemyType.class))){
-                    return null;
-                }
-                if (!actor.getWeaponInventory().isEmpty()) {
-                    Weapon actorWeapon = actor.getWeaponInventory().get(0);
-                    if (rand.nextInt(100) <= 50){
-                        return new AttackAction(target, exit.getName(), actorWeapon);
-                    } else {
-                        return actorWeapon.getSkill(target, exit.getName());
-                    }
-                } else {
-                    return new AttackAction(target, exit.getName());
+                if (!actor.findCapabilitiesByType(EnemyType.class).equals(target.findCapabilitiesByType(EnemyType.class))){
+                    targets.add(target);
+                    directions.add(exit.getName());
                 }
             }
         }
-        return null;
+
+        if (targets.isEmpty()) {
+            return null;
+        }
+
+        int randomInt = RandomNumberGenerator.getRandomInt(targets.size());
+        Actor finalTarget = targets.get(randomInt);
+        String finalDirection = directions.get(randomInt);
+
+        if (!actor.getWeaponInventory().isEmpty()) {
+            Weapon actorWeapon = actor.getWeaponInventory().get(0);
+            if (rand.nextInt(100) <= 50){
+                return new AttackAction(finalTarget, finalDirection, actorWeapon);
+            } else {
+                return actorWeapon.getSkill(finalTarget, finalDirection);
+            }
+        } else {
+            return new AttackAction(finalTarget, finalDirection);
+        }
     }
 }
