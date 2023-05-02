@@ -38,10 +38,10 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
 
-        if (target.hasCapability(EnemyType.SKELETON)){
+        if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.PILE_OF_BONES)){
             target.resetMaxHp(1);
             target.addCapability(Status.PILE_OF_BONES);
-            target.removeCapability(EnemyType.SKELETON);
+            return System.lineSeparator() + target + " turns into a pile of bones";
         }
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
             // drop all items

@@ -20,7 +20,7 @@ import game.weapons.Grossmesser;
  * Created by:
  * @author Josh Hernett Tan
  * Modified by:
- * @author Josh Hernett Tan
+ * @author Josh Hernett Tan, David Lee
  */
 public class HeavySkeletalSwordsman extends Enemy {
     private int stateCounter;
@@ -40,34 +40,31 @@ public class HeavySkeletalSwordsman extends Enemy {
         this.stateCounter = 0;
     }
 
-
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
         if (this.stateCounter > 0 && this.stateCounter <= 2 && this.hasCapability(Status.PILE_OF_BONES)) {
             setStateCounter(this.stateCounter + 1);
-            return new DoNothingAction();
-        } else if (this.stateCounter == 0 && !(this.isConscious())) {
+        } else if (this.stateCounter == 0 && this.hasCapability(Status.PILE_OF_BONES)) {
             this.setDisplayChar('X');
-            behaviours.clear();
             setStateCounter(this.stateCounter + 1);
-            return new DoNothingAction();
-        } else if (this.stateCounter == 2 && this.hasCapability(Status.PILE_OF_BONES)) {
+        } else if (this.stateCounter == 3 && this.hasCapability(Status.PILE_OF_BONES)) {
             setStateCounter(0);
             this.setDisplayChar('q');
-            return new ReviveSkeletonAction(this, 153);
+            return new ReviveSkeletonAction(153);
         }
 
-        if (this.hasCapability(EnemyType.SKELETON)) {
+        if (!this.hasCapability(Status.PILE_OF_BONES)) {
             Location actorLocation = map.locationOf(this);
             for (Exit targetExits : actorLocation.getExits()) {
                 Actor target = targetExits.getDestination().getActor();
-                if (target != null) {
+                if (target != null && target.hasCapability(Status.FOLLOWABLE)) {
                     this.getBehaviours().put(2, new FollowBehaviour(target));
+                    behaviours.remove(3);
                 }
             }
             for (Behaviour behaviour : behaviours.values()) {
                 Action action = behaviour.getAction(this, map);
-                if (action != null)
+                if(action != null)
                     return action;
             }
         }
