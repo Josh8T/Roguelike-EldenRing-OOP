@@ -23,6 +23,7 @@ public class Uchigatana extends WeaponItem implements Purchasable, Sellable {
 
     private final int PURCHASE_VALUE = 5000;
     private final int SELL_VALUE = 500;
+    private SellUchigatana sellUchigatana = new SellUchigatana(this);
 
     /**
      * Constructor.
@@ -33,11 +34,18 @@ public class Uchigatana extends WeaponItem implements Purchasable, Sellable {
 
     @Override
     public void tick(Location currentLocation) {
+        boolean traderNearby = false;
         for (Exit exit : currentLocation.getExits()) {
-            Actor actor = exit.getDestination().getActor();
-            if (actor != null && actor.hasCapability(Status.WILLING_TO_TRADE)) {
-                this.addAction(new SellUchigatana(this));
+            Actor otherActor = exit.getDestination().getActor();
+            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
+                if (!this.getAllowableActions().contains(sellUchigatana)) {
+                    this.addAction(sellUchigatana);
+                }
+                traderNearby = true;
             }
+        }
+        if (!traderNearby) {
+            this.removeAction(sellUchigatana);
         }
     }
 

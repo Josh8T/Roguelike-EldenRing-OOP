@@ -26,7 +26,7 @@ public class PurchaseGreatKnife extends PurchaseAction {
         if (greatKnife.isAffordable()) {
             greatKnife.giveRunes();
             actor.addWeaponToInventory(greatKnife);
-            return actor + " purchases Great Knife for 3500 runes successfully.";
+            return actor + " purchases Great Knife for 3500 runes successfully";
         }
         return actor + " does not have enough runes.";
     }
@@ -39,6 +39,6 @@ public class PurchaseGreatKnife extends PurchaseAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " purchases Great Knife for 3500 runes.";
+        return actor + " purchases Great Knife for 3500 runes";
     }
 }

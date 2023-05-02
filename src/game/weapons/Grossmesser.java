@@ -21,6 +21,7 @@ import game.items.RuneManager;
 public class Grossmesser extends WeaponItem implements Sellable {
 
     private final int SELL_VALUE = 100;
+    private SellGrossmesser sellGrossmesser = new SellGrossmesser(this);
 
     /**
      * Constructor.
@@ -31,11 +32,18 @@ public class Grossmesser extends WeaponItem implements Sellable {
 
     @Override
     public void tick(Location currentLocation) {
+        boolean traderNearby = false;
         for (Exit exit : currentLocation.getExits()) {
-            Actor actor = exit.getDestination().getActor();
-            if (actor != null && actor.hasCapability(Status.WILLING_TO_TRADE)) {
-                this.addAction(new SellGrossmesser(this));
+            Actor otherActor = exit.getDestination().getActor();
+            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
+                if (!this.getAllowableActions().contains(sellGrossmesser)) {
+                    this.addAction(sellGrossmesser);
+                }
+                traderNearby = true;
             }
+        }
+        if (!traderNearby) {
+            this.removeAction(sellGrossmesser);
         }
     }
 

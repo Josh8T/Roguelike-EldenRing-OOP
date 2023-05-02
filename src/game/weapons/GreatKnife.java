@@ -23,6 +23,7 @@ public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
 
     private final int PURCHASE_VALUE = 3500;
     private final int SELL_VALUE = 350;
+    private SellGreatKnife sellGreatKnife = new SellGreatKnife(this);
 
     /**
      * Constructor.
@@ -38,11 +39,18 @@ public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
 
     @Override
     public void tick(Location currentLocation) {
+        boolean traderNearby = false;
         for (Exit exit : currentLocation.getExits()) {
-            Actor actor = exit.getDestination().getActor();
-            if (actor != null && actor.hasCapability(Status.WILLING_TO_TRADE)) {
-                this.addAction(new SellGreatKnife(this));
+            Actor otherActor = exit.getDestination().getActor();
+            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
+                if (!this.getAllowableActions().contains(sellGreatKnife)) {
+                    this.addAction(sellGreatKnife);
+                }
+                traderNearby = true;
             }
+        }
+        if (!traderNearby) {
+            this.removeAction(sellGreatKnife);
         }
     }
 

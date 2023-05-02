@@ -22,6 +22,7 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
 
     private final int PURCHASE_VALUE = 600;
     private final int SELL_VALUE = 100;
+    private SellClub sellClub = new SellClub(this);
 
     /**
      * Constructor
@@ -31,12 +32,19 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
-    public void tick(Location currentLocation) {
+    public void tick(Location currentLocation, Actor actor) {
+        boolean traderNearby = false;
         for (Exit exit : currentLocation.getExits()) {
-            Actor actor = exit.getDestination().getActor();
-            if (actor != null && actor.hasCapability(Status.WILLING_TO_TRADE)) {
-                this.addAction(new SellClub(this));
+            Actor otherActor = exit.getDestination().getActor();
+            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
+                if (!this.getAllowableActions().contains(sellClub)) {
+                    this.addAction(sellClub);
+                }
+                traderNearby = true;
             }
+        }
+        if (!traderNearby) {
+            this.removeAction(sellClub);
         }
     }
 

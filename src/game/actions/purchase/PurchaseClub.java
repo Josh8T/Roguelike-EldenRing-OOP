@@ -26,7 +26,7 @@ public class PurchaseClub extends PurchaseAction {
         if (club.isAffordable()) {
             club.giveRunes();
             actor.addWeaponToInventory(club);
-            return actor + " purchases Club for 600 runes successfully.";
+            return actor + " purchases Club for 600 runes successfully";
         }
         return actor + " does not have enough runes.";
     }
@@ -39,6 +39,6 @@ public class PurchaseClub extends PurchaseAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " purchases Club for 600 runes.";
+        return actor + " purchases Club for 600 runes";
     }
 }

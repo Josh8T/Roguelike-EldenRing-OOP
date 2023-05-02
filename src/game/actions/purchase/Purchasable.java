@@ -1,5 +1,6 @@
 package game.actions.purchase;
 
+import edu.monash.fit2099.engine.actors.Actor;
 import game.items.RuneManager;
 
 /**
