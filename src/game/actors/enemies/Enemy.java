@@ -9,6 +9,8 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
+import game.ResetManager;
+import game.Resettable;
 import game.enums.Status;
 import game.actions.AttackAction;
 import game.behaviours.*;
@@ -16,7 +18,7 @@ import game.behaviours.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Enemy extends Actor {
+public abstract class Enemy extends Actor implements Resettable {
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
 
     public Enemy(String name, char displayChar, int hitPoints) {
@@ -78,5 +80,11 @@ public abstract class Enemy extends Actor {
 
     public Map<Integer, Behaviour> getBehaviours() {
         return behaviours;
+    }
+
+    @Override
+    public void reset(GameMap map) {
+        ResetManager.getInstance().removeResettable(this);
+        map.removeActor(this);
     }
 }

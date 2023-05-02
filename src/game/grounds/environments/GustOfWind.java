@@ -2,8 +2,10 @@ package game.grounds.environments;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ResetManager;
 import game.actors.enemies.GiantDog;
 import game.actors.enemies.LoneWolf;
+import game.enums.GroundType;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -17,6 +19,7 @@ public class GustOfWind extends Ground {
 
     public GustOfWind() {
         super('&');
+        this.addCapability(GroundType.GW);
     }
 
     @Override
@@ -24,12 +27,16 @@ public class GustOfWind extends Ground {
         if (!location.containsAnActor()) {
             if (location.x() < location.map().getXRange().max() / 2) {
                 if (RandomNumberGenerator.getRandomInt(100) <= 33) {
-                    location.addActor(new LoneWolf());
+                    LoneWolf newLoneWolf = new LoneWolf();
+                    location.addActor(newLoneWolf);
+                    ResetManager.getInstance().registerResettable(newLoneWolf);
                 }
             }
             else {
                 if (RandomNumberGenerator.getRandomInt(100) <= 4) {
-                    location.addActor(new GiantDog());
+                    GiantDog newGiantDog = new GiantDog();
+                    location.addActor(newGiantDog);
+                    ResetManager.getInstance().registerResettable(newGiantDog);
                 }
             }
         }
