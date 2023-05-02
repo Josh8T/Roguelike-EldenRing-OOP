@@ -2,8 +2,10 @@ package game.grounds.environments;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ResetManager;
 import game.actors.enemies.GiantCrab;
 import game.actors.enemies.GiantCrayfish;
+import game.enums.GroundType;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -17,6 +19,7 @@ public class PuddleOfWater extends Ground {
 
     public PuddleOfWater() {
         super('~');
+        this.addCapability(GroundType.PW);
     }
 
     @Override
@@ -24,12 +27,16 @@ public class PuddleOfWater extends Ground {
         if (!location.containsAnActor()) {
             if (location.x() < location.map().getXRange().max() / 2) {
                 if (RandomNumberGenerator.getRandomInt(100) <= 2) {
-                    location.addActor(new GiantCrab());
+                    GiantCrab newGiantCrab = new GiantCrab();
+                    location.addActor(newGiantCrab);
+                    ResetManager.getInstance().registerResettable(newGiantCrab);
                 }
             }
             else {
                 if (RandomNumberGenerator.getRandomInt(100) <= 1) {
-                    location.addActor(new GiantCrayfish());
+                    GiantCrayfish newGiantCrayfish = new GiantCrayfish();
+                    location.addActor(newGiantCrayfish);
+                    ResetManager.getInstance().registerResettable(newGiantCrayfish);
                 }
             }
         }

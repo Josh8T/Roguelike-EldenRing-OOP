@@ -2,7 +2,10 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.GameMap;
 import game.Consumable;
+import game.ResetManager;
+import game.Resettable;
 
 /**
  * A class that represents a Flask of Crimson Tears item.
@@ -11,7 +14,7 @@ import game.Consumable;
  * Modified by:
  *
  */
-public class FlaskOfCrimsonTears extends Item implements Consumable {
+public class FlaskOfCrimsonTears extends Item implements Consumable, Resettable {
 
     private int amount;
     /**
@@ -44,6 +47,12 @@ public class FlaskOfCrimsonTears extends Item implements Consumable {
         return this.amount;
     }
 
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
-
+    @Override
+    public void reset(GameMap map) {
+        this.setAmount(2);
+    }
 }

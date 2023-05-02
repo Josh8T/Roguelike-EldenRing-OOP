@@ -2,8 +2,10 @@ package game.grounds.environments;
 
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.ResetManager;
 import game.actors.enemies.HeavySkeletalSwordsman;
 import game.actors.enemies.SkeletalBandit;
+import game.enums.GroundType;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -17,6 +19,7 @@ public class Graveyard extends Ground {
 
     public Graveyard() {
         super('n');
+        this.addCapability(GroundType.GY);
     }
 
     @Override
@@ -24,12 +27,16 @@ public class Graveyard extends Ground {
         if (!location.containsAnActor()) {
             if (location.x() < location.map().getXRange().max() / 2) {
                 if (RandomNumberGenerator.getRandomInt(100) <= 27) {
-                    location.addActor(new HeavySkeletalSwordsman());
+                    HeavySkeletalSwordsman newHeavySkeletalSwordsman = new HeavySkeletalSwordsman();
+                    location.addActor(newHeavySkeletalSwordsman);
+                    ResetManager.getInstance().registerResettable(newHeavySkeletalSwordsman);
                 }
             }
             else {
                 if (RandomNumberGenerator.getRandomInt(100) <= 27) {
-                    location.addActor(new SkeletalBandit());
+                    SkeletalBandit newSkeletalBandit = new SkeletalBandit();
+                    location.addActor(newSkeletalBandit);
+                    ResetManager.getInstance().registerResettable(newSkeletalBandit);
                 }
             }
         }

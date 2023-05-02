@@ -23,7 +23,7 @@ import game.weapons.Scimitar;
  * Modified by:
  * @author David Lee, Josh Hernett Tan
  */
-public class SkeletalBandit extends Enemy implements Resettable {
+public class SkeletalBandit extends Enemy{
     private int stateCounter;
 
     public int getStateCounter() {
@@ -39,11 +39,6 @@ public class SkeletalBandit extends Enemy implements Resettable {
         this.addCapability(EnemyType.SKELETON);
         this.addWeaponToInventory(new Scimitar());
         this.stateCounter = 0;
-    }
-
-    @Override
-    public void reset() {
-
     }
 
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {

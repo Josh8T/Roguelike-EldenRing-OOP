@@ -4,6 +4,8 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.Consumable;
+import game.actors.players.Player;
 import game.items.FlaskOfCrimsonTears;
 /**
  * A class that represents the consume action when using Flask of Crimson Tears.
@@ -13,6 +15,14 @@ import game.items.FlaskOfCrimsonTears;
  *
  */
 public class ConsumeAction extends Action {
+    private Consumable consumable;
+    private Player player;
+
+    public ConsumeAction(Consumable consumable, Player player){
+        this.consumable = consumable;
+        this.player = player;
+    }
+
     /**
      * When executed, the actor heals up to 250 hit points
      * and decrease the amount of Flask of Crimson Tears in the actor Inventory .
@@ -23,13 +33,9 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        for (Item item : actor.getItemInventory()){
-            if (item.toString().equals("Flask of Crimson Tears") ){
-                if (((FlaskOfCrimsonTears) item).amountLeft() > 0){
-                    ((FlaskOfCrimsonTears) item).consume(actor);
-                    return actor + " has heals successfully";
-                }
-            }
+        if (consumable.amountLeft() > 0) {
+            consumable.consume(player);
+            return player + " has been healed successfully!";
         }
         return actor + " has no Flask of Crimson Tears left";
     }
@@ -42,6 +48,6 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " consume Flask of Crimson Tears (" ;
+        return actor + " consume Flask of Crimson Tears (" + consumable.amountLeft() + ")";
     }
 }

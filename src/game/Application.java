@@ -6,6 +6,7 @@ import java.util.List;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.players.Player;
 import game.actors.Trader;
@@ -85,6 +86,8 @@ public class Application {
 
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new StartingClassMenu().chooseStartingClass();
+		// adding First Step Grace as first checkpoint
+		player.setCheckpoint(new Location(gameMap, 38, 11));
 		world.addPlayer(player, gameMap.at(36, 10));
 		Trader trader = new Trader("Merchant Kale", 'K');
 		gameMap.at(40, 12).addActor(trader);
