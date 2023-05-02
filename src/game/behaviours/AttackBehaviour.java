@@ -16,7 +16,7 @@ import java.util.Random;
  * Created by:
  * @author Josh Hernett Tan
  * Modified by:
- * @author Aflah Hanif Amarlyadi, David Lee
+ * @author Aflah Hanif Amarlyadi
  */
 public class AttackBehaviour implements Behaviour {
 
