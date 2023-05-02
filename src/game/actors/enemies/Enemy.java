@@ -40,7 +40,7 @@ public abstract class Enemy extends Actor {
         Location actorLocation = map.locationOf(this);
         for (Exit targetExits : actorLocation.getExits()) {
             Actor target = targetExits.getDestination().getActor();
-            if (target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            if (target != null && target.hasCapability(Status.FOLLOWABLE)) {
                 this.getBehaviours().put(2, new FollowBehaviour(target));
                 behaviours.remove(3);
             }

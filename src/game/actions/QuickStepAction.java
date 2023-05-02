@@ -49,6 +49,7 @@ public class QuickStepAction extends Action {
     }
 
     /**
+     * When executed, the Actor attacks the target by executing AttackAction on it. It then
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
@@ -57,10 +58,10 @@ public class QuickStepAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        Location finalDestination = map.locationOf(target);
-        String finalDirection = "to the same location";
         ArrayList<Location> destinations = new ArrayList<>();
         ArrayList<String> directions = new ArrayList<>();
+
+        String result = new AttackAction(target, direction, weapon).execute(actor, map);
 
         for (Exit exit: map.locationOf(actor).getExits()) {
             Location destination = exit.getDestination();
@@ -70,15 +71,12 @@ public class QuickStepAction extends Action {
             }
         }
 
-        if (!destinations.isEmpty()) {
+        if (destinations.isEmpty()) {
+            result += System.lineSeparator() + "Quickstep failed";
+        } else {
             int randomInt = RandomNumberGenerator.getRandomInt(destinations.size());
-            finalDestination = destinations.get(randomInt);
-            finalDirection = directions.get(randomInt);
+            result += System.lineSeparator() + new MoveActorAction(destinations.get(randomInt), directions.get(randomInt)).execute(actor, map);
         }
-
-        String result = new AttackAction(target, direction, weapon).execute(actor, map);
-
-        result += System.lineSeparator() + new MoveActorAction(finalDestination, finalDirection).execute(actor, map);
 
         return result;
     }

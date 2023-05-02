@@ -5,9 +5,16 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.DeSpawnAction;
 
+import java.util.Random;
+
 public class DeSpawnBehaviour implements Behaviour{
+    private Random rand = new Random();
+
     @Override
     public Action getAction(Actor actor, GameMap map) {
-        return new DeSpawnAction();
+        if (rand.nextInt(100) <= 10){
+            return new DeSpawnAction();
+        }
+        return null;
     }
 }
