@@ -55,12 +55,15 @@ public class DeathAction extends Action {
             map.removeActor(target);
         }
         else if (!attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            // remove actor and no drops
+            // remove actor and only drop weapons
+            for (WeaponItem weapon : target.getWeaponInventory())
+                dropActions.add(weapon.getDropAction(target));
+            for (Action drop : dropActions)
+                drop.execute(target, map);
             map.removeActor(target);
         }
         result += System.lineSeparator() + menuDescription(target);
         return result;
-
     }
 
     @Override

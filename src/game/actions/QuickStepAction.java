@@ -49,7 +49,8 @@ public class QuickStepAction extends Action {
     }
 
     /**
-     * When executed, the Actor attacks the target by executing AttackAction on it. It then
+     * When executed, the Actor attacks the target by executing AttackAction on it. It then moves to a random Exit by
+     * executing the MoveActorAction.
      *
      * @param actor The actor performing the action.
      * @param map The map the actor is on.
