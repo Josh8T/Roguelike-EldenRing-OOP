@@ -3,11 +3,13 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
 import game.ResetManager;
+import game.actors.players.Player;
 import game.enums.EnemyType;
 import game.enums.Status;
 
@@ -46,9 +48,10 @@ public class DeathAction extends Action {
             return System.lineSeparator() + target + " turns into a pile of bones";
         }
         else if (target.hasCapability(Status.PLAYER)) {
+            for (String line : FancyMessage.YOU_DIED.split("\n")) {
+                new Display().println(line);
+            }
             ResetManager.getInstance().run(map);
-            //TODO move player
-
         }
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
             // drop all items
@@ -69,6 +72,7 @@ public class DeathAction extends Action {
                 drop.execute(target, map);
             map.removeActor(target);
         }
+
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }

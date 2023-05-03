@@ -64,14 +64,14 @@ public class Application {
 
 		List<String> testMap = Arrays.asList(
 				"......................",
+				"...n..................",
 				"......................",
-				"......................",
-				"......................",
+				"....U.................",
 				"......................",
 				"......................"
 		);
 
-		GameMap gameMap = new GameMap(groundFactory, map);
+		GameMap gameMap = new GameMap(groundFactory, testMap);
 		world.addGameMap(gameMap);
 
 		// BEHOLD, ELDEN RING
@@ -83,14 +83,19 @@ public class Application {
 				exception.printStackTrace();
 			}
 		}
+//
+//		// HINT: what does it mean to prefer composition to inheritance?
+//		Player player = new StartingClassMenu().chooseStartingClass();
+//		// adding First Step Grace as first checkpoint
+//		player.setCheckpoint(new Location(gameMap, 38, 11));
+//		world.addPlayer(player, gameMap.at(36, 10));
+//		Trader trader = new Trader("Merchant Kale", 'K');
+//		gameMap.at(40, 12).addActor(trader);
 
-		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = new StartingClassMenu().chooseStartingClass();
-		// adding First Step Grace as first checkpoint
-		player.setCheckpoint(new Location(gameMap, 38, 11));
-		world.addPlayer(player, gameMap.at(36, 10));
-		Trader trader = new Trader("Merchant Kale", 'K');
-		gameMap.at(40, 12).addActor(trader);
+		player.setCheckpoint(gameMap.at(4,3));
+		ResetManager.getInstance().registerResettable(player);
+		world.addPlayer(player, gameMap.at(3, 3));
 
 		world.run();
 	}

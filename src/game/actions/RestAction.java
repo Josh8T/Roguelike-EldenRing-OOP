@@ -17,6 +17,6 @@ public class RestAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " rests";
+        return actor + " rests at" + " Lost Site of Grace";
     }
 }
