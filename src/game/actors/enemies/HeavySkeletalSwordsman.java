@@ -34,6 +34,9 @@ public class HeavySkeletalSwordsman extends Enemy {
         this.stateCounter = stateCounter;
     }
 
+    /**
+     * The constructor.
+     */
     public HeavySkeletalSwordsman() {
         super("Heavy Skeletal Swordsman", 'q', 153);
         this.addCapability(EnemyType.SKELETON);
@@ -72,6 +75,10 @@ public class HeavySkeletalSwordsman extends Enemy {
         return new DoNothingAction();
     }
 
+    /**
+     * Generates a random value between 35-892
+     * @return a random value of runes
+     */
     @Override
     public int generateRuneValue() {
         return RandomNumberGenerator.getRandomInt(35, 892);

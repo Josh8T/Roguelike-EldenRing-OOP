@@ -96,6 +96,10 @@ public abstract class Enemy extends Actor implements Resettable {
         return actions;
     }
 
+    /**
+     * Generates a random value between a range (differs from each enemy)
+     * @return a random value of runes
+     */
     public abstract int generateRuneValue();
 
     /**

@@ -13,6 +13,9 @@ import game.utils.RandomNumberGenerator;
  */
 public class LoneWolf extends Enemy {
 
+    /**
+     * The constructor.
+     */
     public LoneWolf() {
         super("Lone Wolf", 'h', 102);
         this.addCapability(EnemyType.BEAST);
@@ -23,6 +26,10 @@ public class LoneWolf extends Enemy {
         return new IntrinsicWeapon(97, "bites", 95);
     }
 
+    /**
+     * Generates a random value between 55-1470
+     * @return a random value of runes
+     */
     @Override
     public int generateRuneValue() {
         return RandomNumberGenerator.getRandomInt(55, 1470);

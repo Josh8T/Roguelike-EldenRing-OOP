@@ -13,6 +13,9 @@ import game.weapons.GiantDogHead;
  * @author Aflah Hanif Amarlyadi
  */
 public class GiantDog extends Enemy {
+    /**
+     * Constructor.
+     */
     public GiantDog() {
         super("Giant Dog", 'G', 693);
         this.addCapability(EnemyType.BEAST);
@@ -24,6 +27,10 @@ public class GiantDog extends Enemy {
         return new IntrinsicWeapon(314, "scratch", 90);
     }
 
+    /**
+     * Generates a random value between 313-1808
+     * @return a random value of runes
+     */
     @Override
     public int generateRuneValue() {
         return RandomNumberGenerator.getRandomInt(313, 1808);
