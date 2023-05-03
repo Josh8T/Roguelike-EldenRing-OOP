@@ -11,18 +11,36 @@ import game.actors.enemies.Enemy;
  */
 public class RuneManager {
     private Rune rune;
+    /**
+     * Only one instance of RuneManager is allowed.
+     */
     private static RuneManager runeManager = null;
 
+    /**
+     * The constructor.
+     */
     private RuneManager() {}
 
+    /**
+     * Sets the player's rune.
+     * @param rune
+     */
     public void registerRune(Rune rune) {
         this.rune = rune;
     }
 
+    /**
+     * Gets the player's rune.
+     * @return rune
+     */
     public Rune getRune() {
         return rune;
     }
 
+    /**
+     * Increases the player's runes when an enemy is defeated.
+     * @param enemy
+     */
     public void awardKill(Enemy enemy) {
         rune.increaseValue(enemy.generateRuneValue());
     }
