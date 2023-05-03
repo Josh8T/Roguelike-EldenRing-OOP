@@ -72,7 +72,10 @@ public abstract class Player extends Actor implements Resettable {
 
 	@Override
 	public void reset(GameMap map) {
-		map.moveActor(this, this.getCheckpoint());
+		if (!(map.locationOf(this) == this.getCheckpoint())) {
+			map.moveActor(this, this.getCheckpoint());
+
+		}
 		this.heal(10000);
 	}
 
