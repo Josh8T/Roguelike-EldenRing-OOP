@@ -2,6 +2,7 @@ package game.grounds.environments;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.RestAction;
@@ -25,7 +26,7 @@ public class SiteOfLostGrace extends Ground {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if (location.containsAnActor() && actor.hasCapability(Status.PLAYER)) {
+        if (actor.hasCapability(Status.PLAYER)) {
             actions.add(new RestAction());
         }
         return actions;

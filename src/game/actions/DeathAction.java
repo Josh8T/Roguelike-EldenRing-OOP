@@ -3,12 +3,14 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.FancyMessage;
 import game.ResetManager;
+import game.actors.players.Player;
 import game.enums.EnemyType;
-import game.enums.ItemType;
 import game.enums.Status;
 
 /**
@@ -40,41 +42,37 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
 
-        if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.INCAPACITATED)){
+        if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.PILE_OF_BONES)){
             target.resetMaxHp(1);
-            target.addCapability(Status.INCAPACITATED);
+            target.addCapability(Status.PILE_OF_BONES);
             return System.lineSeparator() + target + " turns into a pile of bones";
         }
-        else if (target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            // drop all droppable items (e.g. Runes)
-            for (Item item : target.getItemInventory())
-                if (item.hasCapability(ItemType.DROPPABLE)) {
-                    dropActions.add(item.getDropAction(target));
-                }
+        else if (target.hasCapability(Status.PLAYER)) {
+            for (String line : FancyMessage.YOU_DIED.split("\n")) {
+                new Display().println(line);
+            }
             ResetManager.getInstance().run(map);
-            //TODO move player
-
-        } else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            // drop all droppable items
+        }
+        else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            // drop all items
             for (Item item : target.getItemInventory())
-                if (item.hasCapability(ItemType.DROPPABLE)) {
-                    dropActions.add(item.getDropAction(target));
-                }
-            // drop all weapons
+                dropActions.add(item.getDropAction(target));
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
             // remove actor
             map.removeActor(target);
-        } else if (!attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            // only drop weapons
+        }
+        else if (!attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
+            // remove actor and only drop weapons
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
             map.removeActor(target);
         }
+
         result += System.lineSeparator() + menuDescription(target);
         return result;
     }

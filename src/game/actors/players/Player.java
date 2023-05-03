@@ -7,6 +7,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
+import game.FancyMessage;
 import game.ResetManager;
 import game.actions.ConsumeAction;
 import game.enums.GroundType;
@@ -55,10 +56,14 @@ public abstract class Player extends Actor implements Resettable {
 
 		actions.add(new ConsumeAction(flaskOfCrimsonTears, this));
 
-		Location playerLocation = map.locationOf(this);
-		if (playerLocation.getGround().hasCapability(GroundType.SLG)){
-			this.setCheckpoint(playerLocation);
-		}
+//		Location playerLocation = map.locationOf(this);
+//			if (playerExit.getDestination().getGround().hasCapability(GroundType.SLG)){
+//				if ()
+//				this.setCheckpoint(playerLocation);
+//
+//				actions.add(new RestAction());
+//			}
+//		}
 
 		display.println(this.name + " (" + this.hitPoints + "/" + this.maxHitPoints + "), Runes: " + RuneManager.getInstance().getRune().value());
 
@@ -70,14 +75,13 @@ public abstract class Player extends Actor implements Resettable {
 		return checkpoint;
 	}
 
-	public void setCheckpoint(Location checkpoint) {
-		this.checkpoint = checkpoint;
+	public void setCheckpoint(Location location) {
+		this.checkpoint = location;
 	}
-
-
 
 	@Override
 	public void reset(GameMap map) {
-		this.heal(250);
+		map.moveActor(this,this.checkpoint);
+		this.heal(10000);
 	}
 }
