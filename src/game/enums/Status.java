@@ -12,5 +12,6 @@ public enum Status {
     WILLING_TO_TRADE,
     RESTING,
     RESPAWNABLE,
+    FOLLOWABLE,
     PLAYER
 }
