@@ -53,7 +53,7 @@ public class StartingClassMenu {
     public Player chooseStartingClass() {
         display.println("Select your starting class: ");
         for (Player choice: choices) {
-            display.println(choice.getClassName().toLowerCase().charAt(0) + ": " + choice);
+            display.println(choice.getClassName().toLowerCase().charAt(0) + ": " + choice.getClassName());
         }
 
         char mChoice;
