@@ -34,6 +34,9 @@ public class SkeletalBandit extends Enemy{
         this.stateCounter = stateCounter;
     }
 
+    /**
+     * The constructor.
+     */
     public SkeletalBandit() {
         super("Skeletal Bandit", 'b', 102);
         this.addCapability(EnemyType.SKELETON);
@@ -72,6 +75,10 @@ public class SkeletalBandit extends Enemy{
         return new DoNothingAction();
     }
 
+    /**
+     * Generates a random value between 318-4961
+     * @return a random value of runes
+     */
     @Override
     public int generateRuneValue() {
         return RandomNumberGenerator.getRandomInt(35, 892);

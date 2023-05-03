@@ -13,6 +13,9 @@ import game.weapons.GiantCrayfishPincer;
  * @author Aflah Hanif Amarlyadi
  */
 public class GiantCrayfish extends Enemy{
+    /**
+     * The constructor.
+     */
     public GiantCrayfish() {
         super("Giant Crayfish", 'R', 4803);
         this.addCapability(EnemyType.CRUSTACEAN);
@@ -24,6 +27,10 @@ public class GiantCrayfish extends Enemy{
         return new IntrinsicWeapon(527, "pinch", 100);
     }
 
+    /**
+     * Generates a random value between 500-2371.
+     * @return a random value of runes
+     */
     @Override
     public int generateRuneValue() {
         return RandomNumberGenerator.getRandomInt(500, 2374);
