@@ -83,19 +83,15 @@ public class Application {
 				exception.printStackTrace();
 			}
 		}
-
+//
 		// HINT: what does it mean to prefer composition to inheritance?
 		Player player = StartingClassMenu.getInstance().chooseStartingClass();
 		// adding First Step Grace as first checkpoint
-		player.setCheckpoint(new Location(gameMap, 38, 11));
+		player.setCheckpoint(gameMap.at(38, 11));
+		ResetManager.getInstance().registerResettable(player);
 		world.addPlayer(player, gameMap.at(36, 10));
 		Trader trader = new Trader("Merchant Kale", 'K');
 		gameMap.at(40, 12).addActor(trader);
-
-//		Player player = StartingClassMenu.getInstance().chooseStartingClass();
-//		player.setCheckpoint(gameMap.at(4,3));
-//		ResetManager.getInstance().registerResettable(player);
-//		world.addPlayer(player, gameMap.at(3, 3));
 
 		world.run();
 	}
