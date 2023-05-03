@@ -12,7 +12,7 @@ public class Wretch extends Player{
     }
 
     @Override
-    public String toString() {
+    public String getClassName() {
         return "Wretch";
     }
 }

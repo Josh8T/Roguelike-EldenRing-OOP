@@ -42,7 +42,7 @@ public class StartingClassMenu {
         choices.add(new Bandit());
         choices.add(new Wretch());
         for (Player choice: choices) {
-            choicesChar.add(choice.toString().toLowerCase().charAt(0));
+            choicesChar.add(choice.getClassName().toLowerCase().charAt(0));
         }
     }
 
@@ -53,7 +53,7 @@ public class StartingClassMenu {
     public Player chooseStartingClass() {
         display.println("Select your starting class: ");
         for (Player choice: choices) {
-            display.println(choice.toString().toLowerCase().charAt(0) + ": " + choice);
+            display.println(choice.getClassName().toLowerCase().charAt(0) + ": " + choice);
         }
 
         char mChoice;

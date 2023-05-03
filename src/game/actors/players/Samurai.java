@@ -12,7 +12,7 @@ public class Samurai extends Player{
     }
 
     @Override
-    public String toString() {
+    public String getClassName() {
         return "Samurai";
     }
 }

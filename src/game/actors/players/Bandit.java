@@ -12,7 +12,7 @@ public class Bandit extends Player{
     }
 
     @Override
-    public String toString() {
+    public String getClassName() {
         return "Bandit";
     }
 }
