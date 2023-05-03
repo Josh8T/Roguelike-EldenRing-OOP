@@ -15,55 +15,59 @@ import java.util.ArrayList;
  *
  */
 public class StartingClassMenu {
+
+    /**
+     * The instance of the Starting Menu Class
+     */
     private static StartingClassMenu instance;
+
     private Display display;
-    private ArrayList<Character> choices;
+
+    /**
+     * An arraylist of starting classes
+     */
+    private ArrayList<Player> choices = new ArrayList<>();
+
+    /**
+     * An arraylist of first characters if starting classes
+     */
+    private ArrayList<Character> choicesChar = new ArrayList<>();
 
     /**
      * Constructor
      */
     private StartingClassMenu() {
         this.display = new Display();
-        choices = getChoices();
+        choices.add(new Samurai());
+        choices.add(new Bandit());
+        choices.add(new Wretch());
+        for (Player choice: choices) {
+            choicesChar.add(choice.getClassName().toLowerCase().charAt(0));
+        }
     }
 
     /**
-     * This method gets input from the user, if the input is a valid choice, a player with the chosen starting class is created
+     * This method gets input from the user, if the input is a valid choice, a player with the chosen starting class is returned
      * @return new player with chosen starting class
      */
     public Player chooseStartingClass() {
         display.println("Select your starting class: ");
-        display.println("s: Samurai");
-        display.println("b: Bandit");
-        display.println("w: Wretch");
+        for (Player choice: choices) {
+            display.println(choice.getClassName().toLowerCase().charAt(0) + ": " + choice);
+        }
 
-        char choice;
+        char mChoice;
         do {
-            choice = display.readChar();
-        } while (!choices.contains(choice));
+            mChoice = display.readChar();
+        } while (!choicesChar.contains(mChoice));
 
-        if (choice == 's') {
-            return new Samurai();
+        for (int i = 0; i < choicesChar.size(); i++) {
+            if (mChoice == choicesChar.get(i)) {
+                return choices.get(i);
+            }
         }
-        else if (choice == 'b') {
-            return new Bandit();
-        }
-        else if (choice == 'w') {
-            return new Wretch();
-        }
+
         return null;
-    }
-
-    /**
-     * This method implements the valid characters where each character represents a certain starting class
-     * @return an array list of characters that are valid
-     */
-    public ArrayList<Character> getChoices() {
-        ArrayList<Character> choices = new ArrayList<>();
-        choices.add('s');
-        choices.add('b');
-        choices.add('w');
-        return choices;
     }
 
     /**

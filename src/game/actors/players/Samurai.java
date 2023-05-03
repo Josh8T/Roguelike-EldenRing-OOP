@@ -10,4 +10,9 @@ public class Samurai extends Player{
         super(455);
         this.addWeaponToInventory(new Uchigatana());
     }
+
+    @Override
+    public String getClassName() {
+        return "Samurai";
+    }
 }
