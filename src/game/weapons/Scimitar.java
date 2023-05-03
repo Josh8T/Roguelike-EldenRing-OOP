@@ -21,9 +21,7 @@ import game.items.RuneManager;
  */
 public class Scimitar extends WeaponItem implements Purchasable, Sellable {
 
-    private final int PURCHASE_VALUE = 600;
-    private final int SELL_VALUE = 100;
-    private SellScimitar sellScimitar = new SellScimitar(this);
+    private SellScimitar sellScimitar = new SellScimitar(this, 100);
 
     /**
      * Constructor.
@@ -60,17 +58,17 @@ public class Scimitar extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
-    public boolean isAffordable() {
-        return RuneManager.getInstance().getRune().value() >= PURCHASE_VALUE;
+    public boolean isAffordable(int purchaseValue) {
+        return RuneManager.getInstance().getRune().value() >= purchaseValue;
     }
 
     @Override
-    public void giveRunes() {
-        RuneManager.getInstance().getRune().decreaseValue(PURCHASE_VALUE);
+    public void giveRunes(int purchaseValue) {
+        RuneManager.getInstance().getRune().decreaseValue(purchaseValue);
     }
 
     @Override
-    public void receiveRunes() {
-        RuneManager.getInstance().getRune().increaseValue(SELL_VALUE);
+    public void receiveRunes(int sellValue) {
+        RuneManager.getInstance().getRune().increaseValue(sellValue);
     }
 }

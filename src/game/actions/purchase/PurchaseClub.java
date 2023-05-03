@@ -13,6 +13,12 @@ import game.weapons.Club;
  */
 public class PurchaseClub extends PurchaseAction {
 
+    private final int purchaseValue;
+
+    public PurchaseClub(int purchaseValue) {
+        this.purchaseValue = purchaseValue;
+    }
+
     /**
      * When executed, the weapon is added to the actor's inventory and the actor loses runes.
      *
@@ -23,8 +29,8 @@ public class PurchaseClub extends PurchaseAction {
     @Override
     public String execute(Actor actor, GameMap map) {
         Club club = new Club();
-        if (club.isAffordable()) {
-            club.giveRunes();
+        if (club.isAffordable(purchaseValue)) {
+            club.giveRunes(purchaseValue);
             actor.addWeaponToInventory(club);
             return actor + " purchases Club for 600 runes successfully";
         }

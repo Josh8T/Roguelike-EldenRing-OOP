@@ -54,10 +54,11 @@ public class DeathAction extends Action {
                 new Display().println(line);
             }
             // drop all droppable items
-            for (Item item : target.getItemInventory())
+            for (Item item : target.getItemInventory()) {
                 if (item.hasCapability(ItemType.DROPPABLE)) {
                     dropActions.add(item.getDropAction(target));
                 }
+            }
             new ResetAction().execute(target,map);
         }
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
@@ -65,10 +66,11 @@ public class DeathAction extends Action {
                 RuneManager.getInstance().awardKill((Enemy) target);
             }
             // drop all droppable items
-            for (Item item : target.getItemInventory())
+            for (Item item : target.getItemInventory()) {
                 if (item.hasCapability(ItemType.DROPPABLE)) {
                     dropActions.add(item.getDropAction(target));
                 }
+            }
             // drop all weapons
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));

@@ -13,6 +13,12 @@ import game.weapons.GreatKnife;
  */
 public class PurchaseGreatKnife extends PurchaseAction {
 
+    private final int purchaseValue;
+
+    public PurchaseGreatKnife(int purchaseValue) {
+        this.purchaseValue = purchaseValue;
+    }
+
     /**
      * When executed, the weapon is added to the actor's inventory and the actor loses runes.
      *
@@ -23,8 +29,8 @@ public class PurchaseGreatKnife extends PurchaseAction {
     @Override
     public String execute(Actor actor, GameMap map) {
         GreatKnife greatKnife = new GreatKnife();
-        if (greatKnife.isAffordable()) {
-            greatKnife.giveRunes();
+        if (greatKnife.isAffordable(purchaseValue)) {
+            greatKnife.giveRunes(purchaseValue);
             actor.addWeaponToInventory(greatKnife);
             return actor + " purchases Great Knife for 3500 runes successfully";
         }

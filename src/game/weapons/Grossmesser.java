@@ -20,8 +20,7 @@ import game.items.RuneManager;
  */
 public class Grossmesser extends WeaponItem implements Sellable {
 
-    private final int SELL_VALUE = 100;
-    private SellGrossmesser sellGrossmesser = new SellGrossmesser(this);
+    private SellGrossmesser sellGrossmesser = new SellGrossmesser(this, 100);
 
     /**
      * Constructor.
@@ -57,7 +56,7 @@ public class Grossmesser extends WeaponItem implements Sellable {
         return new AreaAttackAction(this);
     }
 
-    public void receiveRunes() {
-        RuneManager.getInstance().getRune().increaseValue(SELL_VALUE);
+    public void receiveRunes(int sellValue) {
+        RuneManager.getInstance().getRune().increaseValue(sellValue);
     }
 }

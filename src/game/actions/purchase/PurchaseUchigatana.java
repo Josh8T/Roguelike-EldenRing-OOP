@@ -12,6 +12,11 @@ import game.weapons.Uchigatana;
  *
  */
 public class PurchaseUchigatana extends PurchaseAction {
+    private final int purchaseValue;
+
+    public PurchaseUchigatana(int purchaseValue) {
+        this.purchaseValue = purchaseValue;
+    }
 
     /**
      * When executed, the weapon is added to the actor's inventory and the actor loses runes.
@@ -23,8 +28,8 @@ public class PurchaseUchigatana extends PurchaseAction {
     @Override
     public String execute(Actor actor, GameMap map) {
         Uchigatana uchigatana = new Uchigatana();
-        if (uchigatana.isAffordable()) {
-            uchigatana.giveRunes();
+        if (uchigatana.isAffordable(purchaseValue)) {
+            uchigatana.giveRunes(purchaseValue);
             actor.addWeaponToInventory(uchigatana);
             return actor + " purchases Uchigatana for 5000 runes successfully";
         }

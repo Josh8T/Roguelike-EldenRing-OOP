@@ -14,13 +14,15 @@ import game.weapons.Scimitar;
 public class SellScimitar extends SellAction {
 
     private Scimitar scimitar;
+    private final int sellValue;
 
     /**
      * Constructor.
      * @param scimitar being sold
      */
-    public SellScimitar(Scimitar scimitar) {
+    public SellScimitar(Scimitar scimitar, int sellValue) {
         this.scimitar = scimitar;
+        this.sellValue = sellValue;
     }
 
     /**
@@ -32,7 +34,7 @@ public class SellScimitar extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        scimitar.receiveRunes();
+        scimitar.receiveRunes(sellValue);
         actor.removeWeaponFromInventory(scimitar);
         return actor + " sells Scimitar for 100 runes successfully";
     }

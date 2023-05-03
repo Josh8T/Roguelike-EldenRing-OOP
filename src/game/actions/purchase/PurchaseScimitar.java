@@ -13,6 +13,12 @@ import game.weapons.Scimitar;
  */
 public class PurchaseScimitar extends PurchaseAction {
 
+    private final int purchaseValue;
+
+    public PurchaseScimitar(int purchaseValue) {
+        this.purchaseValue = purchaseValue;
+    }
+
     /**
      * When executed, the weapon is added to the actor's inventory and the actor loses runes.
      *
@@ -23,8 +29,8 @@ public class PurchaseScimitar extends PurchaseAction {
     @Override
     public String execute(Actor actor, GameMap map) {
         Scimitar scimitar = new Scimitar();
-        if (scimitar.isAffordable()) {
-            scimitar.giveRunes();
+        if (scimitar.isAffordable(purchaseValue)) {
+            scimitar.giveRunes(purchaseValue);
             actor.addWeaponToInventory(scimitar);
             return actor + " purchases Scimitar for 600 runes successfully";
         }
