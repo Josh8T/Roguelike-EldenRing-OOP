@@ -16,10 +16,17 @@ import game.utils.RandomNumberGenerator;
  */
 public class Graveyard extends Ground {
 
+    /**
+     * The constructor.
+     */
     public Graveyard() {
         super('n');
     }
 
+    /**
+     * Spawns a Heavy Skeletal Swordsman on the west side of the map/a Skeletal Bandit on the east side of the map at every turn.
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         if (!location.containsAnActor()) {

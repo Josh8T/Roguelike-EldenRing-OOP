@@ -16,10 +16,17 @@ import game.utils.RandomNumberGenerator;
  */
 public class PuddleOfWater extends Ground {
 
+    /**
+     * The constructor.
+     */
     public PuddleOfWater() {
         super('~');
     }
 
+    /**
+     * Spawns a Giant Crab on the west side of the map/a Giant Crayfish on the east side of the map at every turn.
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         if (!location.containsAnActor()) {

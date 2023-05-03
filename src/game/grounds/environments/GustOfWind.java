@@ -16,10 +16,17 @@ import game.utils.RandomNumberGenerator;
  */
 public class GustOfWind extends Ground {
 
+    /**
+     * The constructor.
+     */
     public GustOfWind() {
         super('&');
     }
 
+    /**
+     * Spawns a Lone Wolf on the west side of the map/a Giant Dog on the east side of the map at every turn.
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         if (!location.containsAnActor()) {
