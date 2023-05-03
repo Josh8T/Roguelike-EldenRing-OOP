@@ -4,7 +4,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 
-public class DeSpawnAction extends Action {
+public class DespawnAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {

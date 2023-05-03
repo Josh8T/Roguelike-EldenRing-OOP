@@ -11,17 +11,17 @@ import game.enums.Status;
  * Modified by:
  * @author David Lee
  */
-public class ReviveSkeletonAction extends Action {
+public class ReviveAction extends Action {
 
-    private int originalHitPoint;
-    public ReviveSkeletonAction(int hitPoint) {
-        this.originalHitPoint = hitPoint;
+    private int maxHitPoint;
+    public ReviveAction(int hitPoint) {
+        this.maxHitPoint = hitPoint;
     }
 
     @Override
     public String execute(Actor target, GameMap map) {
         target.removeCapability(Status.INCAPACITATED);
-        target.resetMaxHp(originalHitPoint);
+        target.resetMaxHp(maxHitPoint);
         return menuDescription(target);
     }
 

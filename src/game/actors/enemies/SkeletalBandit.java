@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.ReviveSkeletonAction;
+import game.actions.ReviveAction;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.enums.EnemyType;
@@ -50,7 +50,7 @@ public class SkeletalBandit extends Enemy{
         } else if (this.stateCounter == 3 && this.hasCapability(Status.INCAPACITATED)) {
             setStateCounter(0);
             this.setDisplayChar('b');
-            return new ReviveSkeletonAction(102);
+            return new ReviveAction(102);
         }
 
         if (!this.hasCapability(Status.INCAPACITATED)) {

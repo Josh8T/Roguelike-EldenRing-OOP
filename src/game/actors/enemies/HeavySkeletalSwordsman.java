@@ -8,7 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.ReviveSkeletonAction;
+import game.actions.ReviveAction;
 import game.enums.EnemyType;
 import game.enums.Status;
 import game.behaviours.Behaviour;
@@ -50,7 +50,7 @@ public class HeavySkeletalSwordsman extends Enemy {
         } else if (this.stateCounter == 3 && this.hasCapability(Status.INCAPACITATED)) {
             setStateCounter(0);
             this.setDisplayChar('q');
-            return new ReviveSkeletonAction(153);
+            return new ReviveAction(153);
         }
 
         if (!this.hasCapability(Status.INCAPACITATED)) {
