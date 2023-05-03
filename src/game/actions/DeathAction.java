@@ -9,8 +9,8 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
 import game.ResetManager;
-import game.actors.players.Player;
 import game.enums.EnemyType;
+import game.enums.ItemType;
 import game.enums.Status;
 
 /**
@@ -42,9 +42,9 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
 
-        if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.PILE_OF_BONES)){
+        if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.INCAPACITATED)){
             target.resetMaxHp(1);
-            target.addCapability(Status.PILE_OF_BONES);
+            target.addCapability(Status.INCAPACITATED);
             return System.lineSeparator() + target + " turns into a pile of bones";
         }
         else if (target.hasCapability(Status.PLAYER)) {
@@ -54,9 +54,12 @@ public class DeathAction extends Action {
             ResetManager.getInstance().run(map);
         }
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            // drop all items
+            // drop all droppable items
             for (Item item : target.getItemInventory())
-                dropActions.add(item.getDropAction(target));
+                if (item.hasCapability(ItemType.DROPPABLE)) {
+                    dropActions.add(item.getDropAction(target));
+                }
+            // drop all weapons
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
@@ -65,7 +68,7 @@ public class DeathAction extends Action {
             map.removeActor(target);
         }
         else if (!attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            // remove actor and only drop weapons
+            // only drop weapons and remove actor
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
