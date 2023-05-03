@@ -14,13 +14,15 @@ import game.weapons.Club;
 public class SellClub extends SellAction {
 
     private Club club;
+    private final int sellValue;
 
     /**
      * Constructor.
      * @param club being sold
      */
-    public SellClub (Club club) {
+    public SellClub (Club club, int sellValue) {
         this.club = club;
+        this.sellValue = sellValue;
     }
 
     /**
@@ -32,7 +34,7 @@ public class SellClub extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        club.receiveRunes();
+        club.receiveRunes(sellValue);
         actor.removeWeaponFromInventory(club);
         return actor + " sells Club for 100 runes successfully";
     }

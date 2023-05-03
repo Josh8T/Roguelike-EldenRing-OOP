@@ -20,9 +20,7 @@ import game.items.RuneManager;
  */
 public class Club extends WeaponItem implements Purchasable, Sellable {
 
-    private final int PURCHASE_VALUE = 600;
-    private final int SELL_VALUE = 100;
-    private SellClub sellClub = new SellClub(this);
+    private SellClub sellClub = new SellClub(this, 100);
 
     /**
      * Constructor
@@ -54,17 +52,17 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
-    public boolean isAffordable() {
-        return RuneManager.getInstance().getRune().value() >= PURCHASE_VALUE;
+    public boolean isAffordable(int price) {
+        return RuneManager.getInstance().getRune().value() >= price;
     }
 
     @Override
-    public void giveRunes() {
-        RuneManager.getInstance().getRune().decreaseValue(PURCHASE_VALUE);
+    public void giveRunes(int price) {
+        RuneManager.getInstance().getRune().decreaseValue(price);
     }
 
     @Override
-    public void receiveRunes() {
-        RuneManager.getInstance().getRune().increaseValue(SELL_VALUE);
+    public void receiveRunes(int price) {
+        RuneManager.getInstance().getRune().increaseValue(price);
     }
 }

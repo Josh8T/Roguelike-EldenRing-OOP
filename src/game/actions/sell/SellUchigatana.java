@@ -15,13 +15,15 @@ import game.weapons.Uchigatana;
 public class SellUchigatana extends SellAction {
 
     private Uchigatana uchigatana;
+    private final int sellValue;
 
     /**
      * Constructor.
      * @param uchigatana being sold
      */
-    public SellUchigatana(Uchigatana uchigatana) {
+    public SellUchigatana(Uchigatana uchigatana, int sellValue) {
         this.uchigatana = uchigatana;
+        this.sellValue = sellValue;
     }
     /**
      * When executed, the weapon is removed from the inventory and the actor receives runes.
@@ -32,7 +34,7 @@ public class SellUchigatana extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        uchigatana.receiveRunes();
+        uchigatana.receiveRunes(sellValue);
         actor.removeWeaponFromInventory(uchigatana);
         return actor + " sells Uchigatana for 500 runes successfully";
     }

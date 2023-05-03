@@ -15,13 +15,15 @@ import game.weapons.Grossmesser;
 public class SellGrossmesser extends SellAction {
 
     private Grossmesser grossmesser;
+    private final int sellValue;
 
     /**
      * Constructor.
      * @param grossmesser being sold
      */
-    public SellGrossmesser(Grossmesser grossmesser) {
+    public SellGrossmesser(Grossmesser grossmesser, int sellValue) {
         this.grossmesser = grossmesser;
+        this.sellValue = sellValue;
     }
 
     /**
@@ -33,7 +35,7 @@ public class SellGrossmesser extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        grossmesser.receiveRunes();
+        grossmesser.receiveRunes(sellValue);
         actor.removeWeaponFromInventory(grossmesser);
         return actor + " sells Grossmesser for 100 runes successfully.";
     }

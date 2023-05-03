@@ -13,10 +13,10 @@ public interface Purchasable {
      * Checks if the item being purchased is affordable.
      * @return
      */
-    boolean isAffordable();
+    boolean isAffordable(int purchaseValue);
 
     /**
      * Deduct runes from the buyer.
      */
-    void giveRunes();
+    void giveRunes(int purchaseValue);
 }

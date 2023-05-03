@@ -58,10 +58,10 @@ public class Trader extends Actor {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new PurchaseUchigatana());
-            actions.add(new PurchaseGreatKnife());
-            actions.add(new PurchaseClub());
-            actions.add(new PurchaseScimitar());
+            actions.add(new PurchaseUchigatana(5000));
+            actions.add(new PurchaseGreatKnife(3500));
+            actions.add(new PurchaseClub(600));
+            actions.add(new PurchaseScimitar(600));
         }
         return actions;
     }

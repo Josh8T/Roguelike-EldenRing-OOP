@@ -12,5 +12,5 @@ public interface Sellable {
     /**
      * Add runes to the seller.
      */
-    void receiveRunes();
+    void receiveRunes(int sellValue);
 }

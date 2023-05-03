@@ -2,6 +2,7 @@ package game.actions.sell;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.weapons.Club;
 import game.weapons.GreatKnife;
 
 /**
@@ -14,13 +15,15 @@ import game.weapons.GreatKnife;
 public class SellGreatKnife extends SellAction {
 
     private GreatKnife greatKnife;
+    private final int sellValue;
 
     /**
      * Constructor.
      * @param greatKnife being sold
      */
-    public SellGreatKnife(GreatKnife greatKnife) {
+    public SellGreatKnife(GreatKnife greatKnife, int sellValue) {
         this.greatKnife = greatKnife;
+        this.sellValue = sellValue;
     }
 
     /**
@@ -32,7 +35,7 @@ public class SellGreatKnife extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        greatKnife.receiveRunes();
+        greatKnife.receiveRunes(sellValue);
         actor.removeWeaponFromInventory(greatKnife);
         return actor + " sells Great Knife for 350 runes successfully";
     }
