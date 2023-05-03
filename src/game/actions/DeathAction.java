@@ -44,9 +44,9 @@ public class DeathAction extends Action {
         String result = "";
         ActionList dropActions = new ActionList();
 
-        if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.INCAPACITATED)){
+        if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.RESPAWNABLE)){
             target.resetMaxHp(1);
-            target.addCapability(Status.INCAPACITATED);
+            target.addCapability(Status.RESPAWNABLE);
             return System.lineSeparator() + target + " turns into a pile of bones";
         }
         else if (target.hasCapability(Status.PLAYER)) {

@@ -43,18 +43,18 @@ public class SkeletalBandit extends Enemy{
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (this.stateCounter > 0 && this.stateCounter <= 2 && this.hasCapability(Status.INCAPACITATED)) {
+        if (this.stateCounter > 0 && this.stateCounter <= 2 && this.hasCapability(Status.RESPAWNABLE)) {
             setStateCounter(this.stateCounter + 1);
-        } else if (this.stateCounter == 0 && this.hasCapability(Status.INCAPACITATED)) {
+        } else if (this.stateCounter == 0 && this.hasCapability(Status.RESPAWNABLE)) {
             this.setDisplayChar('X');
             setStateCounter(this.stateCounter + 1);
-        } else if (this.stateCounter == 3 && this.hasCapability(Status.INCAPACITATED)) {
+        } else if (this.stateCounter == 3 && this.hasCapability(Status.RESPAWNABLE)) {
             setStateCounter(0);
             this.setDisplayChar('b');
             return new ReviveAction(102);
         }
 
-        if (!this.hasCapability(Status.INCAPACITATED)) {
+        if (!this.hasCapability(Status.RESPAWNABLE)) {
             Location actorLocation = map.locationOf(this);
             for (Exit targetExits : actorLocation.getExits()) {
                 Actor target = targetExits.getDestination().getActor();

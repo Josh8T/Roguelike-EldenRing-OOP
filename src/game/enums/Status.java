@@ -10,8 +10,7 @@ package game.enums;
 public enum Status {
     HOSTILE_TO_ENEMY,
     WILLING_TO_TRADE,
-    RESPAWNABLE,
     RESTING,
-    INCAPACITATED,
+    RESPAWNABLE,
     PLAYER
 }
