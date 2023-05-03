@@ -37,6 +37,11 @@ public class GreatKnife extends WeaponItem implements Purchasable, Sellable {
         return new QuickStepAction(target, direction, this);
     }
 
+    /**
+     * Checks whether a trader is nearby and gives the player an action to sell the weapon.
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
         boolean traderNearby = false;

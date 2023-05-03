@@ -32,6 +32,11 @@ public class Uchigatana extends WeaponItem implements Purchasable, Sellable {
         super("Uchigatana", ')', 115, "slashes", 80);
     }
 
+    /**
+     * Checks whether a trader is nearby and gives the player an action to sell the weapon.
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
         boolean traderNearby = false;
