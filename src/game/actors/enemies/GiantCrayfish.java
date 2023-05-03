@@ -2,6 +2,7 @@ package game.actors.enemies;
 
 import edu.monash.fit2099.engine.weapons.IntrinsicWeapon;
 import game.enums.EnemyType;
+import game.utils.RandomNumberGenerator;
 import game.weapons.GiantCrayfishPincer;
 
 /**
@@ -9,7 +10,7 @@ import game.weapons.GiantCrayfishPincer;
  * Created by:
  * @author David Lee
  * Modified by:
- *
+ * @author Aflah Hanif Amarlyadi
  */
 public class GiantCrayfish extends Enemy{
     public GiantCrayfish() {
@@ -21,5 +22,10 @@ public class GiantCrayfish extends Enemy{
     @Override
     public IntrinsicWeapon getIntrinsicWeapon() {
         return new IntrinsicWeapon(527, "pinch", 100);
+    }
+
+    @Override
+    public int generateRuneValue() {
+        return RandomNumberGenerator.getRandomInt(500, 2374);
     }
 }

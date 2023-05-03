@@ -14,6 +14,7 @@ import game.Resettable;
 import game.enums.Status;
 import game.actions.AttackAction;
 import game.behaviours.*;
+import game.utils.RandomNumberGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,7 @@ import java.util.Map;
  * Created by:
  * @author David Lee
  * Modified by:
- * @author Josh Hernett Tan
+ * @author Josh Hernett Tan, Aflah Hanif Amarlyadi
  */
 public abstract class Enemy extends Actor implements Resettable {
 
@@ -94,6 +95,8 @@ public abstract class Enemy extends Actor implements Resettable {
         }
         return actions;
     }
+
+    public abstract int generateRuneValue();
 
     /**
      * Getter for the Enemy's hashmap of behaviours

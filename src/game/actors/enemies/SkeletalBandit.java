@@ -13,6 +13,7 @@ import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
 import game.enums.EnemyType;
 import game.enums.Status;
+import game.utils.RandomNumberGenerator;
 import game.weapons.Scimitar;
 
 /**
@@ -69,5 +70,10 @@ public class SkeletalBandit extends Enemy{
             }
         }
         return new DoNothingAction();
+    }
+
+    @Override
+    public int generateRuneValue() {
+        return RandomNumberGenerator.getRandomInt(35, 892);
     }
 }

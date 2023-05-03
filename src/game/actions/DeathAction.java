@@ -9,9 +9,11 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
 import game.ResetManager;
+import game.actors.enemies.Enemy;
 import game.enums.EnemyType;
 import game.enums.ItemType;
 import game.enums.Status;
+import game.items.RuneManager;
 
 /**
  * An action executed if an actor is killed.
@@ -51,9 +53,17 @@ public class DeathAction extends Action {
             for (String line : FancyMessage.YOU_DIED.split("\n")) {
                 new Display().println(line);
             }
+            // drop all droppable items
+            for (Item item : target.getItemInventory())
+                if (item.hasCapability(ItemType.DROPPABLE)) {
+                    dropActions.add(item.getDropAction(target));
+                }
             ResetManager.getInstance().run(map);
         }
-        else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            if (target instanceof Enemy) {
+                RuneManager.getInstance().awardKill((Enemy) target);
+            }
             // drop all droppable items
             for (Item item : target.getItemInventory())
                 if (item.hasCapability(ItemType.DROPPABLE)) {
@@ -67,7 +77,7 @@ public class DeathAction extends Action {
             // remove actor
             map.removeActor(target);
         }
-        else if (!attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        else if (!attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             // only drop weapons and remove actor
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));

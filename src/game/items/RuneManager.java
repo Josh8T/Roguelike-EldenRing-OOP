@@ -1,5 +1,7 @@
 package game.items;
 
+import game.actors.enemies.Enemy;
+
 /**
  * A rune manager class that manages the player's runes.
  * Created by:
@@ -19,6 +21,10 @@ public class RuneManager {
 
     public Rune getRune() {
         return rune;
+    }
+
+    public void awardKill(Enemy enemy) {
+        rune.increaseValue(enemy.generateRuneValue());
     }
 
     /**

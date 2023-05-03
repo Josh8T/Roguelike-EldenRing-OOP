@@ -13,12 +13,13 @@ import game.enums.EnemyType;
 import game.enums.Status;
 import game.behaviours.Behaviour;
 import game.behaviours.FollowBehaviour;
+import game.utils.RandomNumberGenerator;
 import game.weapons.Grossmesser;
 
 /**
  * A class that represents the Heavy Skeletal Swordsman.
  * Created by:
- * @author Josh Hernett Tan
+ * @author Aflah Hanif Amarlyadi
  * Modified by:
  * @author Josh Hernett Tan, David Lee
  */
@@ -69,5 +70,10 @@ public class HeavySkeletalSwordsman extends Enemy {
             }
         }
         return new DoNothingAction();
+    }
+
+    @Override
+    public int generateRuneValue() {
+        return RandomNumberGenerator.getRandomInt(35, 892);
     }
 }
