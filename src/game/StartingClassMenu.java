@@ -15,13 +15,14 @@ import java.util.ArrayList;
  *
  */
 public class StartingClassMenu {
+    private static StartingClassMenu instance;
     private Display display;
     private ArrayList<Character> choices;
 
     /**
      * Constructor
      */
-    public StartingClassMenu() {
+    private StartingClassMenu() {
         this.display = new Display();
         choices = getChoices();
     }
@@ -63,5 +64,16 @@ public class StartingClassMenu {
         choices.add('b');
         choices.add('w');
         return choices;
+    }
+
+    /**
+     * This method returns an instance of Starting Class menu. It makes sure that there is only one instance of Starting Class Menu.
+     * @return the instance of the Starting Class Menu
+     */
+    public static StartingClassMenu getInstance(){
+        if (instance == null){
+            instance = new StartingClassMenu();
+        }
+        return instance;
     }
 }
