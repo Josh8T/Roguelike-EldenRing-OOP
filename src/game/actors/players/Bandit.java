@@ -10,4 +10,9 @@ public class Bandit extends Player{
         super(414);
         this.addWeaponToInventory(new GreatKnife());
     }
+
+    @Override
+    public String toString() {
+        return "Bandit";
+    }
 }

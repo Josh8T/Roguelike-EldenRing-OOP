@@ -10,4 +10,9 @@ public class Wretch extends Player{
         super(414);
         this.addWeaponToInventory(new Club());
     }
+
+    @Override
+    public String toString() {
+        return "Wretch";
+    }
 }
