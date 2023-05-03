@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.ResetManager;
 import game.actors.enemies.GiantCrab;
 import game.actors.enemies.GiantCrayfish;
-import game.enums.GroundType;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -19,7 +18,6 @@ public class PuddleOfWater extends Ground {
 
     public PuddleOfWater() {
         super('~');
-        this.addCapability(GroundType.PW);
     }
 
     @Override

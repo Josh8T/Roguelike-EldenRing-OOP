@@ -1,8 +1,5 @@
 package game.actions.purchase;
 
-import edu.monash.fit2099.engine.actors.Actor;
-import game.items.RuneManager;
-
 /**
  * A Purchasable interface.
  * Created by:
@@ -11,7 +8,6 @@ import game.items.RuneManager;
  *
  */
 public interface Purchasable {
-    RuneManager runeManager = RuneManager.getInstance();
 
     /**
      * Checks if the item being purchased is affordable.

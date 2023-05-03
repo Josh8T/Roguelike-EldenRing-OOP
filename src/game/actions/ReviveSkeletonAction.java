@@ -20,7 +20,7 @@ public class ReviveSkeletonAction extends Action {
 
     @Override
     public String execute(Actor target, GameMap map) {
-        target.removeCapability(Status.PILE_OF_BONES);
+        target.removeCapability(Status.INCAPACITATED);
         target.resetMaxHp(originalHitPoint);
         return menuDescription(target);
     }

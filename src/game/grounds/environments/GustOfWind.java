@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.ResetManager;
 import game.actors.enemies.GiantDog;
 import game.actors.enemies.LoneWolf;
-import game.enums.GroundType;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -19,7 +18,6 @@ public class GustOfWind extends Ground {
 
     public GustOfWind() {
         super('&');
-        this.addCapability(GroundType.GW);
     }
 
     @Override

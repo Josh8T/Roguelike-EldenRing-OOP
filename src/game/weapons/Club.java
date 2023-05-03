@@ -50,7 +50,7 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
 
     @Override
     public boolean isAffordable() {
-        return RuneManager.getInstance().getRune().getValue() >= PURCHASE_VALUE;
+        return RuneManager.getInstance().getRune().value() >= PURCHASE_VALUE;
     }
 
     @Override

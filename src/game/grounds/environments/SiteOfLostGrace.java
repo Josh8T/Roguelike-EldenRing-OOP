@@ -1,16 +1,12 @@
 package game.grounds.environments;
 
-import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.RestAction;
-import game.actors.players.Player;
 import game.enums.GroundType;
 import game.enums.Status;
-
-import java.nio.file.StandardCopyOption;
 
 /**
  * A class that represents a unique ground that allows the player to rest on it. Reset the game when it happens.

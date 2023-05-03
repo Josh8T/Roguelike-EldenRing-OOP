@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.items.Item;
+import game.enums.ItemType;
 
 /**
  * A class that represents a Rune item, used to trade with the Trader.
@@ -21,6 +22,7 @@ public class Rune extends Item {
     public Rune(int value) {
         super("Rune", '$', true);
         this.value = value;
+        this.addCapability(ItemType.DROPPABLE);
     }
 
     /**
@@ -28,7 +30,7 @@ public class Rune extends Item {
      *
      * @return value
      */
-    public int getValue() {
+    public int value() {
         return value;
     }
 

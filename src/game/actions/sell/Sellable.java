@@ -1,7 +1,5 @@
 package game.actions.sell;
 
-import game.items.RuneManager;
-
 /**
  * A Sellable interface.
  * Created by:
@@ -10,7 +8,6 @@ import game.items.RuneManager;
  *
  */
 public interface Sellable {
-    RuneManager runeManager = RuneManager.getInstance();
 
     /**
      * Add runes to the seller.

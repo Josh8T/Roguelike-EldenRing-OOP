@@ -42,22 +42,22 @@ public class HeavySkeletalSwordsman extends Enemy {
 
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        if (this.stateCounter > 0 && this.stateCounter <= 2 && this.hasCapability(Status.PILE_OF_BONES)) {
+        if (this.stateCounter > 0 && this.stateCounter <= 2 && this.hasCapability(Status.INCAPACITATED)) {
             setStateCounter(this.stateCounter + 1);
-        } else if (this.stateCounter == 0 && this.hasCapability(Status.PILE_OF_BONES)) {
+        } else if (this.stateCounter == 0 && this.hasCapability(Status.INCAPACITATED)) {
             this.setDisplayChar('X');
             setStateCounter(this.stateCounter + 1);
-        } else if (this.stateCounter == 3 && this.hasCapability(Status.PILE_OF_BONES)) {
+        } else if (this.stateCounter == 3 && this.hasCapability(Status.INCAPACITATED)) {
             setStateCounter(0);
             this.setDisplayChar('q');
             return new ReviveSkeletonAction(153);
         }
 
-        if (!this.hasCapability(Status.PILE_OF_BONES)) {
+        if (!this.hasCapability(Status.INCAPACITATED)) {
             Location actorLocation = map.locationOf(this);
             for (Exit targetExits : actorLocation.getExits()) {
                 Actor target = targetExits.getDestination().getActor();
-                if (target != null && target.hasCapability(Status.FOLLOWABLE)) {
+                if (target != null && target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
                     this.getBehaviours().put(2, new FollowBehaviour(target));
                     behaviours.remove(3);
                 }
