@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * A reset manager class that manages a list of resettables.
@@ -14,7 +15,7 @@ import java.util.Map;
  * @author Josh Hernett Tan
  */
 public class ResetManager {
-    private List<Resettable> resettables;
+    private CopyOnWriteArrayList<Resettable> resettables;
     private static ResetManager instance;
 
     /**
@@ -22,7 +23,7 @@ public class ResetManager {
      * HINT 2: see the instance attribute above.
      */
     private ResetManager() {
-        this.resettables = new ArrayList<>();
+        this.resettables = new CopyOnWriteArrayList<>();
     }
 
     public static ResetManager getInstance(){

@@ -6,6 +6,8 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
+import game.FancyMessage;
+import game.ResetManager;
 import game.enums.EnemyType;
 import game.enums.Status;
 
@@ -42,6 +44,11 @@ public class DeathAction extends Action {
             target.resetMaxHp(1);
             target.addCapability(Status.PILE_OF_BONES);
             return System.lineSeparator() + target + " turns into a pile of bones";
+        }
+        else if (target.hasCapability(Status.PLAYER)) {
+            ResetManager.getInstance().run(map);
+            //TODO move player
+
         }
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)){
             // drop all items

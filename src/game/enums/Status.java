@@ -11,5 +11,6 @@ public enum Status {
     RESPAWNABLE,
     RESTING,
     PILE_OF_BONES,
-    FOLLOWABLE
+    FOLLOWABLE,
+    PLAYER
 }

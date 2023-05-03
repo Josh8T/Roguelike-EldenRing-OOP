@@ -29,7 +29,7 @@ public class SiteOfLostGrace extends Ground {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if (location.containsAnActor() && actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+        if (location.containsAnActor() && actor.hasCapability(Status.PLAYER)) {
             actions.add(new RestAction());
         }
         return actions;
