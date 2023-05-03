@@ -4,23 +4,16 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.Location;
-import game.FancyMessage;
 import game.ResetManager;
 import game.actions.ConsumeAction;
-import game.actions.RestAction;
-import game.enums.GroundType;
 import game.items.FlaskOfCrimsonTears;
 import game.items.Rune;
 import game.Resettable;
 import game.enums.Status;
 import game.items.RuneManager;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Class representing the Player. It implements the Resettable interface.
@@ -82,4 +75,6 @@ public abstract class Player extends Actor implements Resettable {
 		map.moveActor(this, this.getCheckpoint());
 		this.heal(10000);
 	}
+
+	public abstract String getClassName();
 }
