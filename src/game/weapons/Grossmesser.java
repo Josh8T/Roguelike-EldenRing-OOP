@@ -31,7 +31,7 @@ public class Grossmesser extends WeaponItem implements Sellable {
     }
 
     @Override
-    public void tick(Location currentLocation) {
+    public void tick(Location currentLocation, Actor actor) {
         boolean traderNearby = false;
         for (Exit exit : currentLocation.getExits()) {
             Actor otherActor = exit.getDestination().getActor();
