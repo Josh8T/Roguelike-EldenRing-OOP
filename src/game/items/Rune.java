@@ -1,6 +1,11 @@
 package game.items;
 
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropAction;
+import edu.monash.fit2099.engine.items.DropItemAction;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.items.PickUpAction;
+import game.actions.RecoverRuneAction;
 import game.enums.ItemType;
 
 /**
@@ -50,5 +55,15 @@ public class Rune extends Item {
      */
     public void decreaseValue(int value) {
         this.value -= value;
+    }
+
+    @Override
+    public PickUpAction getPickUpAction(Actor actor) {
+        return new RecoverRuneAction(this);
+    }
+
+    @Override
+    public DropAction getDropAction(Actor actor) {
+        return null;
     }
 }

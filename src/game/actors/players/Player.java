@@ -41,7 +41,7 @@ public abstract class Player extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FOLLOWABLE);
 		this.addCapability(Status.PLAYER);
-		Rune rune = new Rune(10000);
+		Rune rune = new Rune(0);
 		this.addItemToInventory(rune);
 		RuneManager.getInstance().registerRune(rune);
 		this.flaskOfCrimsonTears = new FlaskOfCrimsonTears(2);

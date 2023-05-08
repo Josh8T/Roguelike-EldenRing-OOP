@@ -59,6 +59,8 @@ public class DeathAction extends Action {
                     dropActions.add(item.getDropAction(target));
                 }
             }
+            for (Action drop : dropActions)
+                drop.execute(target, map);
             new ResetAction().execute(target,map);
         }
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
