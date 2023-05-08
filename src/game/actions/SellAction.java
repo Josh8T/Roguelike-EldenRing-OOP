@@ -1,27 +1,27 @@
-package game.actions.sell;
+package game.actions;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.weapons.Scimitar;
+import game.Sellable;
 
 /**
- * A class that represents the sell action for Great Knife between actors.
+ * A base class that represents the sell action between actors.
  * Created by:
  * @author Aflah Hanif Amarlyadi
  * Modified by:
  *
  */
-public class SellScimitar extends SellAction {
-
-    private Scimitar scimitar;
+public class SellAction extends Action {
+    private Sellable sellable;
     private final int sellValue;
 
     /**
      * Constructor.
-     * @param scimitar being sold
+     * @param sellable being sold
      */
-    public SellScimitar(Scimitar scimitar, int sellValue) {
-        this.scimitar = scimitar;
+    public SellAction (Sellable sellable, int sellValue) {
+        this.sellable = sellable;
         this.sellValue = sellValue;
     }
 
@@ -34,9 +34,9 @@ public class SellScimitar extends SellAction {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        scimitar.receiveRunes(sellValue);
-        actor.removeWeaponFromInventory(scimitar);
-        return actor + " sells Scimitar for 100 runes successfully";
+        sellable.takeRune(sellValue);
+        sellable.giveSellable(actor);
+        return actor + " sells " + sellable + " for " + sellValue + " runes successfully";
     }
 
     /**
@@ -47,6 +47,6 @@ public class SellScimitar extends SellAction {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " sells Scimitar for 100 runes";
+        return actor + " sells " + sellable + " for " + sellValue + " runes";
     }
 }

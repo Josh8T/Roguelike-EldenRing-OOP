@@ -6,11 +6,12 @@ import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actions.purchase.PurchaseClub;
-import game.actions.purchase.PurchaseGreatKnife;
-import game.actions.purchase.PurchaseScimitar;
-import game.actions.purchase.PurchaseUchigatana;
+import game.actions.PurchaseAction;
 import game.enums.Status;
+import game.weapons.Club;
+import game.weapons.GreatKnife;
+import game.weapons.Scimitar;
+import game.weapons.Uchigatana;
 
 /**
  * A class that represents the Trader.
@@ -58,10 +59,10 @@ public class Trader extends Actor {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
-            actions.add(new PurchaseUchigatana(5000));
-            actions.add(new PurchaseGreatKnife(3500));
-            actions.add(new PurchaseClub(600));
-            actions.add(new PurchaseScimitar(600));
+            actions.add(new PurchaseAction(new Uchigatana(), 5000));
+            actions.add(new PurchaseAction(new GreatKnife(), 3500));
+            actions.add(new PurchaseAction(new Club(), 600));
+            actions.add(new PurchaseAction(new Scimitar(), 600));
         }
         return actions;
     }

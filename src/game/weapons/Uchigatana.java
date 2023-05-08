@@ -5,12 +5,11 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actions.purchase.Purchasable;
-import game.actions.sell.SellUchigatana;
-import game.actions.sell.Sellable;
+import game.Purchasable;
+import game.actions.SellAction;
+import game.Sellable;
 import game.actions.UnsheatheAction;
 import game.enums.Status;
-import game.items.RuneManager;
 
 /**
  * A class that represents the Uchigatana weapon.
@@ -21,8 +20,7 @@ import game.items.RuneManager;
  */
 public class Uchigatana extends WeaponItem implements Purchasable, Sellable {
 
-    private SellUchigatana sellUchigatana = new SellUchigatana(this, 500);
-
+    private SellAction sellUchigatana = new SellAction(this, 500);
     /**
      * Constructor.
      */
@@ -37,17 +35,10 @@ public class Uchigatana extends WeaponItem implements Purchasable, Sellable {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        boolean traderNearby = false;
-        for (Exit exit : currentLocation.getExits()) {
-            Actor otherActor = exit.getDestination().getActor();
-            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
-                if (!this.getAllowableActions().contains(sellUchigatana)) {
-                    this.addAction(sellUchigatana);
-                }
-                traderNearby = true;
-            }
+        if (traderNearby(currentLocation) && !this.getAllowableActions().contains(sellUchigatana)) {
+            this.addAction(sellUchigatana);
         }
-        if (!traderNearby) {
+        if (!traderNearby(currentLocation)) {
             this.removeAction(sellUchigatana);
         }
     }
@@ -58,17 +49,12 @@ public class Uchigatana extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
-    public boolean isAffordable(int purchaseValue) {
-        return RuneManager.getInstance().getRune().value() >= purchaseValue;
+    public void takePurchasable(Actor actor) {
+        actor.addWeaponToInventory(this);
     }
 
     @Override
-    public void giveRunes(int purchaseValue) {
-        RuneManager.getInstance().getRune().decreaseValue(purchaseValue);
-    }
-
-    @Override
-    public void receiveRunes(int sellValue) {
-        RuneManager.getInstance().getRune().increaseValue(sellValue);
+    public void giveSellable(Actor actor) {
+        actor.removeWeaponFromInventory(this);
     }
 }

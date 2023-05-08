@@ -6,11 +6,10 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AreaAttackAction;
-import game.actions.purchase.Purchasable;
-import game.actions.sell.SellScimitar;
-import game.actions.sell.Sellable;
+import game.Purchasable;
+import game.actions.SellAction;
+import game.Sellable;
 import game.enums.Status;
-import game.items.RuneManager;
 
 /**
  * A class that represents the Scimitar weapon.
@@ -21,7 +20,7 @@ import game.items.RuneManager;
  */
 public class Scimitar extends WeaponItem implements Purchasable, Sellable {
 
-    private SellScimitar sellScimitar = new SellScimitar(this, 100);
+    private SellAction sellScimitar = new SellAction(this, 100);
 
     /**
      * Constructor.
@@ -37,17 +36,10 @@ public class Scimitar extends WeaponItem implements Purchasable, Sellable {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        boolean traderNearby = false;
-        for (Exit exit : currentLocation.getExits()) {
-            Actor otherActor = exit.getDestination().getActor();
-            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
-                if (!this.getAllowableActions().contains(sellScimitar)) {
-                    this.addAction(sellScimitar);
-                }
-                traderNearby = true;
-            }
+        if (traderNearby(currentLocation) && !this.getAllowableActions().contains(sellScimitar)) {
+            this.addAction(sellScimitar);
         }
-        if (!traderNearby) {
+        if (!traderNearby(currentLocation)) {
             this.removeAction(sellScimitar);
         }
     }
@@ -58,17 +50,12 @@ public class Scimitar extends WeaponItem implements Purchasable, Sellable {
     }
 
     @Override
-    public boolean isAffordable(int purchaseValue) {
-        return RuneManager.getInstance().getRune().value() >= purchaseValue;
+    public void takePurchasable(Actor actor) {
+        actor.addWeaponToInventory(this);
     }
 
     @Override
-    public void giveRunes(int purchaseValue) {
-        RuneManager.getInstance().getRune().decreaseValue(purchaseValue);
-    }
-
-    @Override
-    public void receiveRunes(int sellValue) {
-        RuneManager.getInstance().getRune().increaseValue(sellValue);
+    public void giveSellable(Actor actor) {
+        actor.removeWeaponFromInventory(this);
     }
 }

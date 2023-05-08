@@ -4,11 +4,10 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
-import game.actions.purchase.Purchasable;
-import game.actions.sell.SellClub;
-import game.actions.sell.Sellable;
+import game.Purchasable;
+import game.actions.SellAction;
+import game.Sellable;
 import game.enums.Status;
-import game.items.RuneManager;
 
 /**
  * A simple weapon that can be used to attack the enemy.
@@ -20,7 +19,7 @@ import game.items.RuneManager;
  */
 public class Club extends WeaponItem implements Purchasable, Sellable {
 
-    private SellClub sellClub = new SellClub(this, 100);
+    private SellAction sellClub = new SellAction(this, 100);
 
     /**
      * Constructor
@@ -36,33 +35,21 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        boolean traderNearby = false;
-        for (Exit exit : currentLocation.getExits()) {
-            Actor otherActor = exit.getDestination().getActor();
-            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
-                if (!this.getAllowableActions().contains(sellClub)) {
-                    this.addAction(sellClub);
-                }
-                traderNearby = true;
-            }
+        if (traderNearby(currentLocation) && !this.getAllowableActions().contains(sellClub)) {
+            this.addAction(sellClub);
         }
-        if (!traderNearby) {
+        if (!traderNearby(currentLocation)) {
             this.removeAction(sellClub);
         }
     }
 
     @Override
-    public boolean isAffordable(int price) {
-        return RuneManager.getInstance().getRune().value() >= price;
+    public void takePurchasable(Actor actor) {
+        actor.addWeaponToInventory(this);
     }
 
     @Override
-    public void giveRunes(int price) {
-        RuneManager.getInstance().getRune().decreaseValue(price);
-    }
-
-    @Override
-    public void receiveRunes(int price) {
-        RuneManager.getInstance().getRune().increaseValue(price);
+    public void giveSellable(Actor actor) {
+        actor.removeWeaponFromInventory(this);
     }
 }

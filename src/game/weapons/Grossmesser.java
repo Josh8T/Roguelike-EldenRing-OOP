@@ -6,10 +6,9 @@ import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.actions.AreaAttackAction;
-import game.actions.sell.SellGrossmesser;
-import game.actions.sell.Sellable;
+import game.actions.SellAction;
+import game.Sellable;
 import game.enums.Status;
-import game.items.RuneManager;
 
 /**
  * A class that represents the Grossmesser weapon.
@@ -20,7 +19,7 @@ import game.items.RuneManager;
  */
 public class Grossmesser extends WeaponItem implements Sellable {
 
-    private SellGrossmesser sellGrossmesser = new SellGrossmesser(this, 100);
+    private SellAction sellGrossmesser = new SellAction(this, 100);
 
     /**
      * Constructor.
@@ -36,17 +35,10 @@ public class Grossmesser extends WeaponItem implements Sellable {
      */
     @Override
     public void tick(Location currentLocation, Actor actor) {
-        boolean traderNearby = false;
-        for (Exit exit : currentLocation.getExits()) {
-            Actor otherActor = exit.getDestination().getActor();
-            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
-                if (!this.getAllowableActions().contains(sellGrossmesser)) {
-                    this.addAction(sellGrossmesser);
-                }
-                traderNearby = true;
-            }
+        if (traderNearby(currentLocation) && !this.getAllowableActions().contains(sellGrossmesser)) {
+            this.addAction(sellGrossmesser);
         }
-        if (!traderNearby) {
+        if (!traderNearby(currentLocation)) {
             this.removeAction(sellGrossmesser);
         }
     }
@@ -56,7 +48,8 @@ public class Grossmesser extends WeaponItem implements Sellable {
         return new AreaAttackAction(this);
     }
 
-    public void receiveRunes(int sellValue) {
-        RuneManager.getInstance().getRune().increaseValue(sellValue);
+    @Override
+    public void giveSellable(Actor actor) {
+        actor.removeWeaponFromInventory(this);
     }
 }
