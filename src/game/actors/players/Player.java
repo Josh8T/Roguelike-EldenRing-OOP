@@ -21,7 +21,7 @@ import game.items.RuneManager;
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
- * @author Aflah Hanif Amarlyadi, Josh Hernett Tan
+ * @author Aflah Hanif Amarlyadi, Josh Hernett Tan, David Lee
  */
 public abstract class Player extends Actor implements Resettable {
 
@@ -79,5 +79,8 @@ public abstract class Player extends Actor implements Resettable {
 		this.heal(10000);
 	}
 
+	/**
+	 * This method returns the name of the starting class
+	 */
 	public abstract String getClassName();
 }

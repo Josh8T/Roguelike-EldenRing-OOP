@@ -3,18 +3,18 @@ package game.actors.players;
 import game.weapons.GreatKnife;
 
 /**
- * A class that represents the Bandit starting class.
+ * A class that represents the Astrologer starting class.
  * Created by:
  * @author David Lee
  * Modified by:
  *
  */
-public class Bandit extends Player{
+public class Astrologer extends Player{
     /**
      * Constructor.
      */
-    public Bandit() {
-        super(414);
+    public Astrologer() {
+        super(396);
         this.addWeaponToInventory(new GreatKnife());
     }
 
@@ -24,6 +24,6 @@ public class Bandit extends Player{
      */
     @Override
     public String getClassName() {
-        return "Bandit";
+        return "Astrologer";
     }
 }

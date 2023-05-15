@@ -1,10 +1,8 @@
 package game;
 
 import edu.monash.fit2099.engine.displays.Display;
-import game.actors.players.Bandit;
-import game.actors.players.Player;
-import game.actors.players.Samurai;
-import game.actors.players.Wretch;
+import game.actors.players.*;
+
 import java.util.ArrayList;
 
 /**
@@ -41,6 +39,7 @@ public class StartingClassMenu {
         choices.add(new Samurai());
         choices.add(new Bandit());
         choices.add(new Wretch());
+        choices.add(new Astrologer());
         for (Player choice: choices) {
             choicesChar.add(choice.getClassName().toLowerCase().charAt(0));
         }
