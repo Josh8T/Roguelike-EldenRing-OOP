@@ -9,5 +9,6 @@ public enum EnemyType {
     CRUSTACEAN,
     BEAST,
     SKELETON,
-    STORMVEIL_ENTITIES
+    STORMVEIL_ENTITIES,
+    INVADER
 }

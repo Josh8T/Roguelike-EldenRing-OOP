@@ -29,7 +29,8 @@ public class Application {
 		World world = new World(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace(), new Barrack(), new Cage());
+				new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace(), new Barrack(), new Cage()
+		, new SummonSign());
 
 		List<String> map = Arrays.asList(
 				"..nnnn................................................~~~~~~~~~~~~~~~~~~~~~",
@@ -58,7 +59,7 @@ public class Application {
 				"...........................................................................");
 
 		List<String> testMap = Arrays.asList(
-				"U.....................",
+				"U.=...................",
 				"......................",
 				"......................",
 				"......................",
@@ -66,11 +67,11 @@ public class Application {
 				"......................"
 		);
 
-		GameMap gameMap = new GameMap(groundFactory, map);
-		world.addGameMap(gameMap);
-
-//		GameMap gameMap = new GameMap(groundFactory, testMap);
+//		GameMap gameMap = new GameMap(groundFactory, map);
 //		world.addGameMap(gameMap);
+
+		GameMap gameMap = new GameMap(groundFactory, testMap);
+		world.addGameMap(gameMap);
 
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
@@ -82,19 +83,19 @@ public class Application {
 			}
 		}
 
-		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
-		// adding First Step Grace as first checkpoint
-		player.setCheckpoint(gameMap.at(38, 11));
-		ResetManager.getInstance().registerResettable(player);
-		world.addPlayer(player, gameMap.at(36, 10));
-		Trader trader = new Trader("Merchant Kale", 'K');
-		gameMap.at(40, 12).addActor(trader);
-
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 //		// adding First Step Grace as first checkpoint
-//		player.setCheckpoint(gameMap.at(0, 0));
+//		player.setCheckpoint(gameMap.at(38, 11));
 //		ResetManager.getInstance().registerResettable(player);
-//		world.addPlayer(player, gameMap.at(1, 1));
+//		world.addPlayer(player, gameMap.at(36, 10));
+//		Trader trader = new Trader("Merchant Kale", 'K');
+//		gameMap.at(40, 12).addActor(trader);
+
+		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
+		// adding First Step Grace as first checkpoint
+		player.setCheckpoint(gameMap.at(0, 0));
+		ResetManager.getInstance().registerResettable(player);
+		world.addPlayer(player, gameMap.at(1, 1));
 
 		world.run();
 	}
