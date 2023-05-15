@@ -4,7 +4,13 @@ import game.enums.EnemyType;
 import game.utils.RandomNumberGenerator;
 
 import java.util.Random;
-
+/**
+ * Godrick Soldier enemy class
+ * Created by:
+ * @author Josh Hernett Tan
+ * Modified by:
+ *
+ */
 public class GodrickSoldier extends Enemy{
     /**
      * Constructor.

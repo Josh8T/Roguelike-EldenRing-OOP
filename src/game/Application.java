@@ -10,9 +10,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.players.Player;
 import game.actors.Trader;
-import game.grounds.Dirt;
-import game.grounds.Floor;
-import game.grounds.Wall;
+import game.grounds.*;
 import game.grounds.environments.Graveyard;
 import game.grounds.environments.GustOfWind;
 import game.grounds.environments.PuddleOfWater;
@@ -32,7 +30,7 @@ public class Application {
 		World world = new World(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace());
+				new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace(), new Barrack(), new Cage());
 
 
 
@@ -63,16 +61,20 @@ public class Application {
 				"...........................................................................");
 
 		List<String> testMap = Arrays.asList(
+				"U.....................",
+				".......<..............",
 				"......................",
-				"...n..................",
-				"......................",
-				"....U.................",
+				"...................B..",
 				"......................",
 				"......................"
 		);
 
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
+
+
+//		GameMap gameMap = new GameMap(groundFactory, testMap);
+//		world.addGameMap(gameMap);
 
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
@@ -92,6 +94,14 @@ public class Application {
 		world.addPlayer(player, gameMap.at(36, 10));
 		Trader trader = new Trader("Merchant Kale", 'K');
 		gameMap.at(40, 12).addActor(trader);
+
+
+//		Player player = StartingClassMenu.getInstance().chooseStartingClass();
+//		// adding First Step Grace as first checkpoint
+//		player.setCheckpoint(gameMap.at(0, 0));
+//		ResetManager.getInstance().registerResettable(player);
+//		world.addPlayer(player, gameMap.at(1, 1));
+
 
 		world.run();
 	}
