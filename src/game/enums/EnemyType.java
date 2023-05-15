@@ -8,5 +8,6 @@ package game.enums;
 public enum EnemyType {
     CRUSTACEAN,
     BEAST,
-    SKELETON
+    SKELETON,
+    STORMVEIL_ENTITIES
 }
