@@ -14,7 +14,6 @@ import game.Resettable;
 import game.enums.Status;
 import game.actions.AttackAction;
 import game.behaviours.*;
-import game.utils.RandomNumberGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,7 +59,7 @@ public abstract class Enemy extends Actor implements Resettable {
         Location actorLocation = map.locationOf(this);
         for (Exit targetExits : actorLocation.getExits()) {
             Actor target = targetExits.getDestination().getActor();
-            if (target != null && target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            if (target != null && target.hasCapability(Status.FOLLOWABLE)) {
                 this.getBehaviours().put(2, new FollowBehaviour(target));
                 behaviours.remove(3);
             }

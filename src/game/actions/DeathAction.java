@@ -3,12 +3,10 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
-import game.ResetManager;
 import game.actors.enemies.Enemy;
 import game.enums.EnemyType;
 import game.enums.ItemType;
@@ -41,7 +39,7 @@ public class DeathAction extends Action {
      */
     @Override
     public String execute(Actor target, GameMap map) {
-        String result = "";
+        String result = System.lineSeparator() + menuDescription(target);
         ActionList dropActions = new ActionList();
 
         if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.RESPAWNABLE)){
@@ -49,9 +47,9 @@ public class DeathAction extends Action {
             target.addCapability(Status.RESPAWNABLE);
             return System.lineSeparator() + target + " turns into a pile of bones";
         }
-        else if (target.hasCapability(Status.PLAYER)) {
+        else if (target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             for (String line : FancyMessage.YOU_DIED.split("\n")) {
-                new Display().println(line);
+                result += System.lineSeparator() + line;
             }
             // drop all droppable items
             for (Item item : target.getItemInventory()) {
@@ -90,7 +88,6 @@ public class DeathAction extends Action {
             map.removeActor(target);
         }
 
-        result += System.lineSeparator() + menuDescription(target);
         return result;
     }
 

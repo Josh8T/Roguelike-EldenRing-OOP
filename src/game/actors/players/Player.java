@@ -40,7 +40,7 @@ public abstract class Player extends Actor implements Resettable {
 		super("Tarnished", '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FOLLOWABLE);
-		this.addCapability(Status.PLAYER);
+		this.addCapability(Status.RESTING);
 		Rune rune = new Rune(0);
 		this.addItemToInventory(rune);
 		RuneManager.getInstance().registerRune(rune);

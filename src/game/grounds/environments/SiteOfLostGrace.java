@@ -25,7 +25,7 @@ public class SiteOfLostGrace extends Ground {
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
-        if (actor.hasCapability(Status.PLAYER)) {
+        if (actor.hasCapability(Status.RESTING)) {
             actions.add(new RestAction());
         }
         return actions;
