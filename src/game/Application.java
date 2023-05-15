@@ -6,10 +6,9 @@ import java.util.List;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
-import game.actors.players.Player;
 import game.actors.Trader;
+import game.actors.players.StartingClass;
 import game.grounds.*;
 import game.grounds.environments.Graveyard;
 import game.grounds.environments.GustOfWind;
@@ -31,8 +30,6 @@ public class Application {
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
 				new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace(), new Barrack(), new Cage());
-
-
 
 		List<String> map = Arrays.asList(
 				"..nnnn................................................~~~~~~~~~~~~~~~~~~~~~",
@@ -62,16 +59,15 @@ public class Application {
 
 		List<String> testMap = Arrays.asList(
 				"U.....................",
-				".......<..............",
 				"......................",
-				"...................B..",
+				"......................",
+				"......................",
 				"......................",
 				"......................"
 		);
 
 		GameMap gameMap = new GameMap(groundFactory, map);
 		world.addGameMap(gameMap);
-
 
 //		GameMap gameMap = new GameMap(groundFactory, testMap);
 //		world.addGameMap(gameMap);
@@ -85,9 +81,8 @@ public class Application {
 				exception.printStackTrace();
 			}
 		}
-//
-		// HINT: what does it mean to prefer composition to inheritance?
-		Player player = StartingClassMenu.getInstance().chooseStartingClass();
+
+		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 		// adding First Step Grace as first checkpoint
 		player.setCheckpoint(gameMap.at(38, 11));
 		ResetManager.getInstance().registerResettable(player);
@@ -95,13 +90,11 @@ public class Application {
 		Trader trader = new Trader("Merchant Kale", 'K');
 		gameMap.at(40, 12).addActor(trader);
 
-
-//		Player player = StartingClassMenu.getInstance().chooseStartingClass();
+//		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 //		// adding First Step Grace as first checkpoint
 //		player.setCheckpoint(gameMap.at(0, 0));
 //		ResetManager.getInstance().registerResettable(player);
 //		world.addPlayer(player, gameMap.at(1, 1));
-
 
 		world.run();
 	}

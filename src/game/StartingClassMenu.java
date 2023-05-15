@@ -24,7 +24,7 @@ public class StartingClassMenu {
     /**
      * An arraylist of starting classes
      */
-    private ArrayList<Player> choices = new ArrayList<>();
+    private ArrayList<StartingClass> choices = new ArrayList<>();
 
     /**
      * An arraylist of first characters if starting classes
@@ -40,7 +40,7 @@ public class StartingClassMenu {
         choices.add(new Bandit());
         choices.add(new Wretch());
         choices.add(new Astrologer());
-        for (Player choice: choices) {
+        for (StartingClass choice: choices) {
             choicesChar.add(choice.getClassName().toLowerCase().charAt(0));
         }
     }
@@ -49,9 +49,9 @@ public class StartingClassMenu {
      * This method gets input from the user, if the input is a valid choice, a player with the chosen starting class is returned
      * @return new player with chosen starting class
      */
-    public Player chooseStartingClass() {
+    public StartingClass chooseStartingClass() {
         display.println("Select your starting class: ");
-        for (Player choice: choices) {
+        for (StartingClass choice: choices) {
             display.println(choice.getClassName().toLowerCase().charAt(0) + ": " + choice.getClassName());
         }
 

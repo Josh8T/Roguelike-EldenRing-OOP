@@ -9,7 +9,7 @@ import game.weapons.Uchigatana;
  * Modified by:
  *
  */
-public class Samurai extends Player{
+public class Samurai extends StartingClass {
     /**
      * Constructor.
      */

@@ -9,7 +9,7 @@ import game.weapons.GreatKnife;
  * Modified by:
  *
  */
-public class Astrologer extends Player{
+public class Astrologer extends StartingClass {
     /**
      * Constructor.
      */

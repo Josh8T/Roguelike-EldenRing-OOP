@@ -9,7 +9,7 @@ import game.weapons.GreatKnife;
  * Modified by:
  *
  */
-public class Bandit extends Player{
+public class Bandit extends StartingClass {
     /**
      * Constructor.
      */

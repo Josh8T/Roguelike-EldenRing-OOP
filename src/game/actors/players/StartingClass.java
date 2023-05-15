@@ -16,14 +16,13 @@ import game.enums.Status;
 import game.items.RuneManager;
 
 /**
- * Class representing the Player. It implements the Resettable interface.
- * It carries around a club to attack a hostile creature in the Lands Between.
+ * Class representing the Starting Class. It implements the Resettable interface.
  * Created by:
  * @author Adrian Kristanto
  * Modified by:
  * @author Aflah Hanif Amarlyadi, Josh Hernett Tan, David Lee
  */
-public abstract class Player extends Actor implements Resettable {
+public abstract class StartingClass extends Actor implements Resettable {
 
 	private final Menu menu = new Menu();
 
@@ -34,9 +33,9 @@ public abstract class Player extends Actor implements Resettable {
 	/**
 	 * Constructor.
 	 *
-	 * @param hitPoints   Player's starting number of hit points
+	 * @param hitPoints Starting Class's number of hit points
 	 */
-	public Player(int hitPoints) {
+	public StartingClass(int hitPoints) {
 		super("Tarnished", '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FOLLOWABLE);
@@ -56,7 +55,7 @@ public abstract class Player extends Actor implements Resettable {
 
 		actions.add(new ConsumeAction(flaskOfCrimsonTears, this));
 
-		display.println(this.name + " (" + this.hitPoints + "/" + this.maxHitPoints + "), Runes: " + RuneManager.getInstance().getRune().value());
+		display.println(printHp() + ", Runes: " + RuneManager.getInstance().getRune().value());
 
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
@@ -83,4 +82,12 @@ public abstract class Player extends Actor implements Resettable {
 	 * This method returns the name of the starting class
 	 */
 	public abstract String getClassName();
+
+	/**
+	 * This method calls the getMaxHp() method of the Actor class.
+	 * @return Maximum hit points of this Starting Class
+	 */
+	public int getHp() {
+		return getMaxHp();
+	}
 }

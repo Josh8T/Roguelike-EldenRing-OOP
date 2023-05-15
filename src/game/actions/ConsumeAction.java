@@ -2,11 +2,10 @@ package game.actions;
 
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Consumable;
-import game.actors.players.Player;
-import game.items.FlaskOfCrimsonTears;
+import game.actors.players.StartingClass;
+
 /**
  * A class that represents the consume action when using Flask of Crimson Tears.
  * Created by:
@@ -16,9 +15,9 @@ import game.items.FlaskOfCrimsonTears;
  */
 public class ConsumeAction extends Action {
     private Consumable consumable;
-    private Player player;
+    private StartingClass player;
 
-    public ConsumeAction(Consumable consumable, Player player){
+    public ConsumeAction(Consumable consumable, StartingClass player){
         this.consumable = consumable;
         this.player = player;
     }

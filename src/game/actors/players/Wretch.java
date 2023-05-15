@@ -9,7 +9,7 @@ import game.weapons.Club;
  * Modified by:
  *
  */
-public class Wretch extends Player{
+public class Wretch extends StartingClass {
     /**
      * Constructor.
      */
