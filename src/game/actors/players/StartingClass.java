@@ -40,6 +40,9 @@ public abstract class StartingClass extends Actor implements Resettable {
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FOLLOWABLE);
 		this.addCapability(Status.RESTING);
+		this.addCapability(Status.WILLING_TO_PURCHASE);
+		this.addCapability(Status.WILLING_TO_SELL);
+		this.addCapability(Status.WILLING_TO_EXCHANGE);
 		Rune rune = new Rune(0);
 		this.addItemToInventory(rune);
 		RuneManager.getInstance().registerRune(rune);

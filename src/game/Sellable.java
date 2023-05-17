@@ -22,7 +22,7 @@ public interface Sellable {
     default boolean traderNearby(Location currentLocation) {
         for (Exit exit : currentLocation.getExits()) {
             Actor otherActor = exit.getDestination().getActor();
-            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_TRADE)) {
+            if (otherActor != null && otherActor.hasCapability(Status.WILLING_TO_PURCHASE)) {
                 return true;
             }
         }

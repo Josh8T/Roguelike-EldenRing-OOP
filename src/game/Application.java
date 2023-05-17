@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Trader;
 import game.actors.players.StartingClass;
+import game.enums.Status;
 import game.grounds.*;
 import game.grounds.environments.Graveyard;
 import game.grounds.environments.GustOfWind;
@@ -135,6 +136,7 @@ public class Application {
 		limgraveMap.at(40, 12).addActor(kale);
 
 		Trader enia = new Trader("Finger Reader Enia", 'E');
+		enia.removeCapability(Status.WILLING_TO_SELL);
 		roundtableHoldMap.at(9, 1).addActor(enia);
 
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();

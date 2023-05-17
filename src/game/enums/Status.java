@@ -9,7 +9,9 @@ package game.enums;
  */
 public enum Status {
     HOSTILE_TO_ENEMY,
-    WILLING_TO_TRADE,
+    WILLING_TO_PURCHASE,
+    WILLING_TO_SELL,
+    WILLING_TO_EXCHANGE,
     RESTING,
     RESPAWNABLE,
     FOLLOWABLE

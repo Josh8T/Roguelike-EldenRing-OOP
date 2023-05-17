@@ -27,7 +27,9 @@ public class Trader extends Actor {
      */
     public Trader(String name, char displayChar) {
         super(name, displayChar, 100);
-        this.addCapability(Status.WILLING_TO_TRADE);
+        this.addCapability(Status.WILLING_TO_PURCHASE);
+        this.addCapability(Status.WILLING_TO_SELL);
+        this.addCapability(Status.WILLING_TO_EXCHANGE);
     }
 
     /**
@@ -55,7 +57,7 @@ public class Trader extends Actor {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(Status.WILLING_TO_PURCHASE) && this.hasCapability(Status.WILLING_TO_SELL)) {
             actions.add(new PurchaseAction(new Uchigatana(), 5000));
             actions.add(new PurchaseAction(new GreatKnife(), 3500));
             actions.add(new PurchaseAction(new Club(), 600));
