@@ -32,7 +32,7 @@ public class Application {
 				new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace(), new Barrack(), new Cage()
 		, new SummonSign(), new Cliff());
 
-		List<String> map = Arrays.asList(
+		List<String> limgrave = Arrays.asList(
 				"..nnnn................#.............#.................~~~~~....+++.........",
 				"......................#.............#.................~~~~~.+++++..........",
 				"..nnnn................#..___....____#.................~~~~~...+++++........",
@@ -58,6 +58,45 @@ public class Application {
 				"_____________#.........+..+.....................+++...........###..__###...",
 				"_____________#.............++..............................................");
 
+		List<String> stormveilCastle = Arrays.asList(
+				"...........................................................................",
+				"..................<...............<........................................",
+				"...........................................................................",
+				"##############################################...##########################",
+				"............................#................#.......B..............B......",
+				".....B...............B......#................#.............................",
+				"...............................<.........<.................................",
+				".....B...............B......#................#.......B..............B......",
+				"............................#................#.............................",
+				"#####################..#############...############.####..#########...#####",
+				"...............#++++++++++++#................#++++++++++++#................",
+				"...............#++++++++++++...<.........<...#++++++++++++#................",
+				"...............#++++++++++++..................++++++++++++#................",
+				"...............#++++++++++++#................#++++++++++++#................",
+				"#####...##########.....#############...#############..#############...#####",
+				".._______........................B......B........................B.....B...",
+				"_____..._..____....&&........<..............<..............................",
+				".........____......&&......................................................",
+				"...._______..................<..............<....................<.....<...",
+				"#####....##...###..#####...##########___###############......##.....####...",
+				"+++++++++++++++++++++++++++#...................#+++++++++++++++++++++++++++",
+				"+++++++++++++++++++++++++++....................#+++++++++++++++++++++++++++",
+				"+++++++++++++++++++++++++++#....................+++++++++++++++++++++++++++",
+				"+++++++++++++++++++++++++++#...................#+++++++++++++++++++++++++++");
+
+		List<String> roundtableHold = Arrays.asList(
+				"##################",
+				"#________________#",
+				"#________________#",
+				"#________________#",
+				"#________________#",
+				"#________________#",
+				"#________________#",
+				"#________________#",
+				"#________________#",
+				"#________________#",
+				"########___#######");
+
 		List<String> testMap = Arrays.asList(
 				"U.=...................",
 				"......................",
@@ -67,11 +106,14 @@ public class Application {
 				"......................"
 		);
 
-//		GameMap gameMap = new GameMap(groundFactory, map);
-//		world.addGameMap(gameMap);
+		GameMap limgraveMap = new GameMap(groundFactory, limgrave);
+		world.addGameMap(limgraveMap);
 
-		GameMap gameMap = new GameMap(groundFactory, testMap);
-		world.addGameMap(gameMap);
+		GameMap stormveilCastleMap = new GameMap(groundFactory, stormveilCastle);
+		world.addGameMap(stormveilCastleMap);
+
+		GameMap roundtableHoldMap = new GameMap(groundFactory, roundtableHold);
+		world.addGameMap(roundtableHoldMap);
 
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
@@ -83,19 +125,23 @@ public class Application {
 			}
 		}
 
-//		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
-//		// adding First Step Grace as first checkpoint
-//		player.setCheckpoint(gameMap.at(38, 11));
-//		ResetManager.getInstance().registerResettable(player);
-//		world.addPlayer(player, gameMap.at(36, 10));
-//		Trader trader = new Trader("Merchant Kale", 'K');
-//		gameMap.at(40, 12).addActor(trader);
-
 		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 		// adding First Step Grace as first checkpoint
-		player.setCheckpoint(gameMap.at(0, 0));
+		player.setCheckpoint(limgraveMap.at(38, 11));
 		ResetManager.getInstance().registerResettable(player);
-		world.addPlayer(player, gameMap.at(1, 1));
+		world.addPlayer(player, limgraveMap.at(36, 10));
+
+		Trader kale = new Trader("Merchant Kale", 'K');
+		limgraveMap.at(40, 12).addActor(kale);
+
+		Trader enia = new Trader("Finger Reader Enia", 'E');
+		roundtableHoldMap.at(9, 1).addActor(enia);
+
+//		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
+//		// adding First Step Grace as first checkpoint
+//		player.setCheckpoint(limgraveMap.at(0, 0));
+//		ResetManager.getInstance().registerResettable(player);
+//		world.addPlayer(player, limgraveMap.at(1, 1));
 
 		world.run();
 	}
