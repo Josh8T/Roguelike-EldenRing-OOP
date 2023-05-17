@@ -15,6 +15,7 @@ import game.grounds.environments.Graveyard;
 import game.grounds.environments.GustOfWind;
 import game.grounds.environments.PuddleOfWater;
 import game.grounds.environments.SiteOfLostGrace;
+import game.items.RemembranceOfTheGrafted;
 
 /**
  * The main class to start the game.
@@ -130,7 +131,9 @@ public class Application {
 		// adding First Step Grace as first checkpoint
 		player.setCheckpoint(limgraveMap.at(38, 11));
 		ResetManager.getInstance().registerResettable(player);
-		world.addPlayer(player, limgraveMap.at(36, 10));
+		player.addItemToInventory(new RemembranceOfTheGrafted());
+		world.addPlayer(player, roundtableHoldMap.at(5, 1));
+//		world.addPlayer(player, limgraveMap.at(36, 10));
 
 		Trader kale = new Trader("Merchant Kale", 'K');
 		limgraveMap.at(40, 12).addActor(kale);
