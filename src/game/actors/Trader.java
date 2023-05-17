@@ -8,10 +8,7 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.PurchaseAction;
 import game.enums.Status;
-import game.weapons.Club;
-import game.weapons.GreatKnife;
-import game.weapons.Scimitar;
-import game.weapons.Uchigatana;
+import game.weapons.*;
 
 /**
  * A class that represents the Trader.
@@ -63,6 +60,7 @@ public class Trader extends Actor {
             actions.add(new PurchaseAction(new GreatKnife(), 3500));
             actions.add(new PurchaseAction(new Club(), 600));
             actions.add(new PurchaseAction(new Scimitar(), 600));
+            actions.add(new PurchaseAction(new AstrologersStaff(), 800));
         }
         return actions;
     }

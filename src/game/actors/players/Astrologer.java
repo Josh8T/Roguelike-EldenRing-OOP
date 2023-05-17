@@ -1,6 +1,6 @@
 package game.actors.players;
 
-import game.weapons.GreatKnife;
+import game.weapons.AstrologersStaff;
 
 /**
  * A class that represents the Astrologer starting class.
@@ -15,7 +15,7 @@ public class Astrologer extends StartingClass {
      */
     public Astrologer() {
         super(396);
-        this.addWeaponToInventory(new GreatKnife());
+        this.addWeaponToInventory(new AstrologersStaff());
     }
 
     /**
