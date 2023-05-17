@@ -1,13 +1,13 @@
 package game.weapons;
 
+import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Purchasable;
+import game.actions.AttackAction;
 import game.actions.SellAction;
 import game.Sellable;
-import game.enums.Status;
 
 /**
  * A simple weapon that can be used to attack the enemy.
@@ -41,6 +41,11 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
         if (!traderNearby(currentLocation)) {
             this.removeAction(sellClub);
         }
+    }
+
+    @Override
+    public Action getSkill(Actor target, String direction) {
+        return new AttackAction(target, direction, this);
     }
 
     @Override
