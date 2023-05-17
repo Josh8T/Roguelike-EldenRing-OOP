@@ -1,6 +1,6 @@
 package game.items;
 
-import game.actors.enemies.Enemy;
+import game.actors.DropsRunes;
 
 /**
  * A rune manager class that manages the player's runes.
@@ -39,9 +39,9 @@ public class RuneManager {
 
     /**
      * Increases the player's runes when an enemy is defeated.
-     * @param enemy
+     * @param enemy actor that is able to drop runes
      */
-    public void awardKill(Enemy enemy) {
+    public void awardKill(DropsRunes enemy) {
         rune.increaseValue(enemy.generateRuneValue());
     }
 

@@ -11,6 +11,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.Weapon;
 import game.ResetManager;
 import game.Resettable;
+import game.actors.DropsRunes;
 import game.enums.Status;
 import game.actions.AttackAction;
 import game.behaviours.*;
@@ -25,7 +26,7 @@ import java.util.Map;
  * Modified by:
  * @author Josh Hernett Tan, Aflah Hanif Amarlyadi
  */
-public abstract class Enemy extends Actor implements Resettable {
+public abstract class Enemy extends Actor implements Resettable, DropsRunes {
 
     /**
      * The behaviours that an Enemy has stored in a hashmap
@@ -83,14 +84,12 @@ public abstract class Enemy extends Actor implements Resettable {
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             for (Weapon weapon: otherActor.getWeaponInventory()) {
                 actions.add(new AttackAction(this, direction, weapon));
                 actions.add(weapon.getSkill(this, direction));
             }
             actions.add(new AttackAction(this, direction));
-            // HINT 1: The AttackAction above allows you to attak the enemy with your intrinsic weapon.
-            // HINT 1: How would you attack the enemy with a weapon?
         }
         return actions;
     }

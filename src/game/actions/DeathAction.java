@@ -7,7 +7,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
-import game.actors.enemies.Enemy;
+import game.actors.DropsRunes;
 import game.enums.EnemyType;
 import game.enums.ItemType;
 import game.enums.Status;
@@ -62,8 +62,8 @@ public class DeathAction extends Action {
             new ResetAction().execute(target,map);
         }
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            if (target instanceof Enemy) {
-                RuneManager.getInstance().awardKill((Enemy) target);
+            if (!target.findCapabilitiesByType(EnemyType.class).isEmpty()) {
+                RuneManager.getInstance().awardKill((DropsRunes) target);
             }
             // drop all droppable items
             for (Item item : target.getItemInventory()) {
