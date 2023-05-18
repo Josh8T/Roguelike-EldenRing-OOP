@@ -9,7 +9,7 @@ public class RestAction extends Action {
     @Override
     public String execute(Actor actor, GameMap map) {
         String result = "";
-        result += new ResetAction().execute(actor, map);
+        result += new ResetAction(true).execute(actor, map);
         return result;
     }
 

@@ -55,7 +55,7 @@ public class SummonAction extends Action {
             guest = new Invader();
             result += System.lineSeparator() + "A hostile guest has arrived. Prepare for battle!";
         }
-        ResetManager.getInstance().registerResettable(guest);
+        ResetManager.getInstance().registerDeathResettable(guest);
 
         ArrayList<Location> summonLocations = new ArrayList<>();
 
