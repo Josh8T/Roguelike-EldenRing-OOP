@@ -26,10 +26,6 @@ import game.weapons.Grossmesser;
 public class HeavySkeletalSwordsman extends Enemy {
     private int stateCounter;
 
-    public int getStateCounter() {
-        return stateCounter;
-    }
-
     public void setStateCounter(int stateCounter) {
         this.stateCounter = stateCounter;
     }
