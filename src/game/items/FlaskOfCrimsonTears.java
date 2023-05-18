@@ -4,7 +4,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.Consumable;
-import game.ResetManager;
 import game.Resettable;
 
 /**
@@ -12,7 +11,7 @@ import game.Resettable;
  * Created by:
  * @author Josh Hernett Tan
  * Modified by:
- *
+ * @author Aflah Hanif Amarlyadi
  */
 public class FlaskOfCrimsonTears extends Item implements Consumable, Resettable {
 
@@ -28,27 +27,41 @@ public class FlaskOfCrimsonTears extends Item implements Consumable, Resettable 
     }
 
     /**
+     * Getter method for the amount of Flask Of Crimson Tears
+     *
+     * @return amount
+     */
+    public int getAmount() {
+        return this.amount;
+    }
+
+    /**
+     * Setter method for the amount of Flask Of Crimson Tears
+     */
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + " (" + this.getAmount() + "/2)";
+    }
+
+
+    /**
      * Decrease the amount of Flask of Crimson Tears by one, and heals the actor that is consuming it.
      *
      * @param actor the one that consumes the Flask of Crimson Tears
      */
+    @Override
     public void consume(Actor actor){
         actor.heal(250);
         this.amount -= 1;
     }
 
-    /**
-     * Getter method for amount attribute
-     *
-     * @return amount
-     */
     @Override
-    public int amountLeft() {
-        return this.amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public boolean isEmpty() {
+        return !(getAmount() > 0);
     }
 
     @Override

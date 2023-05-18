@@ -2,7 +2,9 @@ package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Location;
 import game.Consumable;
+import game.actions.ConsumeAction;
 import game.utils.RandomNumberGenerator;
 
 /**
@@ -13,7 +15,10 @@ import game.utils.RandomNumberGenerator;
  *
  */
 public class GoldenRunes extends Item implements Consumable {
-    /***
+
+    private ConsumeAction consumeGoldenRunes = new ConsumeAction(this);
+
+    /**
      * Constructor.
      */
     public GoldenRunes() {
@@ -21,12 +26,15 @@ public class GoldenRunes extends Item implements Consumable {
     }
 
     @Override
-    public void consume(Actor actor) {
-        RuneManager.getInstance().getRune().increaseValue(RandomNumberGenerator.getRandomInt(200, 10000));
+    public void tick(Location currentLocation, Actor actor) {
+        if (!this.getAllowableActions().contains(consumeGoldenRunes)) {
+            this.addAction(consumeGoldenRunes);
+        }
     }
 
     @Override
-    public int amountLeft() {
-        return 0;
+    public void consume(Actor actor) {
+        RuneManager.getInstance().getRune().increaseValue(RandomNumberGenerator.getRandomInt(200, 10000));
+        actor.removeItemFromInventory(this);
     }
 }

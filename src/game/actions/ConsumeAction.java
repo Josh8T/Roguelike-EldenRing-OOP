@@ -11,20 +11,18 @@ import game.actors.players.StartingClass;
  * Created by:
  * @author Josh Hernett Tan
  * Modified by:
- *
+ * @author Aflah Hanif Amarlyadi
  */
 public class ConsumeAction extends Action {
     private Consumable consumable;
-    private StartingClass player;
 
-    public ConsumeAction(Consumable consumable, StartingClass player){
+    public ConsumeAction(Consumable consumable){
         this.consumable = consumable;
-        this.player = player;
     }
 
     /**
      * When executed, the actor heals up to 250 hit points
-     * and decrease the amount of Flask of Crimson Tears in the actor Inventory .
+     * and decrease the amount of Flask of Crimson Tears in the actor Inventory.
      *
      * @param actor The actor performing the consume action.
      * @param map The map the actor is on.
@@ -32,21 +30,21 @@ public class ConsumeAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
-        if (consumable.amountLeft() > 0) {
-            consumable.consume(player);
-            return player + " has been healed successfully!";
+        if (!consumable.isEmpty()) {
+            consumable.consume(actor);
+            return actor + " consumed " + consumable;
         }
-        return actor + " has no Flask of Crimson Tears left";
+        return consumable + " is empty";
     }
 
     /**
-     * Describes which item the actor is consuming and its effect
+     * Describes which consumable the actor is consuming
      *
      * @param actor The actor performing the action.
      * @return a description used for the menu UI
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " consume Flask of Crimson Tears (" + consumable.amountLeft() + ")";
+        return actor + " consumes " + consumable;
     }
 }

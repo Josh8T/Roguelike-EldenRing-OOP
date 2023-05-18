@@ -16,7 +16,7 @@ import game.grounds.environments.Graveyard;
 import game.grounds.environments.GustOfWind;
 import game.grounds.environments.PuddleOfWater;
 import game.grounds.environments.SiteOfLostGrace;
-import game.items.RemembranceOfTheGrafted;
+import game.items.GoldenRunes;
 
 /**
  * The main class to start the game.
@@ -132,6 +132,15 @@ public class Application {
 		GameMap bossRoomMap = new GameMap(groundFactory, roundtableHold);
 		world.addGameMap(bossRoomMap);
 
+		// Add Merchant Kale to the Limgrave map
+		Trader kale = new Trader("Merchant Kale", 'K');
+		limgraveMap.at(40, 12).addActor(kale);
+
+		// Add Finger Reader Enia to the Roundtable Hold map
+		Trader enia = new Trader("Finger Reader Enia", 'E');
+		enia.removeCapability(Status.WILLING_TO_SELL);
+		roundtableHoldMap.at(9, 1).addActor(enia);
+
 		// Create The First Step in Limgrave
 		Location theFirstStepLocation = limgraveMap.at(38, 11);
 		SiteOfLostGrace theFirstStep = new SiteOfLostGrace("The First Step", theFirstStepLocation);
@@ -150,6 +159,20 @@ public class Application {
 		// Create Golden Fog Door in Stormveil Castle to travel to Godrick the Grafted
 		stormveilCastleMap.at(5, 0).setGround(new GoldenFogDoor("Godrick the Grafted", bossRoomMap, bossRoomMap.at(0, 4)));
 
+		// Scatter Golden Runes in Limgrave
+		limgraveMap.at(3, 21).addItem(new GoldenRunes());
+		limgraveMap.at(26, 2).addItem(new GoldenRunes());
+		limgraveMap.at(38, 10).addItem(new GoldenRunes());
+		limgraveMap.at(69, 19).addItem(new GoldenRunes());
+		limgraveMap.at(73, 11).addItem(new GoldenRunes());
+
+		// Scatter Golden Runes in Stormveil Castle
+		stormveilCastleMap.at(0, 4).addItem(new GoldenRunes());
+		stormveilCastleMap.at(8, 10).addItem(new GoldenRunes());
+		stormveilCastleMap.at(38, 21).addItem(new GoldenRunes());
+		stormveilCastleMap.at(74, 1).addItem(new GoldenRunes());
+		stormveilCastleMap.at(74, 10).addItem(new GoldenRunes());
+
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
 			new Display().println(line);
@@ -161,19 +184,11 @@ public class Application {
 		}
 
 		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
-		// adding First Step Grace as first checkpoint
+		// Set First Step as the first Site of Lost Grace
 		player.setCheckpoint(theFirstStep.getLocation());
 		theFirstStep.discover();
 		ResetManager.getInstance().registerResettable(player);
 		world.addPlayer(player, limgraveMap.at(36, 10));
-//		world.addPlayer(player, limgraveMap.at(28, 0));
-
-		Trader kale = new Trader("Merchant Kale", 'K');
-		limgraveMap.at(40, 12).addActor(kale);
-
-		Trader enia = new Trader("Finger Reader Enia", 'E');
-		enia.removeCapability(Status.WILLING_TO_SELL);
-		roundtableHoldMap.at(9, 1).addActor(enia);
 
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 //		// adding First Step Grace as first checkpoint
