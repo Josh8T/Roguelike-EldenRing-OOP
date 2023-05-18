@@ -30,9 +30,9 @@ public class Application {
 
 		World world = new World(new Display());
 
-		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(),
-				new Graveyard(), new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace(), new Barrack(), new Cage()
-		, new SummonSign(), new Cliff());
+		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Graveyard(),
+				new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace(), new Barrack(), new Cage(),
+				new SummonSign(), new Cliff());
 
 		List<String> limgrave = Arrays.asList(
 				"..nnnn................#.............#.................~~~~~....+++.........",
@@ -99,6 +99,17 @@ public class Application {
 				"#________________#",
 				"########___#######");
 
+		List<String> bossRoom = Arrays.asList(
+				"+++++++++++++++++++++++++",
+				".........................",
+				"..=......................",
+				".........................",
+				".........................",
+				".........................",
+				".........................",
+				".........................",
+				"+++++++++++++++++++++++++");
+
 		List<String> testMap = Arrays.asList(
 				"U.=...................",
 				"......................",
@@ -117,6 +128,17 @@ public class Application {
 		GameMap roundtableHoldMap = new GameMap(groundFactory, roundtableHold);
 		world.addGameMap(roundtableHoldMap);
 
+		GameMap bossRoomMap = new GameMap(groundFactory, roundtableHold);
+		world.addGameMap(bossRoomMap);
+
+		limgraveMap.at(6, 23).setGround(new GoldenFogDoor("Roundtable Hold", roundtableHoldMap, roundtableHoldMap.at(9,10)));
+		roundtableHoldMap.at(9, 10).setGround(new GoldenFogDoor("Limgrave", limgraveMap, limgraveMap.at(6,23)));
+
+		limgraveMap.at(30, 0).setGround(new GoldenFogDoor("Stormveil Castle", stormveilCastleMap, stormveilCastleMap.at(38, 23)));
+		stormveilCastleMap.at(38, 23).setGround(new GoldenFogDoor("Limgrave", limgraveMap, limgraveMap.at(30, 0)));
+
+		stormveilCastleMap.at(5, 0).setGround(new GoldenFogDoor("Godrick the Grafted", bossRoomMap, bossRoomMap.at(0, 4)));
+
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
 			new Display().println(line);
@@ -131,9 +153,8 @@ public class Application {
 		// adding First Step Grace as first checkpoint
 		player.setCheckpoint(limgraveMap.at(38, 11));
 		ResetManager.getInstance().registerResettable(player);
-		player.addItemToInventory(new RemembranceOfTheGrafted());
-		world.addPlayer(player, roundtableHoldMap.at(5, 1));
 //		world.addPlayer(player, limgraveMap.at(36, 10));
+		world.addPlayer(player, limgraveMap.at(28, 0));
 
 		Trader kale = new Trader("Merchant Kale", 'K');
 		limgraveMap.at(40, 12).addActor(kale);
