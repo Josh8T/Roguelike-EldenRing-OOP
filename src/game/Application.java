@@ -6,6 +6,7 @@ import java.util.List;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.FancyGroundFactory;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Trader;
 import game.actors.players.StartingClass;
@@ -31,7 +32,7 @@ public class Application {
 		World world = new World(new Display());
 
 		FancyGroundFactory groundFactory = new FancyGroundFactory(new Dirt(), new Wall(), new Floor(), new Graveyard(),
-				new GustOfWind(), new PuddleOfWater(), new SiteOfLostGrace(), new Barrack(), new Cage(),
+				new GustOfWind(), new PuddleOfWater(), new Barrack(), new Cage(),
 				new SummonSign(), new Cliff());
 
 		List<String> limgrave = Arrays.asList(
@@ -46,7 +47,7 @@ public class Application {
 				"...........................=...............................................",
 				"........++++......................###___###................................",
 				"........+++++++...................________#....nnnn........................",
-				"..........+++.....................#___U____................................",
+				"..........+++.....................#________................................",
 				"~~~~........+++...................#_______#....nnnn........................",
 				"~~~~.........+....................###___###................................",
 				"~~~~........++......................#___#..................................",
@@ -131,12 +132,22 @@ public class Application {
 		GameMap bossRoomMap = new GameMap(groundFactory, roundtableHold);
 		world.addGameMap(bossRoomMap);
 
+		// Create The First Step in Limgrave
+		Location theFirstStepLocation = limgraveMap.at(38, 11);
+		SiteOfLostGrace theFirstStep = new SiteOfLostGrace("The First Step", theFirstStepLocation);
+		theFirstStepLocation.setGround(theFirstStep);
+
+		// Create Golden Fog Door in Limgrave to travel to Roundtable Hold
 		limgraveMap.at(6, 23).setGround(new GoldenFogDoor("Roundtable Hold", roundtableHoldMap, roundtableHoldMap.at(9,10)));
+		// Create Golden Fog Door in Roundtable Hold to travel to Limgrave
 		roundtableHoldMap.at(9, 10).setGround(new GoldenFogDoor("Limgrave", limgraveMap, limgraveMap.at(6,23)));
 
+		// Create Golden Fog Door in Limgrave to travel to Stormveil Castle
 		limgraveMap.at(30, 0).setGround(new GoldenFogDoor("Stormveil Castle", stormveilCastleMap, stormveilCastleMap.at(38, 23)));
+		// Create Golden Fog Door in Stormveil Castle to travel to Limgrave
 		stormveilCastleMap.at(38, 23).setGround(new GoldenFogDoor("Limgrave", limgraveMap, limgraveMap.at(30, 0)));
 
+		// Create Golden Fog Door in Stormveil Castle to travel to Godrick the Grafted
 		stormveilCastleMap.at(5, 0).setGround(new GoldenFogDoor("Godrick the Grafted", bossRoomMap, bossRoomMap.at(0, 4)));
 
 		// BEHOLD, ELDEN RING
@@ -151,10 +162,11 @@ public class Application {
 
 		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 		// adding First Step Grace as first checkpoint
-		player.setCheckpoint(limgraveMap.at(38, 11));
+		player.setCheckpoint(theFirstStep.getLocation());
+		theFirstStep.discover();
 		ResetManager.getInstance().registerResettable(player);
-//		world.addPlayer(player, limgraveMap.at(36, 10));
-		world.addPlayer(player, limgraveMap.at(28, 0));
+		world.addPlayer(player, limgraveMap.at(36, 10));
+//		world.addPlayer(player, limgraveMap.at(28, 0));
 
 		Trader kale = new Trader("Merchant Kale", 'K');
 		limgraveMap.at(40, 12).addActor(kale);
