@@ -79,4 +79,14 @@ public class SiteOfLostGrace extends Ground {
     public void discover() {
         this.discovered = true;
     }
+
+    /**
+     * This method checks if an Actor can step on the Site of Lost Grace
+     * @param actor the Actor to check
+     * @return true if the Actor can step on the Site of Lost Grace
+     */
+    @Override
+    public boolean canActorEnter(Actor actor) {
+        return actor.hasCapability(Status.HOSTILE_TO_ENEMY);
+    }
 }
