@@ -17,13 +17,4 @@ public class Samurai extends StartingClass {
         super(455);
         this.addWeaponToInventory(new Uchigatana());
     }
-
-    /**
-     * This method returns the name of the starting class
-     * @return name of the starting class as a string
-     */
-    @Override
-    public String getClassName() {
-        return "Samurai";
-    }
 }

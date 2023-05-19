@@ -17,13 +17,4 @@ public class Astrologer extends StartingClass {
         super(396);
         this.addWeaponToInventory(new AstrologersStaff());
     }
-
-    /**
-     * This method returns the name of the starting class
-     * @return name of the starting class as a string
-     */
-    @Override
-    public String getClassName() {
-        return "Astrologer";
-    }
 }

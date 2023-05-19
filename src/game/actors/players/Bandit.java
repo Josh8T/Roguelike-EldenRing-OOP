@@ -17,13 +17,4 @@ public class Bandit extends StartingClass {
         super(414);
         this.addWeaponToInventory(new GreatKnife());
     }
-
-    /**
-     * This method returns the name of the starting class
-     * @return name of the starting class as a string
-     */
-    @Override
-    public String getClassName() {
-        return "Bandit";
-    }
 }

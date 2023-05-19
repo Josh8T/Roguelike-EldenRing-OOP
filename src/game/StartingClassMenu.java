@@ -22,27 +22,19 @@ public class StartingClassMenu {
     private Display display;
 
     /**
-     * An arraylist of starting classes
+     * An arraylist of String of starting classes
      */
-    private ArrayList<StartingClass> choices = new ArrayList<>();
-
-    /**
-     * An arraylist of first characters if starting classes
-     */
-    private ArrayList<Character> choicesChar = new ArrayList<>();
+    private ArrayList<String> choices = new ArrayList<>();
 
     /**
      * Constructor
      */
     private StartingClassMenu() {
         this.display = new Display();
-        choices.add(new Samurai());
-        choices.add(new Bandit());
-        choices.add(new Wretch());
-        choices.add(new Astrologer());
-        for (StartingClass choice: choices) {
-            choicesChar.add(choice.getClassName().toLowerCase().charAt(0));
-        }
+        choices.add("Samurai");
+        choices.add("Bandit");
+        choices.add("Wretch");
+        choices.add("Astrologer");
     }
 
     /**
@@ -51,22 +43,23 @@ public class StartingClassMenu {
      */
     public StartingClass chooseStartingClass() {
         display.println("Select your starting class: ");
-        for (StartingClass choice: choices) {
-            display.println(choice.getClassName().toLowerCase().charAt(0) + ": " + choice.getClassName());
+        for (String choice: choices) {
+            display.println(choice.toLowerCase().charAt(0) + ": " + choice);
         }
 
         char mChoice;
-        do {
+        while (true) {
             mChoice = display.readChar();
-        } while (!choicesChar.contains(mChoice));
-
-        for (int i = 0; i < choicesChar.size(); i++) {
-            if (mChoice == choicesChar.get(i)) {
-                return choices.get(i);
+            if (mChoice == 's') {
+                return new Samurai();
+            } else if (mChoice == 'b') {
+                return new Bandit();
+            } else if (mChoice == 'w') {
+                return new Wretch();
+            } else if (mChoice == 'a') {
+                return new Astrologer();
             }
         }
-
-        return null;
     }
 
     /**

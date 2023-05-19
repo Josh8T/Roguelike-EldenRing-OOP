@@ -104,11 +104,6 @@ public abstract class StartingClass extends Actor implements Resettable {
 	}
 
 	/**
-	 * This method returns the name of the starting class
-	 */
-	public abstract String getClassName();
-
-	/**
 	 * This method calls the getMaxHp() method of the Actor class.
 	 * @return Maximum hit points of this Starting Class
 	 */
