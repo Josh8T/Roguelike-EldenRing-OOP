@@ -31,6 +31,11 @@ public abstract class StartingClass extends Actor implements Resettable {
 	private Location checkpoint;
 
 	/**
+	 * Last Location of the player
+	 */
+	private Location lastLocation;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param hitPoints Starting Class's number of hit points
@@ -44,7 +49,7 @@ public abstract class StartingClass extends Actor implements Resettable {
 		this.addCapability(Status.WILLING_TO_SELL);
 		this.addCapability(Status.WILLING_TO_EXCHANGE);
 
-		Rune rune = new Rune(0);
+		Rune rune = new Rune(0, this);
 		this.addItemToInventory(rune);
 		RuneManager.getInstance().registerRune(rune);
 
@@ -55,6 +60,7 @@ public abstract class StartingClass extends Actor implements Resettable {
 
 	@Override
 	public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+		this.lastLocation = map.locationOf(this);
 		// Handle multi-turn Actions
 		if (lastAction.getNextAction() != null)
 			return lastAction.getNextAction();
@@ -78,7 +84,6 @@ public abstract class StartingClass extends Actor implements Resettable {
 	public void reset(GameMap map) {
 		if (!(map.locationOf(this) == this.getCheckpoint())) {
 			map.moveActor(this, this.getCheckpoint());
-
 		}
 		this.heal(10000);
 	}
@@ -94,5 +99,13 @@ public abstract class StartingClass extends Actor implements Resettable {
 	 */
 	public int getHp() {
 		return getMaxHp();
+	}
+
+	/**
+	 * Getter for last Location of the player
+	 * @return Last Location of the player
+	 */
+	public Location getLastLocation() {
+		return this.lastLocation;
 	}
 }
