@@ -15,6 +15,7 @@ import game.enums.Status;
  *
  */
 public class Cliff extends Ground {
+
     /**
      * Constructor.
      */
@@ -22,6 +23,11 @@ public class Cliff extends Ground {
         super('+');
     }
 
+    /**
+     * Cliff can also experience the joy of time.
+     * If player steps on the Cliff, call DeathAction on the player.
+     * @param location The location of the Ground
+     */
     @Override
     public void tick(Location location) {
         if (location.containsAnActor() && location.getActor().hasCapability(Status.HOSTILE_TO_ENEMY)) {
@@ -29,6 +35,11 @@ public class Cliff extends Ground {
         }
     }
 
+    /**
+     * This method checks if an Actor can step on the Cliff. It makes sure that only player can step on it.
+     * @param actor the Actor to check
+     * @return true if the Actor can step on the Cliff
+     */
     @Override
     public boolean canActorEnter(Actor actor) {
         return actor.hasCapability(Status.HOSTILE_TO_ENEMY);

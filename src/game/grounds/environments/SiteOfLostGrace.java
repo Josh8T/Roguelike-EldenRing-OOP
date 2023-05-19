@@ -17,6 +17,7 @@ import game.enums.Status;
  *
  */
 public class SiteOfLostGrace extends Ground {
+
     /**
      * Name of the Site of Lost Grace
      */
@@ -45,6 +46,15 @@ public class SiteOfLostGrace extends Ground {
         this.addCapability(GroundType.SLG);
     }
 
+    /**
+     * This method allows the player to perform certain actions when in the exits of the Site of Lost Grace.
+     * Player can perform DiscoverAction when in the exits of the Site of Lost Grace if it is not discovered yet.
+     * Player can perform RestAction when in the exits of the Site of Lost Grace if it has been discovered.
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return a collection of Actions that the player can perform
+     */
     @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
@@ -81,7 +91,7 @@ public class SiteOfLostGrace extends Ground {
     }
 
     /**
-     * This method checks if an Actor can step on the Site of Lost Grace
+     * This method checks if an Actor can step on the Site of Lost Grace. It makes sure that only player can step on it.
      * @param actor the Actor to check
      * @return true if the Actor can step on the Site of Lost Grace
      */

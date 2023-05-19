@@ -15,12 +15,26 @@ import game.actions.TravelAction;
  */
 public class GoldenFogDoor extends Ground {
 
+    /**
+     * Name of the destination of the Golden Fog Door
+     */
     private String destinationName;
+
+    /**
+     * GameMap of the destination of the Golden Fog Door
+     */
     private GameMap destinationMap;
+
+    /**
+     * Location of the destination of the Golden Fog Door
+     */
     private Location destinationLocation;
 
     /**
-     * Constructor.
+     * Constructor
+     * @param destinationName Name of the destination of the Golden Fog Door
+     * @param destinationMap GameMap of the destination of the Golden Fog Door
+     * @param destinationLocation Location of the destination of the Golden Fog Door
      */
     public GoldenFogDoor(String destinationName, GameMap destinationMap, Location destinationLocation) {
         super('D');
@@ -30,12 +44,12 @@ public class GoldenFogDoor extends Ground {
     }
 
     /**
-     * Returns an empty Action list.
-     *
+     * This method allows the player to perform certain actions when in the exits of the Golden Fog Door.
+     * Player can perform TravelAction when in the exits of the Golden Fog Door.
      * @param actor the Actor acting
      * @param location the current Location
      * @param direction the direction of the Ground from the Actor
-     * @return a new, empty collection of Actions
+     * @return a collection of Actions that the player can perform
      */
     public ActionList allowableActions(Actor actor, Location location, String direction){
         ActionList actions = new ActionList();
