@@ -66,8 +66,11 @@ public class SummonAction extends Action {
             }
         }
 
-        summonLocations.get(RandomNumberGenerator.getRandomInt(summonLocations.size())).addActor(guest);
-
+        if (!summonLocations.isEmpty()) {
+            summonLocations.get(RandomNumberGenerator.getRandomInt(summonLocations.size())).addActor(guest);
+        } else {
+            return "Summoning is not possible";
+        }
         return result;
     }
 
