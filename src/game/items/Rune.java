@@ -1,13 +1,11 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.DropAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.items.PickUpAction;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Resettable;
-import game.actions.DropRuneAction;
 import game.actions.RecoverRuneAction;
 import game.actors.players.StartingClass;
 import game.enums.ItemType;
@@ -42,7 +40,7 @@ public class Rune extends Item implements Resettable {
      * @param player Player that has the Runes
      */
     public Rune(int value, StartingClass player) {
-        super("Rune", '$', true);
+        super("Rune", '$', false);
         this.value = value;
         this.player = player;
         this.addCapability(ItemType.DROPPABLE);
@@ -83,6 +81,14 @@ public class Rune extends Item implements Resettable {
     }
 
     /**
+     * Getter for player that has the runes
+     * @return player that has the runes
+     */
+    public StartingClass getPlayer() {
+        return this.player;
+    }
+
+    /**
      * Setter for dropped location of the Runes
      * @param location dropped location of the Runes
      */
@@ -90,14 +96,14 @@ public class Rune extends Item implements Resettable {
         this.location = location;
     }
 
+    /**
+     * Create and return an action to recover these runes
+     * @param actor the actor performing the action
+     * @return a new RecoverRuneAction
+     */
     @Override
     public PickUpAction getPickUpAction(Actor actor) {
         return new RecoverRuneAction(this);
-    }
-
-    @Override
-    public DropAction getDropAction(Actor actor) {
-        return new DropRuneAction(this, player);
     }
 
     @Override

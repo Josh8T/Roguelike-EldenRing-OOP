@@ -43,41 +43,50 @@ public class DeathAction extends Action {
         String result = System.lineSeparator() + menuDescription(target);
         ActionList dropActions = new ActionList();
 
+        // if target is skeleton
         if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.RESPAWNABLE)){
             target.resetMaxHp(1);
             target.addCapability(Status.RESPAWNABLE);
             return System.lineSeparator() + target + " turns into a pile of bones";
         }
+        // if player dies
         else if (target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             for (String line : FancyMessage.YOU_DIED.split("\n")) {
                 result += System.lineSeparator() + line;
             }
+            // reset game
             new ResetAction().execute(target, map);
+            // drop runes
+            new DropRuneAction(RuneManager.getInstance().getRune()).execute(target, map);
         }
+        // if attacker is player
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            // drop runes of killed enemies
             if (!target.findCapabilitiesByType(EnemyType.class).isEmpty()) {
                 RuneManager.getInstance().awardKill((DropsRunes) target);
             }
-            // drop all droppable items
+            // drop all droppable items of target
             for (Item item : target.getItemInventory()) {
                 if (item.hasCapability(ItemType.DROPPABLE)) {
                     dropActions.add(item.getDropAction(target));
                 }
             }
-            // drop all weapons
+            // drop all weapons of target
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
-            // remove actor
+            // remove target
             map.removeActor(target);
         }
+        // if attacker is not player
         else if (!attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
-            // only drop weapons and remove actor
+            // drop all weapons of target
             for (WeaponItem weapon : target.getWeaponInventory())
                 dropActions.add(weapon.getDropAction(target));
             for (Action drop : dropActions)
                 drop.execute(target, map);
+            // remove target
             map.removeActor(target);
         }
 
