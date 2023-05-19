@@ -24,10 +24,19 @@ import game.items.RuneManager;
  */
 public abstract class StartingClass extends Actor implements Resettable {
 
+	/**
+	 * Menu of actions that the player can perform
+	 */
 	private final Menu menu = new Menu();
 
+	/**
+	 * The Flask of Crimson Tears the player has
+	 */
 	private FlaskOfCrimsonTears flaskOfCrimsonTears;
 
+	/**
+	 * The spawn point of player if game resets
+	 */
 	private Location checkpoint;
 
 	/**
@@ -37,14 +46,12 @@ public abstract class StartingClass extends Actor implements Resettable {
 
 	/**
 	 * Constructor.
-	 *
 	 * @param hitPoints Starting Class's number of hit points
 	 */
 	public StartingClass(int hitPoints) {
 		super("Tarnished", '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FOLLOWABLE);
-		this.addCapability(Status.RESTING);
 		this.addCapability(Status.WILLING_TO_PURCHASE);
 		this.addCapability(Status.WILLING_TO_SELL);
 		this.addCapability(Status.WILLING_TO_EXCHANGE);
@@ -72,10 +79,18 @@ public abstract class StartingClass extends Actor implements Resettable {
 		return menu.showMenu(this, actions, display);
 	}
 
+	/**
+	 * Getter for the checkpoint of the player
+	 * @return checkpoint of the player
+	 */
 	public Location getCheckpoint() {
 		return checkpoint;
 	}
 
+	/**
+	 * Setter for the checkpoint of the player
+	 * @param location Location to be set as the player's checkpoint
+	 */
 	public void setCheckpoint(Location location) {
 		this.checkpoint = location;
 	}

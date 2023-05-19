@@ -28,8 +28,10 @@ public class DeathAction extends Action {
     }
 
     /**
-     * When the target is killed, the items & weapons carried by target will drop at the location in the game map where
-     * the target was, except if both target and attacker is Enemy, only the weapons carried by the target will drop.
+     * If player is killed, drop runes and reset the game.
+     * If player kills a target, the items & weapons carried by target will drop at the location in the game map where
+     * the target was
+     * If killed by an actor that is not the player, only the weapons carried by the target will drop.
      * Skeleton type enemies are not dead the moment it is no longer conscious but instead becomes pile of bones.
      *
      * @param target The actor performing the action.
@@ -50,15 +52,7 @@ public class DeathAction extends Action {
             for (String line : FancyMessage.YOU_DIED.split("\n")) {
                 result += System.lineSeparator() + line;
             }
-            // drop all droppable items
-            for (Item item : target.getItemInventory()) {
-                if (item.hasCapability(ItemType.DROPPABLE)) {
-                    dropActions.add(item.getDropAction(target));
-                }
-            }
-            for (Action drop : dropActions)
-                drop.execute(target, map);
-            new ResetAction(false).execute(target, map);
+            new ResetAction().execute(target, map);
         }
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             if (!target.findCapabilitiesByType(EnemyType.class).isEmpty()) {

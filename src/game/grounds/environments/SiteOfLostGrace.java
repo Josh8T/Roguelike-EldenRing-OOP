@@ -61,7 +61,7 @@ public class SiteOfLostGrace extends Ground {
         if (!this.discovered) {
             actions.add(new DiscoverAction(this));
         }
-        else if (actor.hasCapability(Status.RESTING)) {
+        else if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new RestAction());
         }
         return actions;
