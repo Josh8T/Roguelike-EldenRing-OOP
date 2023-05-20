@@ -47,6 +47,6 @@ public class DiscoverAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " discovers " + this.siteOfLostGrace.getName();
+        return actor + " touches " + this.siteOfLostGrace.getName() + " site of lost grace";
     }
 }
