@@ -76,10 +76,9 @@ public class GodrickTheGrafted extends Enemy{
     }
 
 
-    //TODO: Don't know needed or not, Didn't mention in spec
     @Override
     public int generateRuneValue() {
-        return 0;
+        return 20000;
     }
 
     /**
