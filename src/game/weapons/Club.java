@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Purchasable;
-import game.actions.AttackAction;
 import game.actions.SellAction;
 import game.Sellable;
 
@@ -45,7 +44,7 @@ public class Club extends WeaponItem implements Purchasable, Sellable {
 
     @Override
     public Action getSkill(Actor target, String direction) {
-        return new AttackAction(target, direction, this);
+        return null;
     }
 
     @Override

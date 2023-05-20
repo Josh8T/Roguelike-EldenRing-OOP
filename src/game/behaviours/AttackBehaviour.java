@@ -64,7 +64,11 @@ public class AttackBehaviour implements Behaviour {
             if (rand.nextInt(100) <= 50){
                 return new AttackAction(finalTarget, finalDirection, actorWeapon);
             } else {
-                return actorWeapon.getSkill(finalTarget, finalDirection);
+                Action skill = actorWeapon.getSkill(finalTarget, finalDirection);
+                if (skill == null) {
+                    return new AttackAction(finalTarget, finalDirection, actorWeapon);
+                }
+                return skill;
             }
         } else {
             return new AttackAction(finalTarget, finalDirection);

@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.Purchasable;
 import game.Sellable;
-import game.actions.AttackAction;
 import game.actions.SellAction;
 
 public class AstrologersStaff extends WeaponItem implements Purchasable, Sellable {
@@ -37,7 +36,7 @@ public class AstrologersStaff extends WeaponItem implements Purchasable, Sellabl
 
     @Override
     public Action getSkill(Actor target, String direction) {
-        return new AttackAction(target, direction, this);
+        return null;
     }
 
     @Override

@@ -146,6 +146,16 @@ public class Application {
 		SiteOfLostGrace theFirstStep = new SiteOfLostGrace("The First Step", theFirstStepLocation);
 		theFirstStepLocation.setGround(theFirstStep);
 
+		// Create Stormveil Main Gate in Stormveil Castle
+		Location stormveilMainGateLocation = stormveilCastleMap.at(38, 20);
+		SiteOfLostGrace stormveilMainGate = new SiteOfLostGrace("Stormveil Main Gate", stormveilMainGateLocation);
+		stormveilMainGateLocation.setGround(stormveilMainGate);
+
+		// Create Table of Lost Grace in Roundtable Hold
+		Location tableOfLostGraceLocation = roundtableHoldMap.at(9, 5);
+		SiteOfLostGrace tableOfLostGrace = new SiteOfLostGrace("Table of Lost Grace", tableOfLostGraceLocation);
+		tableOfLostGraceLocation.setGround(tableOfLostGrace);
+
 		// Create Golden Fog Door in Limgrave to travel to Roundtable Hold
 		limgraveMap.at(6, 23).setGround(new GoldenFogDoor("Roundtable Hold", roundtableHoldMap, roundtableHoldMap.at(9,10)));
 		// Create Golden Fog Door in Roundtable Hold to travel to Limgrave
@@ -186,10 +196,13 @@ public class Application {
 		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 		// Register the player's runes
 		player.registerRune();
-		// Set First Step as the first Site of Lost Grace
+		// Set The First Step as the first Site of Lost Grace
 		player.setCheckpoint(theFirstStep.getLocation());
+		// Set The First Step to discovered as default
 		theFirstStep.discover();
+		// Register player as resettable
 		ResetManager.getInstance().registerResettable(player);
+		// Add player to Limgrave
 		world.addPlayer(player, limgraveMap.at(36, 10));
 
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
