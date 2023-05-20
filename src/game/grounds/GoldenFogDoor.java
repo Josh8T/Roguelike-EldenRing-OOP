@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
+import game.Destination;
 import game.actions.TravelAction;
 /**
  * A class that represents the Golden Fog Door, used to move between maps.
@@ -16,31 +17,17 @@ import game.actions.TravelAction;
 public class GoldenFogDoor extends Ground {
 
     /**
-     * Name of the destination of the Golden Fog Door
+     * The Destination of the Golden Fog Door
      */
-    private String destinationName;
+    private Destination destination;
 
     /**
-     * GameMap of the destination of the Golden Fog Door
+     * Constructor.
+     * @param destination
      */
-    private GameMap destinationMap;
-
-    /**
-     * Location of the destination of the Golden Fog Door
-     */
-    private Location destinationLocation;
-
-    /**
-     * Constructor
-     * @param destinationName Name of the destination of the Golden Fog Door
-     * @param destinationMap GameMap of the destination of the Golden Fog Door
-     * @param destinationLocation Location of the destination of the Golden Fog Door
-     */
-    public GoldenFogDoor(String destinationName, GameMap destinationMap, Location destinationLocation) {
+    public GoldenFogDoor(Destination destination) {
         super('D');
-        this.destinationName = destinationName;
-        this.destinationMap = destinationMap;
-        this.destinationLocation = destinationLocation;
+        this.destination = destination;
     }
 
     /**
@@ -53,7 +40,7 @@ public class GoldenFogDoor extends Ground {
      */
     public ActionList allowableActions(Actor actor, Location location, String direction){
         ActionList actions = new ActionList();
-        actions.add(new TravelAction(destinationName, destinationMap, destinationLocation));
+        actions.add(new TravelAction(destination));
         return actions;
     }
 }

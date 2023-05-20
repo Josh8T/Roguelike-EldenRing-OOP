@@ -133,6 +133,11 @@ public class Application {
 		enia.removeCapability(Status.WILLING_TO_SELL);
 		roundtableHoldMap.at(9, 1).addActor(enia);
 
+		// Add Godrick The Grafted to the Boss Room map
+		GodrickTheGrafted boss = new GodrickTheGrafted();
+		bossRoomMap.at(12, 4).addActor(boss);
+		boss.setSpawnLocation(new Location(bossRoomMap, 12, 4));
+
 		// Create The First Step in Limgrave
 		Location theFirstStepLocation = limgraveMap.at(38, 11);
 		SiteOfLostGrace theFirstStep = new SiteOfLostGrace("The First Step", theFirstStepLocation);
@@ -148,18 +153,23 @@ public class Application {
 		SiteOfLostGrace tableOfLostGrace = new SiteOfLostGrace("Table of Lost Grace", tableOfLostGraceLocation);
 		tableOfLostGraceLocation.setGround(tableOfLostGrace);
 
+		Destination fromLimgraveToRoundtableHold = new Destination("Roundtable Hold", roundtableHoldMap, roundtableHoldMap.at(9,10));
+		Destination fromRoundtableHoldToLimgrave = new Destination("Limgrave", limgraveMap, limgraveMap.at(6,23));
 		// Create Golden Fog Door in Limgrave to travel to Roundtable Hold
-		limgraveMap.at(6, 23).setGround(new GoldenFogDoor("Roundtable Hold", roundtableHoldMap, roundtableHoldMap.at(9,10)));
+		limgraveMap.at(6, 23).setGround(new GoldenFogDoor(fromLimgraveToRoundtableHold));
 		// Create Golden Fog Door in Roundtable Hold to travel to Limgrave
-		roundtableHoldMap.at(9, 10).setGround(new GoldenFogDoor("Limgrave", limgraveMap, limgraveMap.at(6,23)));
+		roundtableHoldMap.at(9, 10).setGround(new GoldenFogDoor(fromRoundtableHoldToLimgrave));
 
+		Destination fromLimgraveToStormveilCastle = new Destination("Stormveil Castle", stormveilCastleMap, stormveilCastleMap.at(38, 23));
+		Destination fromStormveilCastleToLimgrave = new Destination("Limgrave", limgraveMap, limgraveMap.at(30, 0));
 		// Create Golden Fog Door in Limgrave to travel to Stormveil Castle
-		limgraveMap.at(30, 0).setGround(new GoldenFogDoor("Stormveil Castle", stormveilCastleMap, stormveilCastleMap.at(38, 23)));
+		limgraveMap.at(30, 0).setGround(new GoldenFogDoor(fromLimgraveToStormveilCastle));
 		// Create Golden Fog Door in Stormveil Castle to travel to Limgrave
-		stormveilCastleMap.at(38, 23).setGround(new GoldenFogDoor("Limgrave", limgraveMap, limgraveMap.at(30, 0)));
+		stormveilCastleMap.at(38, 23).setGround(new GoldenFogDoor(fromStormveilCastleToLimgrave));
 
+		Destination fromStormveilCastleToGodrickTheGrafted = new Destination("Godrick the Grafted", bossRoomMap, bossRoomMap.at(0, 4));
 		// Create Golden Fog Door in Stormveil Castle to travel to Godrick the Grafted
-		stormveilCastleMap.at(5, 0).setGround(new GoldenFogDoor("Godrick the Grafted", bossRoomMap, bossRoomMap.at(0, 4)));
+		stormveilCastleMap.at(5, 0).setGround(new GoldenFogDoor(fromStormveilCastleToGodrickTheGrafted));
 
 		// Scatter Golden Runes in Limgrave
 		limgraveMap.at(3, 21).addItem(new GoldenRunes());
@@ -195,12 +205,7 @@ public class Application {
 		// Register player as resettable
 		ResetManager.getInstance().registerResettable(player);
 		// Add player to Limgrave
-//		world.addPlayer(player, limgraveMap.at(36, 10));
-		world.addPlayer(player, bossRoomMap.at(3, 3));
-
-		GodrickTheGrafted boss = new GodrickTheGrafted();
-		bossRoomMap.at(12, 4).addActor(boss);
-		boss.setSpawnLocation(new Location(bossRoomMap, 12, 4));
+		world.addPlayer(player, limgraveMap.at(36, 10));
 
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 //		// adding First Step Grace as first checkpoint
