@@ -48,7 +48,7 @@ public class DeathAction extends Action {
         if (target.hasCapability(EnemyType.BOSS)){
             // Doesn't drop weapons but drop Items
             // the location of the boss death will be a new Site of lost grace
-            new SiteOfLostGrace("Godrick's Grace", map.locationOf(target));
+            map.locationOf(target).setGround(new SiteOfLostGrace("Godrick's Grace", map.locationOf(target)));
             // drop all droppable items of Boss
             for (Item item : target.getItemInventory()) {
                 if (item.hasCapability(ItemType.DROPPABLE)) {

@@ -78,7 +78,7 @@ public abstract class StartingClass extends Actor implements Resettable {
 
 		actions.add(new ConsumeAction(flaskOfCrimsonTears));
 
-		display.println(printHp() + ", Runes: " + RuneManager.getInstance().getRune().value());
+		display.println(this + ": " + printHp() + ", Runes: " + RuneManager.getInstance().getRune().value());
 		// return/print the console menu
 		return menu.showMenu(this, actions, display);
 	}

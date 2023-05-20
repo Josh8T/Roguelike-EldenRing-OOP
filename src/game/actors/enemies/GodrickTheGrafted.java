@@ -41,8 +41,9 @@ public class GodrickTheGrafted extends Enemy{
      * Constrcutor.
      */
     public GodrickTheGrafted() {
-        super("Godrick the Grafted", 'Y', 6080);
+        super("Godrick the Grafted", 'Y', 400);
         this.addCapability(EnemyType.BOSS);
+        this.addCapability(Status.FIRST_PHASE);
         behaviours.remove(3);
         this.addWeaponToInventory(new AxeOfGodrick());
         this.addWeaponToInventory(new GraftedDragon());
@@ -60,8 +61,10 @@ public class GodrickTheGrafted extends Enemy{
             }
         }
 
-        if (this.hitPoints <= this.maxHitPoints / 2){
-            this.removeWeaponFromInventory(new AxeOfGodrick());
+        if (this.hitPoints <= this.maxHitPoints / 2 && this.hasCapability(Status.FIRST_PHASE)) {
+            this.removeCapability(Status.FIRST_PHASE);
+            this.addCapability(Status.SECOND_PHASE);
+            this.removeWeaponFromInventory(getWeaponInventory().get(0));
         }
 
         for (Behaviour behaviour : behaviours.values()) {

@@ -9,6 +9,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.World;
 import game.actors.Trader;
+import game.actors.enemies.GodrickTheGrafted;
 import game.actors.players.StartingClass;
 import game.enums.Status;
 import game.grounds.*;
@@ -204,6 +205,10 @@ public class Application {
 		ResetManager.getInstance().registerResettable(player);
 		// Add player to Limgrave
 		world.addPlayer(player, limgraveMap.at(36, 10));
+
+		GodrickTheGrafted boss = new GodrickTheGrafted();
+		bossRoomMap.at(5, 5).addActor(boss);
+		boss.setSpawnLocation(new Location(bossRoomMap, 5, 5));
 
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 //		// adding First Step Grace as first checkpoint

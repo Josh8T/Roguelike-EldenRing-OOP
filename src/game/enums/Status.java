@@ -14,5 +14,7 @@ public enum Status {
     WILLING_TO_EXCHANGE,
     RESTING,
     RESPAWNABLE,
-    FOLLOWABLE
+    FOLLOWABLE,
+    FIRST_PHASE,
+    SECOND_PHASE
 }

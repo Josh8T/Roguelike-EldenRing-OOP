@@ -7,6 +7,7 @@ import game.Exchangeable;
 import game.Sellable;
 import game.actions.ExchangeAction;
 import game.actions.SellAction;
+import game.enums.ItemType;
 import game.weapons.AxeOfGodrick;
 import game.weapons.GraftedDragon;
 
@@ -28,6 +29,7 @@ public class RemembranceOfTheGrafted extends Item implements Sellable, Exchangea
      */
     public RemembranceOfTheGrafted() {
         super("Remembrance Of The Grafted", 'O', true);
+        this.addCapability(ItemType.DROPPABLE);
     }
 
     @Override
