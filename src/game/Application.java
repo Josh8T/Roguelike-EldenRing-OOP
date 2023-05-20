@@ -184,6 +184,8 @@ public class Application {
 		}
 
 		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
+		// Register the player's runes
+		player.registerRune();
 		// Set First Step as the first Site of Lost Grace
 		player.setCheckpoint(theFirstStep.getLocation());
 		theFirstStep.discover();

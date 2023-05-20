@@ -35,6 +35,11 @@ public abstract class StartingClass extends Actor implements Resettable {
 	private FlaskOfCrimsonTears flaskOfCrimsonTears;
 
 	/**
+	 * The Runes the player has
+	 */
+	private Rune runes;
+
+	/**
 	 * The spawn point of player if game resets
 	 */
 	private Location checkpoint;
@@ -56,9 +61,8 @@ public abstract class StartingClass extends Actor implements Resettable {
 		this.addCapability(Status.WILLING_TO_SELL);
 		this.addCapability(Status.WILLING_TO_EXCHANGE);
 
-		Rune rune = new Rune(0, this);
-		this.addItemToInventory(rune);
-		RuneManager.getInstance().registerRune(rune);
+		this.runes = new Rune(0, this);
+		this.addItemToInventory(this.runes);
 
 		this.flaskOfCrimsonTears = new FlaskOfCrimsonTears(2);
 		this.addItemToInventory(this.flaskOfCrimsonTears);
@@ -117,5 +121,12 @@ public abstract class StartingClass extends Actor implements Resettable {
 	 */
 	public Location getLastLocation() {
 		return this.lastLocation;
+	}
+
+	/**
+	 * This method registers the runes of the player to the Rune Manager
+	 */
+	public void registerRune() {
+		RuneManager.getInstance().registerRune(runes);
 	}
 }

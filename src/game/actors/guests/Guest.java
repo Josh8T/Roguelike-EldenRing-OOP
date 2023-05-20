@@ -21,10 +21,6 @@ import java.util.Map;
  *
  */
 public abstract class Guest extends Actor implements Resettable {
-    /**
-     * The starting class of the Guest
-     */
-    StartingClass startingClass;
 
     /**
      * The behaviours that the Guest has stored in a hashmap
@@ -40,15 +36,16 @@ public abstract class Guest extends Actor implements Resettable {
      */
     public Guest(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
+        StartingClass startingClass;
         int randomInt = RandomNumberGenerator.getRandomInt(4);
         if (randomInt == 0) {
-            this.startingClass = new Samurai();
+            startingClass = new Samurai();
         } else if (randomInt == 1) {
-            this.startingClass = new Bandit();
+            startingClass = new Bandit();
         } else if (randomInt == 2) {
-            this.startingClass = new Wretch();
+            startingClass = new Wretch();
         } else {
-            this.startingClass = new Astrologer();
+            startingClass = new Astrologer();
         }
         this.increaseMaxHp(startingClass.getHp());
         this.addWeaponToInventory(startingClass.getWeaponInventory().get(0));
