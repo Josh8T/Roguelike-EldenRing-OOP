@@ -2,8 +2,8 @@ package game.actors.enemies;
 
 import game.enums.EnemyType;
 import game.utils.RandomNumberGenerator;
+import game.weapons.GreatKnife;
 
-import java.util.Random;
 /**
  * Godrick Soldier enemy class
  * Created by:
@@ -18,8 +18,7 @@ public class GodrickSoldier extends Enemy{
     public GodrickSoldier() {
         super("Godrick Soldier", 'p',198);
         this.addCapability(EnemyType.STORMVEIL_ENTITIES);
-        // TODO add a weapon for Godrick Soldier (supposedly a Heavy Crossbow)
-        // this.addWeaponToInventory( );
+        this.addWeaponToInventory(new GreatKnife());
     }
 
     @Override

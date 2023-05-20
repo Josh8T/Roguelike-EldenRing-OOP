@@ -5,7 +5,6 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
 import game.actors.DropsRunes;
@@ -55,6 +54,8 @@ public class DeathAction extends Action {
                     dropActions.add(item.getDropAction(target));
                 }
             }
+            // drop runes of the defeated boss
+            RuneManager.getInstance().awardKill((DropsRunes) target);
             for (Action drop : dropActions)
                 drop.execute(target, map);
             // remove Boss

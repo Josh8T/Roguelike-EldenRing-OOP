@@ -112,15 +112,6 @@ public class Application {
 				".........................",
 				"+++++++++++++++++++++++++");
 
-		List<String> testMap = Arrays.asList(
-				"U.=...................",
-				"......................",
-				"......................",
-				"......................",
-				"......................",
-				"......................"
-		);
-
 		GameMap limgraveMap = new GameMap(groundFactory, limgrave);
 		world.addGameMap(limgraveMap);
 
@@ -204,11 +195,12 @@ public class Application {
 		// Register player as resettable
 		ResetManager.getInstance().registerResettable(player);
 		// Add player to Limgrave
-		world.addPlayer(player, limgraveMap.at(36, 10));
+//		world.addPlayer(player, limgraveMap.at(36, 10));
+		world.addPlayer(player, bossRoomMap.at(3, 3));
 
 		GodrickTheGrafted boss = new GodrickTheGrafted();
-		bossRoomMap.at(5, 5).addActor(boss);
-		boss.setSpawnLocation(new Location(bossRoomMap, 5, 5));
+		bossRoomMap.at(12, 4).addActor(boss);
+		boss.setSpawnLocation(new Location(bossRoomMap, 12, 4));
 
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 //		// adding First Step Grace as first checkpoint
