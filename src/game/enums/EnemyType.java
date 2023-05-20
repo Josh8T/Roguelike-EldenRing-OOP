@@ -10,5 +10,6 @@ public enum EnemyType {
     BEAST,
     SKELETON,
     STORMVEIL_ENTITIES,
-    INVADER
+    INVADER,
+    BOSS
 }

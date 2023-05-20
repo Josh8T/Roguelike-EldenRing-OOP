@@ -5,12 +5,14 @@ import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.weapons.WeaponItem;
 import game.FancyMessage;
 import game.actors.DropsRunes;
 import game.enums.EnemyType;
 import game.enums.ItemType;
 import game.enums.Status;
+import game.grounds.environments.SiteOfLostGrace;
 import game.items.RuneManager;
 
 /**
@@ -43,8 +45,24 @@ public class DeathAction extends Action {
         String result = System.lineSeparator() + menuDescription(target);
         ActionList dropActions = new ActionList();
 
+        if (target.hasCapability(EnemyType.BOSS)){
+            // Doesn't drop weapons but drop Items
+            // the location of the boss death will be a new Site of lost grace
+            new SiteOfLostGrace("Godrick's Grace", map.locationOf(target));
+            // drop all droppable items of Boss
+            for (Item item : target.getItemInventory()) {
+                if (item.hasCapability(ItemType.DROPPABLE)) {
+                    dropActions.add(item.getDropAction(target));
+                }
+            }
+            for (Action drop : dropActions)
+                drop.execute(target, map);
+            // remove Boss
+            map.removeActor(target);
+
+        }
         // if target is skeleton
-        if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.RESPAWNABLE)){
+        else if (target.hasCapability(EnemyType.SKELETON) && !target.hasCapability(Status.RESPAWNABLE)){
             target.resetMaxHp(1);
             target.addCapability(Status.RESPAWNABLE);
             return System.lineSeparator() + target + " turns into a pile of bones";

@@ -129,7 +129,7 @@ public class Application {
 		GameMap roundtableHoldMap = new GameMap(groundFactory, roundtableHold);
 		world.addGameMap(roundtableHoldMap);
 
-		GameMap bossRoomMap = new GameMap(groundFactory, roundtableHold);
+		GameMap bossRoomMap = new GameMap(groundFactory, bossRoom);
 		world.addGameMap(bossRoomMap);
 
 		// Add Merchant Kale to the Limgrave map
