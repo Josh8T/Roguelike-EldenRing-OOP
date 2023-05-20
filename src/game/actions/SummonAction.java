@@ -58,6 +58,7 @@ public class SummonAction extends Action {
         ResetManager.getInstance().registerDeathResettable(guest);
 
         ArrayList<Location> summonLocations = new ArrayList<>();
+        summonLocations.add(signLocation);
 
         for (Exit exit: signLocation.getExits()) {
             Location destination = exit.getDestination();
