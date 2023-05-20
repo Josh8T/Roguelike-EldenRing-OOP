@@ -57,9 +57,6 @@ public abstract class StartingClass extends Actor implements Resettable {
 		super("Tarnished", '@', hitPoints);
 		this.addCapability(Status.HOSTILE_TO_ENEMY);
 		this.addCapability(Status.FOLLOWABLE);
-		this.addCapability(Status.WILLING_TO_PURCHASE);
-		this.addCapability(Status.WILLING_TO_SELL);
-		this.addCapability(Status.WILLING_TO_EXCHANGE);
 
 		this.runes = new Rune(0, this);
 		this.addItemToInventory(this.runes);
