@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.actions.DiscoverAction;
 import game.actions.RestAction;
-import game.enums.GroundType;
 import game.enums.Status;
 
 /**
@@ -43,7 +42,6 @@ public class SiteOfLostGrace extends Ground {
         this.name = name;
         this.location = location;
         this.discovered = false;
-        this.addCapability(GroundType.SLG);
     }
 
     /**
