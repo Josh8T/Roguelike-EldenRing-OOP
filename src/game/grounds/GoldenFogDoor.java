@@ -6,6 +6,7 @@ import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Destination;
 import game.actions.TravelAction;
+import game.enums.Status;
 
 /**
  * A class that represents the Golden Fog Door, used to move between maps.
@@ -40,7 +41,9 @@ public class GoldenFogDoor extends Ground {
      */
     public ActionList allowableActions(Actor actor, Location location, String direction){
         ActionList actions = new ActionList();
-        actions.add(new TravelAction(destination));
+        if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            actions.add(new TravelAction(destination));
+        }
         return actions;
     }
 }
