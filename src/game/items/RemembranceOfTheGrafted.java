@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Exchangeable;
@@ -61,5 +62,13 @@ public class RemembranceOfTheGrafted extends Item implements Sellable, Exchangea
     @Override
     public void giveExchangeable(Actor actor) {
         actor.removeItemFromInventory(this);
+    }
+
+    @Override
+    public DropAction getDropAction(Actor actor) {
+        this.removeAction(sellRemembranceOfTheGrafted);
+        this.removeAction(exchangeForAxeOfGodrick);
+        this.removeAction(exchangeForGraftedDragon);
+        return super.getDropAction(actor);
     }
 }
