@@ -25,7 +25,10 @@ public class Dog extends Enemy{
         return new IntrinsicWeapon(101, "bites", 93);
     }
 
-
+    /**
+     * Generates a random value between 52-1390.
+     * @return a random value of runes
+     */
     @Override
     public int generateRuneValue() {
         return RandomNumberGenerator.getRandomInt(52,1390);

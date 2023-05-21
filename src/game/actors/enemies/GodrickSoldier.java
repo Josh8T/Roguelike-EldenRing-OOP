@@ -21,6 +21,10 @@ public class GodrickSoldier extends Enemy{
         this.addWeaponToInventory(new GreatKnife());
     }
 
+    /**
+     * Generates a random value between 38-70.
+     * @return a random value of runes
+     */
     @Override
     public int generateRuneValue() {
         return RandomNumberGenerator.getRandomInt(38,70);
