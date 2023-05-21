@@ -6,7 +6,13 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Consumable;
 import game.actions.ConsumeAction;
 import game.enums.Status;
-
+/**
+ * An item class that represents the Gold Pickled Fowl Foot consumable item
+ * Created by:
+ * @author Josh Hernett Tan
+ * Modified by:
+ *
+ */
 public class GoldPickledFowlFoot extends Item implements Consumable {
 
     private ConsumeAction consumeGoldPickled = new ConsumeAction(this);
@@ -15,9 +21,15 @@ public class GoldPickledFowlFoot extends Item implements Consumable {
      * Constructor.
      */
     public GoldPickledFowlFoot() {
-        super("Gold Pickled Fowl Foot", '\'', true);
+        super("Gold Pickled Fowl Foot", 'ç', true);
     }
 
+    /**
+     * If actor pickup the item then the consume action will be added to the list of allowable actions
+     *
+     * @param currentLocation the current location of the item
+     * @param actor the actor who picked up the item
+     */
     @Override
     public void tick(Location currentLocation, Actor actor) {
         if (!this.getAllowableActions().contains(consumeGoldPickled)) {
@@ -25,6 +37,12 @@ public class GoldPickledFowlFoot extends Item implements Consumable {
         }
     }
 
+    /**
+     * Consume method from consumable interface
+     * adds Status called RUNE_BOOST when the actor decides to consume the item
+     *
+     * @param actor the actor who consume the item
+     */
     @Override
     public void consume(Actor actor) {
         actor.addCapability(Status.RUNE_BOOST);

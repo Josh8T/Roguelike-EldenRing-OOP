@@ -13,10 +13,7 @@ import game.actors.enemies.GodrickTheGrafted;
 import game.actors.players.StartingClass;
 import game.enums.Status;
 import game.grounds.*;
-import game.grounds.environments.Graveyard;
-import game.grounds.environments.GustOfWind;
-import game.grounds.environments.PuddleOfWater;
-import game.grounds.environments.SiteOfLostGrace;
+import game.grounds.environments.*;
 import game.items.GoldPickledFowlFoot;
 import game.items.GoldenRunes;
 import game.items.GoldenSeed;
@@ -187,6 +184,26 @@ public class Application {
 		stormveilCastleMap.at(74, 1).addItem(new GoldenRunes());
 		stormveilCastleMap.at(74, 10).addItem(new GoldenRunes());
 
+		// Scatter Golden Seeds in Limgrave
+		limgraveMap.at(35, 3).addItem(new GoldenSeed());
+		limgraveMap.at(11, 20).addItem(new GoldenSeed());
+		limgraveMap.at(68, 22).addItem(new GoldenSeed());
+
+		// Scatter Golden Seeds in Stormveil Castle
+		stormveilCastleMap.at(3, 2).addItem(new GoldenSeed());
+		stormveilCastleMap.at(33, 13).addItem(new GoldenSeed());
+
+		// Scatter Gold Pickled Fowl Foot in Limgrave
+		limgraveMap.at(21, 11).addItem(new GoldPickledFowlFoot());
+		limgraveMap.at(34, 20).addItem(new GoldPickledFowlFoot());
+		limgraveMap.at(60, 6).addItem(new GoldPickledFowlFoot());
+
+		// Scatter Gold Pickled Fowl Foot in Stormveil Castle
+		stormveilCastleMap.at(30, 20).addItem(new GoldPickledFowlFoot());
+		stormveilCastleMap.at(33, 8).addItem(new GoldPickledFowlFoot());
+		stormveilCastleMap.at(60, 16).addItem(new GoldPickledFowlFoot());
+
+
 		// BEHOLD, ELDEN RING
 		for (String line : FancyMessage.ELDEN_RING.split("\n")) {
 			new Display().println(line);
@@ -212,8 +229,14 @@ public class Application {
 
 		// testing pickled fowl consumable item is working
 		// TODO: To be removed
-		bossRoomMap.locationOf(player).setGround(new Cage());
-		bossRoomMap.at(3,4).addItem(new GoldPickledFowlFoot());
+//		world.addPlayer(player, stormveilCastleMap.at(36, 10));
+
+//		world.addPlayer(player, bossRoomMap.at(2, 2));
+//
+//		bossRoomMap.locationOf(player).setGround(new Cage());
+//		bossRoomMap.at(3,4).addItem(new GoldPickledFowlFoot());
+//		bossRoomMap.at(3,5).addItem(new GoldenSeed());
+//		bossRoomMap.at(3,6).addItem(new GoldenSeed());
 
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 //		// adding First Step Grace as first checkpoint
