@@ -45,6 +45,10 @@ public class RuneManager {
         rune.increaseValue(enemy.generateRuneValue());
     }
 
+    public void boostRuneAwardKill(DropsRunes enemy) {
+        rune.increaseValue(enemy.generateRuneValue()*2);
+    }
+
     /**
      * Factory method used to have only one instance of RuneManager.
      * @return the instance of runeManager.

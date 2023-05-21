@@ -32,7 +32,7 @@ public abstract class StartingClass extends Actor implements Resettable {
 	/**
 	 * The Flask of Crimson Tears the player has
 	 */
-	private FlaskOfCrimsonTears flaskOfCrimsonTears;
+	public static FlaskOfCrimsonTears flaskOfCrimsonTears;
 
 	/**
 	 * The Runes the player has
@@ -49,6 +49,13 @@ public abstract class StartingClass extends Actor implements Resettable {
 	 */
 	private Location lastLocation;
 
+	private int statusCount;
+
+
+	public void setStatusCount(int statusCount) {
+		this.statusCount = statusCount;
+	}
+
 	/**
 	 * Constructor.
 	 * @param hitPoints Starting Class's number of hit points
@@ -64,6 +71,7 @@ public abstract class StartingClass extends Actor implements Resettable {
 		this.flaskOfCrimsonTears = new FlaskOfCrimsonTears(2);
 		this.addItemToInventory(this.flaskOfCrimsonTears);
 		ResetManager.getInstance().registerResettable(this.flaskOfCrimsonTears);
+		statusCount = 0;
 	}
 
 	@Override
@@ -74,6 +82,13 @@ public abstract class StartingClass extends Actor implements Resettable {
 			return lastAction.getNextAction();
 
 		actions.add(new ConsumeAction(flaskOfCrimsonTears));
+
+		if (this.hasCapability(Status.RUNE_BOOST)){
+			statusCount++;
+		} else if (this.statusCount >= 50 && this.hasCapability(Status.RUNE_BOOST)){
+			this.removeCapability(Status.RUNE_BOOST);
+			this.setStatusCount(0);
+		}
 
 		display.println(this + ": " + printHp() + ", Runes: " + RuneManager.getInstance().getRune().value());
 		// return/print the console menu

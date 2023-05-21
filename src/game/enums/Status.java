@@ -16,5 +16,6 @@ public enum Status {
     RESPAWNABLE,
     FOLLOWABLE,
     FIRST_PHASE,
-    SECOND_PHASE
+    SECOND_PHASE,
+    RUNE_BOOST
 }

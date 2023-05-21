@@ -16,6 +16,16 @@ import game.Resettable;
 public class FlaskOfCrimsonTears extends Item implements Consumable, Resettable {
 
     private int amount;
+    private int maxAmount;
+
+    public int getMaxAmount() {
+        return maxAmount;
+    }
+
+    public void setMaxAmount(int maxAmount) {
+        this.maxAmount = maxAmount;
+    }
+
     /**
      * Constructor.
      *
@@ -24,6 +34,7 @@ public class FlaskOfCrimsonTears extends Item implements Consumable, Resettable 
     public FlaskOfCrimsonTears(int amount) {
         super("Flask of Crimson Tears", 'F',false);
         this.amount = amount;
+        this.maxAmount = amount;
     }
 
     /**
@@ -44,7 +55,7 @@ public class FlaskOfCrimsonTears extends Item implements Consumable, Resettable 
 
     @Override
     public String toString() {
-        return super.toString() + " (" + this.getAmount() + "/2)";
+        return super.toString() + " (" + this.getAmount() + "/" + this.getMaxAmount() + ")";
     }
 
 
@@ -66,6 +77,6 @@ public class FlaskOfCrimsonTears extends Item implements Consumable, Resettable 
 
     @Override
     public void reset(GameMap map) {
-        this.setAmount(2);
+        this.setAmount(this.getMaxAmount());
     }
 }

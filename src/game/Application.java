@@ -17,7 +17,9 @@ import game.grounds.environments.Graveyard;
 import game.grounds.environments.GustOfWind;
 import game.grounds.environments.PuddleOfWater;
 import game.grounds.environments.SiteOfLostGrace;
+import game.items.GoldPickledFowlFoot;
 import game.items.GoldenRunes;
+import game.items.GoldenSeed;
 
 /**
  * The main class to start the game.
@@ -207,11 +209,17 @@ public class Application {
 		// Add player to Limgrave
 		world.addPlayer(player, limgraveMap.at(36, 10));
 
+
+		// testing pickled fowl consumable item is working
+		// TODO: To be removed
+		bossRoomMap.locationOf(player).setGround(new Cage());
+		bossRoomMap.at(3,4).addItem(new GoldPickledFowlFoot());
+
 //		StartingClass player = StartingClassMenu.getInstance().chooseStartingClass();
 //		// adding First Step Grace as first checkpoint
-//		player.setCheckpoint(limgraveMap.at(0, 0));
+//		player.setCheckpoint(bossRoomMap.at(1, 1));
 //		ResetManager.getInstance().registerResettable(player);
-//		world.addPlayer(player, limgraveMap.at(1, 1));
+//		world.addPlayer(player, bossRoomMap.at(1, 1));
 
 		world.run();
 	}

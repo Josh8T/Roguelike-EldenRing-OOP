@@ -80,8 +80,14 @@ public class DeathAction extends Action {
         }
         // if attacker is player
         else if (attacker.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            // check if player has Rune boost status
+            if (attacker.hasCapability(Status.RUNE_BOOST)){
+                if (!target.findCapabilitiesByType(EnemyType.class).isEmpty()) {
+                    RuneManager.getInstance().boostRuneAwardKill((DropsRunes) target);
+                }
+            }
             // drop runes of killed enemies
-            if (!target.findCapabilitiesByType(EnemyType.class).isEmpty()) {
+            else if (!target.findCapabilitiesByType(EnemyType.class).isEmpty()) {
                 RuneManager.getInstance().awardKill((DropsRunes) target);
             }
             // drop all droppable items of target
