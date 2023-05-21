@@ -5,6 +5,7 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Consumable;
 import game.actions.ConsumeAction;
+import static game.actors.players.StartingClass.flaskOfCrimsonTears;
 
 public class GoldenSeed extends Item implements Consumable {
 
@@ -27,9 +28,10 @@ public class GoldenSeed extends Item implements Consumable {
 
     @Override
     public void consume(Actor actor) {
-        // TODO: implement increase flask max amount
-
-        actor.removeItemFromInventory(this);
+        if(actor.getItemInventory().contains(flaskOfCrimsonTears)){
+            flaskOfCrimsonTears.setMaxAmount(flaskOfCrimsonTears.getMaxAmount()+1);
+            actor.removeItemFromInventory(this);
+        };
     }
 
     @Override
