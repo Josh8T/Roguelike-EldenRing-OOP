@@ -1,6 +1,7 @@
 package game.items;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.items.DropAction;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Consumable;
@@ -56,5 +57,11 @@ public class GoldenSeed extends Item implements Consumable {
     @Override
     public boolean isEmpty() {
         return Consumable.super.isEmpty();
+    }
+
+    @Override
+    public DropAction getDropAction(Actor actor) {
+        this.removeAction(consumeGoldenSeed);
+        return super.getDropAction(actor);
     }
 }
